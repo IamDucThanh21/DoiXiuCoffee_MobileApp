@@ -6,59 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:background="@color/white"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/oi_x"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="10dp" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_toEndOf="@+id/imageView"
-            android:layout_centerVertical="true"
-            android:text="Chào buổi sáng!\nChúc bạn một ngày tốt lành!"
-            android:textColor="@color/black"
-            android:textStyle="bold">
-
-        </TextView>
-
-        <ImageView
-            android:id="@+id/imgAva"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="0dp"/>
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ava">
-
-        </de.hdodenhof.circleimageview.CircleImageView>
-
-    </RelativeLayout>
+    <include layout="@layout/main_title"
+        android:id="@+id/toolbar">
+    </include>
 
     <ImageView
         android:id="@+id/home_back"
@@ -163,12 +113,62 @@
 
             </TextView>
         </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/gray"></TextView>
     </LinearLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/rounded_corner"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:shapeAppearanceOverlay="@style/rounded_corner"
+            app:srcCompat="@drawable/image_4"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"/>
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Đại Lộ Mặt Trời"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/black">
+            </TextView>
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Chillies"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="#6c6c6c">
+            </TextView>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/menu_icon"
+            android:scaleX="1.2"></ImageView>
     </RelativeLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
