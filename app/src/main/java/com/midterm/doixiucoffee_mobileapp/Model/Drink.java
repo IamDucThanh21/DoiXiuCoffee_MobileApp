@@ -1,19 +1,19 @@
 package com.midterm.doixiucoffee_mobileapp.Model;
 
+import java.util.ArrayList;
+
 public class Drink {
     private String idDrink;
     private String drinkName;
     private String typeDrink;
-    private char Size;
-    private int price;
+    private ArrayList<SizeInfo> sizeInfos;
     private String story;
 
-    public Drink(String idDrink, String drinkName, String typeDrink, char size, int price, String story) {
+    public Drink(String idDrink, String drinkName, String typeDrink, ArrayList<SizeInfo> sizeInfos, String story) {
         this.idDrink = idDrink;
         this.drinkName = drinkName;
         this.typeDrink = typeDrink;
-        Size = size;
-        this.price = price;
+        this.sizeInfos = sizeInfos;
         this.story = story;
     }
 
@@ -41,20 +41,12 @@ public class Drink {
         this.typeDrink = typeDrink;
     }
 
-    public char getSize() {
-        return Size;
+    public ArrayList<SizeInfo> getSizeInfos() {
+        return sizeInfos;
     }
 
-    public void setSize(char size) {
-        Size = size;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
+    public void setSizeInfos(ArrayList<SizeInfo> sizeInfos) {
+        this.sizeInfos = sizeInfos;
     }
 
     public String getStory() {

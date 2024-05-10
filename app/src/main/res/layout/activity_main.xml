@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Gọi món ngay!"
+                android:text="@string/booking"
                 android:textColor="@color/black"
                 android:textSize="30dp"
                 android:textStyle="bold"></TextView>
@@ -59,6 +59,7 @@
             android:background="@color/gray"></TextView>
 
         <RelativeLayout
+            android:id="@+id/open_music"
             android:layout_width="match_parent"
             android:layout_height="80dp">
 
@@ -77,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Chọn nhạc đi!"
+                android:text="@string/music"
                 android:textColor="@color/black"
                 android:textSize="30dp"
                 android:textStyle="bold"></TextView>
@@ -89,6 +90,7 @@
             android:background="@color/gray"></TextView>
 
         <RelativeLayout
+            android:id="@+id/open_feedback"
             android:layout_width="match_parent"
             android:layout_height="80dp">
 
@@ -107,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Feedback liền!"
+                android:text="@string/feedback"
                 android:textColor="@color/black"
                 android:textSize="30dp"
                 android:textStyle="bold">

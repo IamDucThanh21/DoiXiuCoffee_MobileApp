@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="70dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:shapeAppearanceOverlay="@style/rounded_corner"
+        app:srcCompat="@drawable/image_4" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="90dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/song_name"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Đại Lộ Mặt Trời"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold">
+        </TextView>
+
+        <TextView
+            android:id="@+id/song_singer"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Chillies"
+            android:textColor="#6c6c6c"
+            android:textSize="18dp"
+            android:textStyle="bold">
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="0dp"
+        android:layout_toEndOf="@+id/linearLayout2"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/song_votes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            android:textColor="#6c6c6c"
+            android:textSize="20dp"
+            android:textStyle="bold">
+        </TextView>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+
+            android:src="@drawable/votes_icon"></ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/linearLayout3"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+
+            android:src="@drawable/heart_icon"></ImageView>
+    </LinearLayout>
+</RelativeLayout>

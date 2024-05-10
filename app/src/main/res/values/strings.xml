@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">DoiXiuCoffee_MobileApp</string>
+    <string name="booking">Gọi món ngay!</string>
+    <string name="music">Chọn nhạc đi!</string>
+    <string name="feedback">Feedback liền!</string>
 </resources>

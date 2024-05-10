@@ -1,4 +1,4 @@
-package com.midterm.doixiucoffee_mobileapp.View;
+package com.midterm.doixiucoffee_mobileapp.View.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +30,8 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull DrinkAdapter.ViewHolder holder, int position) {
         holder.drinkName.setText(listDrink.get(position).getDrinkName());
+        holder.priceS.setText(listDrink.get(position).getSizeInfos().get(0).getPrice()+"K");
+        holder.priceB.setText(listDrink.get(position).getSizeInfos().get(1).getPrice()+"K");
     }
 
     @Override

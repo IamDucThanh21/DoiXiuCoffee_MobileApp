@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.midterm.doixiucoffee_mobileapp.View.BookingLayout;
+import com.midterm.doixiucoffee_mobileapp.View.MusicLayout;
 import com.midterm.doixiucoffee_mobileapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +24,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BookingLayout.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.openMusic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MusicLayout.class);
                 startActivity(intent);
             }
         });
