@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.midterm.doixiucoffee_mobileapp.View.BookingLayout;
 import com.midterm.doixiucoffee_mobileapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

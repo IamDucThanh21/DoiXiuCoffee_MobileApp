@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookingLayout">
+    tools:context=".View.BookingLayout">
 
     <include layout="@layout/sub_title"
         android:id="@+id/toolbar">
@@ -51,18 +51,11 @@
 
             </RelativeLayout>
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_category"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <include layout="@layout/category"></include>
-
-                <include layout="@layout/category"></include>
-
-                <include layout="@layout/category"></include>
-
-            </LinearLayout>
+                android:layout_height="wrap_content">
+            </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
     </ScrollView>
 
@@ -71,27 +64,18 @@
         layout="@layout/music_pain"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
     </include>
 
-    <RelativeLayout
-        android:layout_width="70dp"
+    <include
+        layout="@layout/add_button"
         android:layout_height="70dp"
+        android:layout_width="70dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/include"
         app:layout_constraintEnd_toEndOf="parent">
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray"
-            app:shapeAppearanceOverlay="@style/circle">
-        </com.google.android.material.imageview.ShapeableImageView>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/add_icon"
-            android:layout_centerInParent="true">
-        </ImageView>
-    </RelativeLayout>
+    </include>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

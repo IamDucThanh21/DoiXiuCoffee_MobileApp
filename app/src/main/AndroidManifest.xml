@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BookingLayout"
+            android:name=".View.BookingLayout"
             android:exported="true">
         </activity>
     </application>
