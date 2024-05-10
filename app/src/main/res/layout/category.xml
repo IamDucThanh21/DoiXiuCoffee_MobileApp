@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:id="@+id/coffee_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="40dp"
+            android:src="@drawable/coffee_cup_2_icon"
+            android:scaleY="1.5"
+            android:scaleX="1.5">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="25dp"
+            android:layout_toEndOf="@+id/coffee_icon"
+            android:text="Cà phê"
+            android:textSize="30dp"
+            android:textStyle="bold">
+        </TextView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="25dp"
+            android:layout_toEndOf="@+id/title"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:src="@drawable/more_info_icon">
+        </ImageView>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/gray">
+    </TextView>
+    <include layout="@layout/item_category"></include>
+    <include layout="@layout/item_category"></include>
+    <include layout="@layout/item_category"></include>
+    <include layout="@layout/item_category"></include>
+</LinearLayout>

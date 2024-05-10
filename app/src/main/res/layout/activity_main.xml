@@ -28,6 +28,7 @@
         >
 
         <RelativeLayout
+            android:id="@+id/openBooking"
             android:layout_width="match_parent"
             android:layout_height="80dp">
 
@@ -119,56 +120,10 @@
             android:background="@color/gray"></TextView>
     </LinearLayout>
 
-
-    <RelativeLayout
+    <include
+        layout="@layout/music_pain"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@color/gray"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/rounded_corner"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:shapeAppearanceOverlay="@style/rounded_corner"
-            app:srcCompat="@drawable/image_4"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"/>
-        <LinearLayout
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:text="Đại Lộ Mặt Trời"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:textColor="@color/black">
-            </TextView>
-            <TextView
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:text="Chillies"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:textColor="#6c6c6c">
-            </TextView>
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="30dp"
-            android:src="@drawable/menu_icon"
-            android:scaleX="1.2"></ImageView>
-    </RelativeLayout>
-
+        app:layout_constraintBottom_toBottomOf="parent"></include>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
