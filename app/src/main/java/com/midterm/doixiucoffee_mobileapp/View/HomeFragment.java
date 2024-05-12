@@ -24,6 +24,7 @@ import com.midterm.doixiucoffee_mobileapp.databinding.FragmentHomeBinding;
 public class HomeFragment extends Fragment {
     private RelativeLayout openBooking;
     private RelativeLayout openMusic;
+    private RelativeLayout openFeedback;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,13 +61,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        openFeedback = view.findViewById(R.id.open_feedback);
 
-//        binding.openMusic.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, MusicLayout.class);
-//                startActivity(intent);
-//            }
-//        });
+        openFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.feedbackFragment);
+            }
+        });
     }
 }
