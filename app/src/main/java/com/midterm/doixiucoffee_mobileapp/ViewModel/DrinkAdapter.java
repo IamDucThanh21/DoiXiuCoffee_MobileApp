@@ -1,4 +1,4 @@
-package com.midterm.doixiucoffee_mobileapp.View.Adapter;
+package com.midterm.doixiucoffee_mobileapp.ViewModel;
 
 import android.view.LayoutInflater;
 import android.view.View;

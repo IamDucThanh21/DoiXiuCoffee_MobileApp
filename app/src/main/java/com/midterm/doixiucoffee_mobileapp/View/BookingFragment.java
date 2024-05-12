@@ -1,40 +1,51 @@
 package com.midterm.doixiucoffee_mobileapp.View;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.midterm.doixiucoffee_mobileapp.MainActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import com.midterm.doixiucoffee_mobileapp.Model.Category;
 import com.midterm.doixiucoffee_mobileapp.Model.Drink;
 import com.midterm.doixiucoffee_mobileapp.Model.SizeInfo;
 import com.midterm.doixiucoffee_mobileapp.R;
-import com.midterm.doixiucoffee_mobileapp.View.Adapter.CategoryAdapter;
-import com.midterm.doixiucoffee_mobileapp.databinding.BookingLayoutBinding;
+import com.midterm.doixiucoffee_mobileapp.ViewModel.CategoryAdapter;
+import com.midterm.doixiucoffee_mobileapp.databinding.FragmentBookingBinding;
 
 import java.util.ArrayList;
 
-public class BookingLayout extends AppCompatActivity {
-    private BookingLayoutBinding binding;
+public class BookingFragment extends Fragment {
     private ArrayList<Category> listCategory;
     private CategoryAdapter categoryAdapter;
-
+    private FragmentBookingBinding binding;
+//    private RecyclerView rvCategory;
+//    private ImageView btnBack;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = BookingLayoutBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        if (getArguments() != null) {
+        }
+    }
 
-        binding.includeHb.homeBackTitle.setText(R.string.booking);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        binding.rvCategory.setLayoutManager(new LinearLayoutManager(this));
-        listCategory = new ArrayList<Category>();
+        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_booking, null, false);
+
+        binding.rvCategory.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        listCategory = new ArrayList<>();
         categoryAdapter = new CategoryAdapter(listCategory);
         binding.rvCategory.setAdapter(categoryAdapter);
 
@@ -43,10 +54,12 @@ public class BookingLayout extends AppCompatActivity {
         binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BookingLayout.this, MainActivity.class);
-                startActivity(intent);
+                Navigation.findNavController(v).navigate(R.id.homeFragment);
             }
         });
+
+        View view = binding.getRoot();
+        return view;
     }
 
     public void khoitaodulieumau(){
@@ -64,5 +77,4 @@ public class BookingLayout extends AppCompatActivity {
 
         listCategory.add(new Category("ca01", "Cà phê", listDrink, "Đây là thông tin"));
     }
-
 }

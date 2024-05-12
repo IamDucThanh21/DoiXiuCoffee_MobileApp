@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.HomeFragment">
+
+    <include layout="@layout/main_title"
+        android:id="@+id/toolbar">
+    </include>
+
+    <ImageView
+        android:id="@+id/home_back"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:src="@drawable/image_home"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:scaleType="fitXY">
+    </ImageView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/home_back"
+        >
+
+        <RelativeLayout
+            android:id="@+id/open_booking"
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:src="@drawable/coffee_cup_icon">
+
+            </ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/booking"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:textStyle="bold"></TextView>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/gray"></TextView>
+
+        <RelativeLayout
+            android:id="@+id/open_music"
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:src="@drawable/music_icon">
+
+            </ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/music"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:textStyle="bold"></TextView>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/gray"></TextView>
+
+        <RelativeLayout
+            android:id="@+id/open_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:src="@drawable/feedback_icon">
+
+            </ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/feedback"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:textStyle="bold">
+
+            </TextView>
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/gray"></TextView>
+    </LinearLayout>
+
+    <include
+        layout="@layout/music_pain"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"></include>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

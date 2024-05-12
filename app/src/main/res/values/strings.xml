@@ -3,4 +3,6 @@
     <string name="booking">Gọi món ngay!</string>
     <string name="music">Chọn nhạc đi!</string>
     <string name="feedback">Feedback liền!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
