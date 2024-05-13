@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.midterm.doixiucoffee_mobileapp.Firebase.Firestore;
 import com.midterm.doixiucoffee_mobileapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View viewRoot = binding.getRoot();
         setContentView(viewRoot);
+
+        Firestore.writeData();
+        Firestore.readData("Drink", "ca_phe_sua_nho");
     }
 
 }
