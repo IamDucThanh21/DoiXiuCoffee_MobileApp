@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.midterm.doixiucoffee_mobileapp.Firebase.Firestore;
 import com.midterm.doixiucoffee_mobileapp.Model.Category;
 import com.midterm.doixiucoffee_mobileapp.Model.Drink;
 import com.midterm.doixiucoffee_mobileapp.Model.SizeInfo;
@@ -63,9 +64,8 @@ public class BookingFragment extends Fragment {
     }
 
     public void khoitaodulieumau(){
-        ArrayList<SizeInfo> sizePhinden = new ArrayList<>();
-        sizePhinden.add(new SizeInfo("M", 12, null));
-        sizePhinden.add(new SizeInfo("L", 15, null));
+        ArrayList<SizeInfo> sizePhinden = new ArrayList<>(Firestore.getFullSize());
+
 
         ArrayList<SizeInfo> sizePhinsua = new ArrayList<>();
         sizePhinsua.add(new SizeInfo("M", 15, null));

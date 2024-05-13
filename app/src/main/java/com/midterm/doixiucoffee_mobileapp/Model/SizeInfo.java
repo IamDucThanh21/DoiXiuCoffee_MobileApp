@@ -34,4 +34,8 @@ public class SizeInfo {
     public void setIdDrink(String idDrink) {
         this.idDrink = idDrink;
     }
+
+    public SizeInfo() {
+
+    }
 }

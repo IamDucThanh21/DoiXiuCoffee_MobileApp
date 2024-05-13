@@ -18,8 +18,11 @@ public class MainActivity extends AppCompatActivity {
         View viewRoot = binding.getRoot();
         setContentView(viewRoot);
 
-        Firestore.writeData();
-        Firestore.readData("Drink", "ca_phe_sua_nho");
+//        Firestore.writeData();
+//        Firestore.readData("Drink", "ca_phe_sua_nho");
+//        Firestore.readDocumentFromFireStore();
+
+        Firestore.getFullSize();
     }
 
 }
