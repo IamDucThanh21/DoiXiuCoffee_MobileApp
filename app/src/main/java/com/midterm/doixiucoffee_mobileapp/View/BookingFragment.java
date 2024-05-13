@@ -64,17 +64,18 @@ public class BookingFragment extends Fragment {
 
     public void khoitaodulieumau(){
         ArrayList<SizeInfo> sizePhinden = new ArrayList<>();
-        sizePhinden.add(new SizeInfo("M", 12));
-        sizePhinden.add(new SizeInfo("L", 15));
+        sizePhinden.add(new SizeInfo("M", 12, null));
+        sizePhinden.add(new SizeInfo("L", 15, null));
 
         ArrayList<SizeInfo> sizePhinsua = new ArrayList<>();
-        sizePhinsua.add(new SizeInfo("M", 15));
-        sizePhinsua.add(new SizeInfo("L", 18));
+        sizePhinsua.add(new SizeInfo("M", 15, null));
+        sizePhinsua.add(new SizeInfo("L", 18, null));
 
         ArrayList<Drink> listDrink = new ArrayList<>();
         listDrink.add(new Drink("dr01", "Phin đen", "ca01", sizePhinden, "Cau chuyen"));
         listDrink.add(new Drink("dr02", "Phin sữa", "ca01", sizePhinsua, "Cau chuyen"));
 
         listCategory.add(new Category("ca01", "Cà phê", listDrink, "Đây là thông tin"));
+        listCategory.add(new Category("ca02", "Trà", listDrink, "Đây là thông tin"));
     }
 }
