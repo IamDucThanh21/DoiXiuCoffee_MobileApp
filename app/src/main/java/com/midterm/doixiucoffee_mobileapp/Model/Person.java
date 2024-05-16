@@ -11,6 +11,10 @@ public class Person {
         this.name = name;
     }
 
+    public Person(){
+
+    }
+
     public String getIdPerson() {
         return idPerson;
     }

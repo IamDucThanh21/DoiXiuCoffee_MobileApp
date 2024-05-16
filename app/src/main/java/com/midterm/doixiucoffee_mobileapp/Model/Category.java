@@ -16,6 +16,10 @@ public class Category {
         this.categoryInfo = categoryInfo;
     }
 
+    public Category(){
+
+    }
+
     public String getIdCategory() {
         return idCategory;
     }

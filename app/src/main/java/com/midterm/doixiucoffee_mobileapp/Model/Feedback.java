@@ -19,6 +19,10 @@ public class Feedback {
         this.isPublic = isPublic;
     }
 
+    public Feedback(){
+
+    }
+
     public String getIdFeedback() {
         return idFeedback;
     }

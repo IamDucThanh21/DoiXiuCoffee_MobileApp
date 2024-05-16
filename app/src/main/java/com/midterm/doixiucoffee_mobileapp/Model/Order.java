@@ -21,6 +21,10 @@ public class Order {
         this.discount = discount;
     }
 
+    public Order(){
+
+    }
+
     public String getIdOrder() {
         return idOrder;
     }

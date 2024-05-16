@@ -17,6 +17,10 @@ public class Drink {
         this.story = story;
     }
 
+    public Drink(){
+
+    }
+
     public String getIdDrink() {
         return idDrink;
     }

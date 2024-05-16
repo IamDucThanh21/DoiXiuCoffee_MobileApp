@@ -18,11 +18,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 public class Firestore {
     private static FirebaseFirestore database;
 
-    Firestore(){
+    public Firestore(){
         database = FirebaseFirestore.getInstance();
     }
 
@@ -80,47 +81,49 @@ public class Firestore {
         });
     }
 
-    public static ArrayList<SizeInfo> getFullSize(){
-        ArrayList<String> docSizeInfo = new ArrayList<>();
-        ArrayList<SizeInfo> fullSize = new ArrayList<>();
-        new Firestore();
-        database.collection("SizeInfo").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
-                    String docSize = documentSnapshot.getId();
-                    Log.d("list", docSize);
-                    docSizeInfo.add(docSize);
-                }
-                for(String docSize : docSizeInfo){
-                    fullSize.add(getSizeInfo(docSize));
-                }
-            }
-        });
-
-        return fullSize;
+    public void getListDocumentFromCollection(String collection ,final FirestoreCallbackString callback){
+        database.collection(collection).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            ArrayList<String> documentNameList = new ArrayList<>();
+                            for(QueryDocumentSnapshot document : task.getResult()){
+                                documentNameList.add(document.getId());
+                            }
+                            callback.onCallback(documentNameList);
+                        }else {
+                            callback.onCallback(null);
+                        }
+                    }
+                });
     }
-    public static SizeInfo getSizeInfo(String id){
-        new Firestore();
-        SizeInfo sizeInfo = new SizeInfo("", 0,"");
-        database.collection("SizeInfo").document(id).get()
+
+    public interface FirestoreCallbackString {
+        void onCallback(ArrayList<String> list);
+    }
+
+    public void getDataSizeInfoFromDocument(String collection, String document, final FirestoreCallbackDataSizeInfo callback){
+        SizeInfo sizeInf = new SizeInfo("", 0, "");
+        database.collection(collection).document(document).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()){
+                            String idDrink = documentSnapshot.getString("idDrink");
                             String size = documentSnapshot.getString("name");
                             int price = Math.toIntExact(documentSnapshot.getLong("price"));
-                            String idDrink = documentSnapshot.getString("idDrink");
 
-                            Log.d("Name: ", size);
-                            sizeInfo.setSize(size);
-                            sizeInfo.setPrice(price);
-                            sizeInfo.setIdDrink(idDrink);
-                            Log.d("size", sizeInfo.getSize());
+                            sizeInf.setSize(size);
+                            sizeInf.setPrice(price);
+                            sizeInf.setIdDrink(idDrink);
                         }
+                        callback.onCallback(sizeInf);
                     }
                 });
-        return sizeInfo;
+    }
 
+    public interface FirestoreCallbackDataSizeInfo{
+        void onCallback(SizeInfo sizeInfo);
     }
 }

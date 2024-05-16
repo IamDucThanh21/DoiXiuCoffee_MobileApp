@@ -10,11 +10,13 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.midterm.doixiucoffee_mobileapp.Firebase.Firestore;
 import com.midterm.doixiucoffee_mobileapp.Model.Category;
 import com.midterm.doixiucoffee_mobileapp.Model.Drink;
@@ -24,13 +26,18 @@ import com.midterm.doixiucoffee_mobileapp.ViewModel.CategoryAdapter;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentBookingBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BookingFragment extends Fragment {
     private ArrayList<Category> listCategory;
     private CategoryAdapter categoryAdapter;
     private FragmentBookingBinding binding;
+
+
 //    private RecyclerView rvCategory;
 //    private ImageView btnBack;
+
+    private Firestore database;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,8 +71,24 @@ public class BookingFragment extends Fragment {
     }
 
     public void khoitaodulieumau(){
-        ArrayList<SizeInfo> sizePhinden = new ArrayList<>(Firestore.getFullSize());
 
+        ArrayList<SizeInfo> sizePhinden = new ArrayList<>();
+//        sizePhinden.add(new SizeInfo("M", 15, null));
+//        sizePhinden.add(new SizeInfo("L", 20, null));
+
+        database.getDataSizeInfoFromDocument("SizeInfo", "si01", new Firestore.FirestoreCallbackDataSizeInfo() {
+            @Override
+            public void onCallback(SizeInfo sizeInfo) {
+                sizePhinden.add(new SizeInfo(sizeInfo.getSize(), sizeInfo.getPrice(), sizeInfo.getIdDrink()));
+            }
+        });
+
+        database.getDataSizeInfoFromDocument("SizeInfo", "si02", new Firestore.FirestoreCallbackDataSizeInfo() {
+            @Override
+            public void onCallback(SizeInfo sizeInfo) {
+                sizePhinden.add(new SizeInfo(sizeInfo.getSize(), sizeInfo.getPrice(), sizeInfo.getIdDrink()));
+            }
+        });
 
         ArrayList<SizeInfo> sizePhinsua = new ArrayList<>();
         sizePhinsua.add(new SizeInfo("M", 15, null));
@@ -77,5 +100,41 @@ public class BookingFragment extends Fragment {
 
         listCategory.add(new Category("ca01", "Cà phê", listDrink, "Đây là thông tin"));
         listCategory.add(new Category("ca02", "Trà", listDrink, "Đây là thông tin"));
+    }
+
+    private void fetchDocumentName(String collection){
+        ArrayList<String> arrayList = new ArrayList<>();
+        database.getListDocumentFromCollection(collection, new Firestore.FirestoreCallbackString() {
+            @Override
+            public void onCallback(ArrayList<String> list) {
+                if (list != null) {
+                    arrayList.clear();
+                    arrayList.addAll(list);
+
+                    // In tất cả các giá trị ra Log.d
+                    for (String documentName : arrayList) {
+                        Log.d("Size Info", documentName);
+                        fetchDataFromSizeInfo(collection, documentName);
+                    }
+
+                    // Gọi các hàm khác cần sử dụng documentNamesList ở đây
+                } else {
+                    // Xử lý lỗi ở đây
+                    Log.d("FirestoreDocumentName", "Error getting documents.");
+                }
+            }
+        });
+    }
+
+    private void fetchDataFromSizeInfo(String collection, String document){
+        SizeInfo sizeInf = new SizeInfo("", 0, "");
+        database.getDataSizeInfoFromDocument(collection, document, new Firestore.FirestoreCallbackDataSizeInfo() {
+            @Override
+            public void onCallback(SizeInfo sizeInfo) {
+                 sizeInf.setSize(sizeInfo.getSize());
+                 sizeInf.setPrice(sizeInfo.getPrice());
+                 sizeInf.setIdDrink(sizeInfo.getIdDrink());
+            }
+        });
     }
 }

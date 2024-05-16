@@ -11,6 +11,10 @@ public class Song {
         this.votes = votes;
     }
 
+    public Song(){
+
+    }
+
     public String getName() {
         return name;
     }

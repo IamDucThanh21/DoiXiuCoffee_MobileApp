@@ -7,6 +7,10 @@ public class User extends Person{
     private ArrayList<Order> historyOrder;
     private int point;
 
+    public User(){
+
+    }
+
     public User(String idPerson, String phoneNumber, String name, ArrayList<Feedback> listMyFeedback, ArrayList<Order> historyOrder, int point) {
         super(idPerson, phoneNumber, name);
         this.listMyFeedback = listMyFeedback;
