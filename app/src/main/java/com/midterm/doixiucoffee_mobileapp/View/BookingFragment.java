@@ -50,11 +50,6 @@ public class BookingFragment extends Fragment {
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_booking, null, false);
 
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(this.getContext()));
-//        listCategory = new ArrayList<>();
-//        categoryAdapter = new CategoryAdapter(listCategory);
-//        binding.rvCategory.setAdapter(categoryAdapter);
-//
-//        khoitaodulieumau();
 
         GetFirebase.getInstance().getDataMenu(binding);
 

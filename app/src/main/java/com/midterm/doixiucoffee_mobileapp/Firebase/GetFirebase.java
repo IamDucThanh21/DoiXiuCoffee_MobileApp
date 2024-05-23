@@ -73,11 +73,5 @@ public class GetFirebase {
         }
 
         return listDrink;
-
-//        Map<String, Object> drink = (Map<String, Object>) i.get(0);
-//
-//        Map<String, Integer> size = (Map<String, Integer>) drink.get("size");
-//
-//        Log.d("ahah", String.valueOf(drink.get("story")));
     }
 }

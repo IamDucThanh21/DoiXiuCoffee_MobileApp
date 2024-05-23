@@ -21,22 +21,26 @@
             app:layout_constraintBottom_toTopOf="@+id/include"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <include
                     android:id="@+id/include_hb"
-                    layout="@layout/home_back">
+                    layout="@layout/home_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
                 </include>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_category"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="10000dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintTop_toBottomOf="@+id/include_hb">
                 </androidx.recyclerview.widget.RecyclerView>
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
         <include
