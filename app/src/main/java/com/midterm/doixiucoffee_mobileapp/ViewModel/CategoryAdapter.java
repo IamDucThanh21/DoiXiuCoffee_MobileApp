@@ -1,5 +1,6 @@
 package com.midterm.doixiucoffee_mobileapp.ViewModel;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         drinkAdapter = new DrinkAdapter(listDrink);
         holder.rv_drink.setLayoutManager(new LinearLayoutManager(holder.rv_drink.getContext()));
         holder.rv_drink.setAdapter(drinkAdapter);
+        Log.d("Log", "hehe");
     }
 
     @Override

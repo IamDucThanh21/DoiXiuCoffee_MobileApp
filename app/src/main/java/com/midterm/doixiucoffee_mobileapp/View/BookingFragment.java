@@ -6,13 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Firebase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.midterm.doixiucoffee_mobileapp.Firebase.GetFirebase;
 import com.midterm.doixiucoffee_mobileapp.Model.Category;
 import com.midterm.doixiucoffee_mobileapp.Model.Drink;
 import com.midterm.doixiucoffee_mobileapp.Model.SizeInfo;
@@ -21,18 +28,13 @@ import com.midterm.doixiucoffee_mobileapp.ViewModel.CategoryAdapter;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentBookingBinding;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
 
 
 public class BookingFragment extends Fragment {
     private ArrayList<Category> listCategory;
     private CategoryAdapter categoryAdapter;
     private FragmentBookingBinding binding;
-
-
-//    private RecyclerView rvCategory;
-//    private ImageView btnBack;
-
-    private FirebaseFirestore database;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class BookingFragment extends Fragment {
 //
 //        khoitaodulieumau();
 
-        getDataByStrDoc("si01");
+        GetFirebase.getInstance().getDataMenu(binding);
 
         binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,80 +69,4 @@ public class BookingFragment extends Fragment {
         return view;
     }
 
-    public void khoitaodulieumau(){
-
-        ArrayList<SizeInfo> sizePhinden = new ArrayList<>();
-        sizePhinden.add(new SizeInfo("M", 15, null));
-        sizePhinden.add(new SizeInfo("L", 20, null));
-
-//        setData(sizePhinden, "si01");
-//        setData(sizePhinden, "si02");
-//        sizePhinden.add(getDataByStrDoc("si01"));
-//        sizePhinden.add(getDataByStrDoc("si02"));
-
-
-//        ArrayList<SizeInfo> sizePhinsua = new ArrayList<>();
-//        sizePhinsua.add(new SizeInfo("M", 15, null));
-//        sizePhinsua.add(new SizeInfo("L", 18, null));
-//
-//        ArrayList<Drink> listDrink = new ArrayList<>();
-//        listDrink.add(new Drink("dr01", "Phin đen", "ca01", sizePhinden, "Cau chuyen"));
-//        listDrink.add(new Drink("dr02", "Phin sữa", "ca01", sizePhinsua, "Cau chuyen"));
-//
-//        listCategory.add(new Category("ca01", "Cà phê", listDrink, "Đây là thông tin"));
-//        listCategory.add(new Category("ca02", "Trà", listDrink, "Đây là thông tin"));
-    }
-
-//    public void setData(ArrayList<SizeInfo> sizeInfo, String doc){
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        db.collection("SizeInfo").document(doc).get().
-//                addOnCompleteListener(task -> {
-//                    DocumentSnapshot document = task.getResult();
-//                    int price = Math.toIntExact(document.getLong("price"));
-//                    String name = document.getString("name");
-//                    String idDrink = document.getString("idDrink");
-//
-//                    Log.d("data", String.valueOf(price));
-//                    Log.d("data", name);
-//                    Log.d("data", idDrink);
-//
-//                    sizeInfo.add(new SizeInfo((String) document.getString("name"), Math.toIntExact(document.getLong("price")), (String) document.getString("idDrink")));
-//                });
-//    }
-    public void getDataByStrDoc(String doc){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        SizeInfo sizeInfoNew = new SizeInfo();
-        db.collection("SizeInfo").document(doc).get().
-                addOnCompleteListener(task -> {
-                    DocumentSnapshot document = task.getResult();
-                    int price = Math.toIntExact(document.getLong("price"));
-                    String name = document.getString("name");
-                    String idDrink = document.getString("idDrink");
-
-                    Log.d("data", String.valueOf(price));
-                    Log.d("data", name);
-                    Log.d("data", idDrink);
-
-                    sizeInfoNew.setSize(name);
-                    sizeInfoNew.setPrice(price);
-                    sizeInfoNew.setIdDrink(idDrink);
-
-                    ArrayList<SizeInfo> sizePhinsua = new ArrayList<>();
-                    sizePhinsua.add(sizeInfoNew);
-                    sizePhinsua.add(new SizeInfo("L", 18, null));
-
-                    listCategory = new ArrayList<>();
-                    categoryAdapter = new CategoryAdapter(listCategory);
-                    binding.rvCategory.setAdapter(categoryAdapter);
-
-                    ArrayList<Drink> listDrink = new ArrayList<>();
-                    listDrink.add(new Drink("dr01", "Phin đen", "ca01", sizePhinsua, "Cau chuyen"));
-//                    listDrink.add(new Drink("dr02", "Phin sữa", "ca01", sizePhinsua, "Cau chuyen"));
-
-                    listCategory.add(new Category("ca01", "Cà phê", listDrink, "Đây là thông tin"));
-                });
-//        return sizeInfoNew;
-    }
-
-    
 }
