@@ -1,9 +1,6 @@
 package com.midterm.doixiucoffee_mobileapp.Firebase;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -13,29 +10,23 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.midterm.doixiucoffee_mobileapp.Model.Category;
 import com.midterm.doixiucoffee_mobileapp.Model.Drink;
 import com.midterm.doixiucoffee_mobileapp.Model.SizeInfo;
-import com.midterm.doixiucoffee_mobileapp.ViewModel.CategoryAdapter;
-import com.midterm.doixiucoffee_mobileapp.databinding.FragmentBookingBinding;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class GetFirebase {
-
-    private ArrayList<Category> listCategory;
-    private CategoryAdapter categoryAdapter;
-    private static GetFirebase firesbase;
-    public static GetFirebase getInstance(){
+public class DataDrink {
+    private ArrayList<Category> menu;
+    private static DataDrink firesbase;
+    public static DataDrink getInstance(){
         if(firesbase == null){
-            firesbase = new GetFirebase();
+            firesbase = new DataDrink();
         }
         return firesbase;
     }
 
-    public GetFirebase(){};
+    public DataDrink(){};
 
-    public void getDataMenu(FragmentBookingBinding binding){
+    public void getDataMenu(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("Category").get().
@@ -43,20 +34,16 @@ public class GetFirebase {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
-                            listCategory = new ArrayList<>();
+                            menu = new ArrayList<>();
                             for(QueryDocumentSnapshot document: task.getResult()){
-                                ArrayList<Drink> listDrink = new ArrayList<>(setData(document));
-                                listCategory.add(new Category(document.getId(), document.get("name").toString(),listDrink, document.get("info").toString()));
+                                ArrayList<Drink> listDrink = new ArrayList<>(getDataDrink(document));
+                                menu.add(new Category(document.getId(), document.get("name").toString(),listDrink, document.get("info").toString()));
                             }
-
-                            categoryAdapter = new CategoryAdapter(listCategory);
-
-                            binding.rvCategory.setAdapter(categoryAdapter);
                         }
                     }
                 });
     }
-    public ArrayList<Drink> setData(QueryDocumentSnapshot document){
+    public ArrayList<Drink> getDataDrink(QueryDocumentSnapshot document){
         List<Object> i = (List<Object>) document.get("drink");
         ArrayList<Drink> listDrink = new ArrayList<>();
 
@@ -71,7 +58,11 @@ public class GetFirebase {
             Drink drink = new Drink("", dr1.get("name").toString(),document.getId().toString(), listSize, dr1.get("story").toString() );
             listDrink.add(drink);
         }
-
         return listDrink;
     }
+
+    public ArrayList<Category> getMenu(){
+        return menu;
+    }
 }
+

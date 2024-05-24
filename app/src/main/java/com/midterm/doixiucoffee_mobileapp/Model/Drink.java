@@ -7,6 +7,7 @@ public class Drink {
     private String drinkName;
     private String typeDrink;
     private ArrayList<SizeInfo> sizeInfos;
+    private SizeInfo sizeInfo;
     private String story;
 
     public Drink(String idDrink, String drinkName, String typeDrink, ArrayList<SizeInfo> sizeInfos, String story) {
@@ -14,6 +15,14 @@ public class Drink {
         this.drinkName = drinkName;
         this.typeDrink = typeDrink;
         this.sizeInfos = sizeInfos;
+        this.story = story;
+    }
+
+    public Drink(String idDrink, String drinkName, String typeDrink, SizeInfo sizeInfo, String story) {
+        this.idDrink = idDrink;
+        this.drinkName = drinkName;
+        this.typeDrink = typeDrink;
+        this.sizeInfo = sizeInfo;
         this.story = story;
     }
 
@@ -59,5 +68,13 @@ public class Drink {
 
     public void setStory(String story) {
         this.story = story;
+    }
+
+    public SizeInfo getSizeInfo() {
+        return sizeInfo;
+    }
+
+    public void setSizeInfo(SizeInfo sizeInfo) {
+        this.sizeInfo = sizeInfo;
     }
 }

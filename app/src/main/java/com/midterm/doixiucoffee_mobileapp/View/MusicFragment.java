@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.midterm.doixiucoffee_mobileapp.Model.Song;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.SongAdapter;
-import com.midterm.doixiucoffee_mobileapp.databinding.FragmentBookingBinding;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentMusicBinding;
 
 import java.util.ArrayList;

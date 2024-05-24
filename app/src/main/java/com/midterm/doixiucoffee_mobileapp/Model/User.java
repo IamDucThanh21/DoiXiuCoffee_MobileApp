@@ -17,4 +17,28 @@ public class User extends Person{
         this.historyOrder = historyOrder;
         this.point = point;
     }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    public ArrayList<Feedback> getListMyFeedback() {
+        return listMyFeedback;
+    }
+
+    public void setListMyFeedback(ArrayList<Feedback> listMyFeedback) {
+        this.listMyFeedback = listMyFeedback;
+    }
+
+    public ArrayList<Order> getHistoryOrder() {
+        return historyOrder;
+    }
+
+    public void setHistoryOrder(ArrayList<Order> historyOrder) {
+        this.historyOrder = historyOrder;
+    }
 }

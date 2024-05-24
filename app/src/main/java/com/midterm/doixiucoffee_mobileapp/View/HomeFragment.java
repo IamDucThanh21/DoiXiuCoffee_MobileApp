@@ -1,36 +1,39 @@
 package com.midterm.doixiucoffee_mobileapp.View;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.midterm.doixiucoffee_mobileapp.MainActivity;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataDrink;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
 import com.midterm.doixiucoffee_mobileapp.R;
-import com.midterm.doixiucoffee_mobileapp.databinding.ActivityMainBinding;
-import com.midterm.doixiucoffee_mobileapp.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
     private RelativeLayout openBooking;
     private RelativeLayout openMusic;
     private RelativeLayout openFeedback;
+    private ImageView imgAva;
+    private TextView btnLogin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
+
+        DataDrink.getInstance().getDataMenu();
+        DataPerson.getInstance().getDataPerson();
+
     }
 
     @Override
@@ -67,6 +70,21 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.feedbackFragment);
+            }
+        });
+
+        imgAva = view.findViewById(R.id.imgAva);
+        btnLogin = view.findViewById(R.id.btnLogin);
+
+        if(!DataPerson.getInstance().getIdPersonLogin().equals("null")){
+            imgAva.setVisibility(View.VISIBLE);
+            btnLogin.setVisibility(View.GONE);
+        }
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.loginFragment);
             }
         });
     }
