@@ -41,7 +41,7 @@ public class BookingFragment extends Fragment {
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(this.getContext()));
         listCategory = new ArrayList<>(DataDrink.getInstance().getMenu());
         if(listCategory.size()!=0){
-            categoryAdapter = new CategoryAdapter(listCategory);
+            categoryAdapter = new CategoryAdapter(listCategory, 0);
             Log.d("Check","Size menu: "+categoryAdapter.getItemCount());
             binding.rvCategory.setAdapter(categoryAdapter);
         }
@@ -50,6 +50,13 @@ public class BookingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.homeFragment);
+            }
+        });
+
+        binding.btnAdd.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.addDrinkFragment);
             }
         });
 

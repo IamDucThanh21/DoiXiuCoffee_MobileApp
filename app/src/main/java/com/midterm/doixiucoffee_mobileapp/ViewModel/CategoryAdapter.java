@@ -20,8 +20,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     private ArrayList<Category> listCategory;
     private DrinkAdapter drinkAdapter;
     private ArrayList<Drink> listDrink;
+    private int mode =0;
 
-    public CategoryAdapter(ArrayList<Category> listCategory){ this.listCategory = listCategory;}
+    public CategoryAdapter(ArrayList<Category> listCategory, int mode){
+        this.listCategory = listCategory;
+        this.mode = mode;
+    }
 
 
 
@@ -38,7 +42,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
         holder.title.setText(listCategory.get(position).getCategoryName());
         listDrink = new ArrayList<Drink>(listCategory.get(position).getListDrink());
-        drinkAdapter = new DrinkAdapter(listDrink);
+        drinkAdapter = new DrinkAdapter(listDrink, mode);
         holder.rv_drink.setLayoutManager(new LinearLayoutManager(holder.rv_drink.getContext()));
         holder.rv_drink.setAdapter(drinkAdapter);
     }
@@ -58,4 +62,5 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             rv_drink = (RecyclerView) itemView.findViewById(R.id.rv_drink);
         }
     }
+
 }

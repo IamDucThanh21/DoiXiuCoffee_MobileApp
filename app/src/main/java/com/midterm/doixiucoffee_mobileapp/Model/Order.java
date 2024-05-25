@@ -10,6 +10,7 @@ public class Order {
     private boolean status;
     private User user;
     private int discount;
+    private String note;
 
     public Order(String idOrder, int table, ArrayList<Drink> listDrinks, int totalPrice, boolean status, User user, int discount) {
         this.idOrder = idOrder;
@@ -79,5 +80,13 @@ public class Order {
 
     public void setDiscount(int discount) {
         this.discount = discount;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }
