@@ -3,12 +3,14 @@ package com.midterm.doixiucoffee_mobileapp.View;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.midterm.doixiucoffee_mobileapp.Model.Drink;
 import com.midterm.doixiucoffee_mobileapp.Model.Order;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.OrderAdapter;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 public class ListOdersFragment extends Fragment {
 
     private FragmentListOdersBinding binding;
-    private ArrayList<Order> listOrder;
+    private ArrayList<Drink> listDrink;
     private OrderAdapter orderAdapter;
     public ListOdersFragment() {
         // Required empty public constructor
@@ -43,15 +45,19 @@ public class ListOdersFragment extends Fragment {
 
         binding = FragmentListOdersBinding.inflate(getLayoutInflater());
 
-        listOrder = new ArrayList<>();
-        Order o = new Order();
-        listOrder.add(o);
-        listOrder.add(o);
+        listDrink = new ArrayList<Drink>();
+        Drink d = new Drink();
+        listDrink.add(d);
+        listDrink.add(d);
 
-        orderAdapter = new OrderAdapter(listOrder);
+
+        orderAdapter = new OrderAdapter(listDrink);
+        binding.rvOrder.setLayoutManager(new LinearLayoutManager(this.getContext()));
         binding.rvOrder.setAdapter(orderAdapter);
 
-        Log.d("test", "Size oder:"+orderAdapter.getItemCount());
+
+
+        Log.d("test", "Size oder:" + orderAdapter.getItemCount());
 
         View view = binding.getRoot();
         // Inflate the layout for this fragment

@@ -4,11 +4,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.midterm.doixiucoffee_mobileapp.Model.Drink;
 import com.midterm.doixiucoffee_mobileapp.Model.Order;
 import com.midterm.doixiucoffee_mobileapp.R;
 
@@ -16,11 +18,13 @@ import java.util.ArrayList;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
-    private ArrayList<Order> listOrder;
+    private ArrayList<Drink> listOrderDrink;
 
-    public OrderAdapter(ArrayList<Order> listOrder) {
-        this.listOrder = listOrder;
+    public OrderAdapter(ArrayList<Drink> listOrderDrink) {
+        this.listOrderDrink = listOrderDrink;
     }
+
+
     @NonNull
     @Override
     public OrderAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -31,22 +35,28 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull OrderAdapter.ViewHolder holder, int position) {
-        holder.text.setText("Mot hai ba");
-        Log.d("text2", "hehe");
+
     }
 
     @Override
     public int getItemCount() {
-        return listOrder.size();
+        return listOrderDrink.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView text;
+        private TextView drinkName;
+        private TextView price;
+        private ImageView btnRemove;
+        private ImageView btnTakeNote;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            text = (TextView) itemView.findViewById(R.id.text);
+
+            drinkName = (TextView) itemView.findViewById(R.id.drinkName);
+            price = (TextView)  itemView.findViewById(R.id.price);
+            btnRemove = (ImageView) itemView.findViewById(R.id.btn_remove);
+            btnTakeNote = (ImageView) itemView.findViewById(R.id.btn_take_note);
         }
     }
 }
