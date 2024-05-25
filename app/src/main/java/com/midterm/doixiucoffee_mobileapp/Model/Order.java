@@ -12,7 +12,7 @@ public class Order {
     private int discount;
     private String note;
 
-    public Order(String idOrder, int table, ArrayList<Drink> listDrinks, int totalPrice, boolean status, User user, int discount) {
+    public Order(String idOrder, int table, ArrayList<Drink> listDrinks, int totalPrice, boolean status, User user, int discount, String note) {
         this.idOrder = idOrder;
         this.table = table;
         this.listDrinks = listDrinks;
@@ -20,6 +20,7 @@ public class Order {
         this.status = status;
         this.user = user;
         this.discount = discount;
+        this.note = note;
     }
 
     public Order(){
