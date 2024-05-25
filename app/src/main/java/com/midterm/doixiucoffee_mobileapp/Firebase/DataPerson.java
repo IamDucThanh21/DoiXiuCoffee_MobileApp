@@ -3,13 +3,11 @@ package com.midterm.doixiucoffee_mobileapp.Firebase;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.midterm.doixiucoffee_mobileapp.Model.Admin;
-import com.midterm.doixiucoffee_mobileapp.Model.Person;
 import com.midterm.doixiucoffee_mobileapp.Model.User;
 
 import java.util.ArrayList;
