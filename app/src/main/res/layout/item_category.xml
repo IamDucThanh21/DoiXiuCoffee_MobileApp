@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp">
+    android:layout_height="50dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
         android:id="@+id/drinkName"
         android:layout_width="200dp"
@@ -11,28 +12,70 @@
         android:layout_gravity="center"
         android:layout_marginStart="35dp">
     </TextView>
-    <TextView
-        android:id="@+id/priceS"
+    <RelativeLayout
         android:layout_width="60dp"
         android:layout_height="35dp"
-        android:text="10K"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="#6c6c6c">
-    </TextView>
-    <TextView
-        android:id="@+id/priceB"
+        android:layout_gravity="center">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/borderS"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            app:shapeAppearanceOverlay="@style/rounded_corner"
+            android:background="@color/black"
+            android:visibility="gone">
+        </com.google.android.material.imageview.ShapeableImageView>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/backS"
+            android:layout_width="58dp"
+            android:layout_height="33dp"
+            app:shapeAppearanceOverlay="@style/rounded_corner"
+            android:background="@color/white_sys"
+            android:layout_centerInParent="true">
+        </com.google.android.material.imageview.ShapeableImageView>
+        <TextView
+            android:id="@+id/priceS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="10K"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="#6c6c6c">
+        </TextView>
+    </RelativeLayout>
+    <RelativeLayout
         android:layout_width="60dp"
         android:layout_height="35dp"
-        android:text="15K"
-        android:textStyle="bold"
-        android:textSize="20dp"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="#6c6c6c">
-    </TextView>
+        android:layout_marginLeft="10dp">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/borderB"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            app:shapeAppearanceOverlay="@style/rounded_corner"
+            android:background="@color/black"
+            android:visibility="gone">
+        </com.google.android.material.imageview.ShapeableImageView>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/backB"
+            android:layout_width="58dp"
+            android:layout_height="33dp"
+            app:shapeAppearanceOverlay="@style/rounded_corner"
+            android:layout_centerInParent="true"
+            android:background="@color/white_sys">
+        </com.google.android.material.imageview.ShapeableImageView>
+        <TextView
+            android:id="@+id/priceB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="10K"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="#6c6c6c">
+        </TextView>
+    </RelativeLayout>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
