@@ -61,6 +61,13 @@ public class MusicFragment extends Fragment {
             }
         });
 
+        binding.btnAddMusic.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.searchMusicFragment);
+            }
+        });
+
         View view = binding.getRoot();
         return view;
     }

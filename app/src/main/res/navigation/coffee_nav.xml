@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_musicFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_musicFragment_to_searchMusicFragment"
+            app:destination="@id/searchMusicFragment" />
     </fragment>
     <fragment
         android:id="@+id/feedbackFragment"
@@ -64,4 +67,13 @@
         android:name="com.midterm.doixiucoffee_mobileapp.AddDrinkFragment"
         android:label="fragment_add_drink"
         tools:layout="@layout/fragment_add_drink" />
+    <fragment
+        android:id="@+id/searchMusicFragment"
+        android:name="com.midterm.doixiucoffee_mobileapp.View.SearchMusicFragment"
+        android:label="fragment_search_music"
+        tools:layout="@layout/fragment_search_music" >
+        <action
+            android:id="@+id/action_searchMusicFragment_to_musicFragment"
+            app:destination="@id/musicFragment" />
+    </fragment>
 </navigation>

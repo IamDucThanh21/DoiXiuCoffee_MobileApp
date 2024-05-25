@@ -49,6 +49,7 @@
         </ScrollView>
 
         <include
+            android:id="@+id/btn_add_music"
             layout="@layout/add_button"
             android:layout_width="70dp"
             android:layout_height="70dp"
