@@ -1,5 +1,6 @@
 package com.midterm.doixiucoffee_mobileapp.ViewModel;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.midterm.doixiucoffee_mobileapp.Model.Drink;
+import com.midterm.doixiucoffee_mobileapp.Model.Order;
 import com.midterm.doixiucoffee_mobileapp.R;
 
 import java.util.ArrayList;
@@ -18,10 +20,12 @@ import java.util.ArrayList;
 public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> {
     private ArrayList<Drink> listDrink;
     private int mode = 0;
-
+    private Order order;
     public DrinkAdapter(ArrayList<Drink> listDrink, int mode){
         this.listDrink = listDrink;
         this.mode = mode;
+        this.order = new Order();
+        order.setTotalPrice(0);
     }
 
     @NonNull
@@ -38,44 +42,58 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
         holder.drinkName.setText(listDrink.get(position).getDrinkName());
         holder.priceS.setText(listDrink.get(position).getSizeInfos().get(0).getPrice()+"K");
         holder.priceB.setText(listDrink.get(position).getSizeInfos().get(1).getPrice()+"K");
+        Drink drink = holder.getDrink(listDrink.get(position));
         if(mode == 1){
             holder.borderB.setVisibility(View.VISIBLE);
             holder.borderS.setVisibility(View.VISIBLE);
-
             holder.priceS.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    drink.setSizeInfo(drink.getSizeInfos().get(0));
                     if(holder.borderS.getVisibility()==View.VISIBLE){
                         holder.borderS.setVisibility(View.GONE);
                         holder.backS.setBackgroundColor(v.getResources().getColor(R.color.green));
                         holder.priceS.setTextColor(v.getResources().getColor(R.color.white));
+                        setOrder(drink);
                     }
                     else{
                         holder.borderS.setVisibility(View.VISIBLE);
                         holder.backS.setBackgroundColor(v.getResources().getColor(R.color.white));
                         holder.priceS.setTextColor(v.getResources().getColor(R.color.gray_text));
+                        deleteDrinkOnOrder(drink);
                     }
                 }
             });
             holder.priceB.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    drink.setSizeInfo(drink.getSizeInfos().get(1));
                     if(holder.borderB.getVisibility()==View.VISIBLE){
                         holder.borderB.setVisibility(View.GONE);
                         holder.backB.setBackgroundColor(v.getResources().getColor(R.color.green));
                         holder.priceB.setTextColor(v.getResources().getColor(R.color.white));
+                        setOrder(drink);
                     }
                     else{
                         holder.borderB.setVisibility(View.VISIBLE);
                         holder.backB.setBackgroundColor(v.getResources().getColor(R.color.white));
                         holder.priceB.setTextColor(v.getResources().getColor(R.color.gray_text));
+                        deleteDrinkOnOrder(drink);
                     }
                 }
             });
         }
-
     }
-
+    public void setOrder(Drink drink){
+        order.getListDrinks().add(drink);
+        int totalPriceOrder = order.getTotalPrice() + drink.getSizeInfo().getPrice();
+        order.setTotalPrice(totalPriceOrder);
+    }
+    public void deleteDrinkOnOrder(Drink drink){
+        order.getListDrinks().remove(drink);
+        int totalPriceOrder = order.getTotalPrice() - drink.getSizeInfo().getPrice();
+        order.setTotalPrice(totalPriceOrder);
+    }
     @Override
     public int getItemCount() {
         return listDrink.size();
@@ -99,6 +117,8 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
             backS = (ShapeableImageView) view.findViewById(R.id.backS);
             backB = (ShapeableImageView) view.findViewById(R.id.backB);
         }
+        public Drink getDrink(Drink drink){
+            return drink;
+        }
     }
-
 }

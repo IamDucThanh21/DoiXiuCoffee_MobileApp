@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         View viewRoot = binding.getRoot();
         setContentView(viewRoot);
 
-        addNewUser(generateRandomId(), "Chau Huy", "0123456", 0, "user");
+//        addNewUser(generateRandomId(), "Chau Huy", "0123456", 0, "user");
     }
 
     public void addNewUser(String id, String name, String phone, int point, String role){
