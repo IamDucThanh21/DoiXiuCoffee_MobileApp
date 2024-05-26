@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataDrink;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataOrder;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
 import com.midterm.doixiucoffee_mobileapp.R;
 
@@ -32,7 +33,6 @@ public class HomeFragment extends Fragment {
 
         DataDrink.getInstance().getDataMenu();
         DataPerson.getInstance().getDataPerson();
-
     }
 
     @Override

@@ -1,5 +1,9 @@
 package com.midterm.doixiucoffee_mobileapp.Model;
 
+import android.util.Log;
+
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataDrink;
+
 import java.util.ArrayList;
 
 public class Drink {
@@ -24,6 +28,16 @@ public class Drink {
         this.typeDrink = typeDrink;
         this.sizeInfo = sizeInfo;
         this.story = story;
+    }
+
+    public Drink(String idDrink_, int size){
+        Drink drink = new Drink();
+        drink = DataDrink.getInstance().getDrinkById(idDrink_);
+        this.idDrink = drink.getIdDrink();
+        this.drinkName = drink.getDrinkName();
+        this.typeDrink = drink.getTypeDrink();
+        this.story = drink.getStory();
+        this.sizeInfo = drink.getSizeInfos().get(size);
     }
 
     public Drink(){

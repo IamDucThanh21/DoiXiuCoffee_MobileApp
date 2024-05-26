@@ -38,7 +38,6 @@
             >
         </ImageView>
 
-
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgAva"
             android:layout_width="40dp"
@@ -49,7 +48,18 @@
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:shapeAppearanceOverlay="@style/circle"
-            app:srcCompat="@drawable/ava" />
+            app:srcCompat="@drawable/ava"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:text="Đăng nhập"
+            android:layout_centerVertical="true">
+        </TextView>
 
 
     </RelativeLayout>

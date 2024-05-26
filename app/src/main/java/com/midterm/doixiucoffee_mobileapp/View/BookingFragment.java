@@ -1,5 +1,7 @@
 package com.midterm.doixiucoffee_mobileapp.View;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,8 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataDrink;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataOrder;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
 import com.midterm.doixiucoffee_mobileapp.Model.Category;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.CategoryAdapter;
@@ -36,7 +40,13 @@ public class BookingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        DataOrder.getInstance().getDataOrder();
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_booking, null, false);
+
+        if(!DataPerson.getInstance().getIdPersonLogin().equals("null")) {
+            binding.toolbar.imgAva.setVisibility(View.VISIBLE);
+            binding.toolbar.btnLogin.setVisibility(View.GONE);
+        }
 
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(this.getContext()));
         listCategory = new ArrayList<>(DataDrink.getInstance().getMenu());
@@ -53,10 +63,38 @@ public class BookingFragment extends Fragment {
             }
         });
 
+
         binding.btnAdd.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.addDrinkFragment);
+
+                //Nếu như chưa đăng nhập thì hiện thông báo yêu cầu đăng nhập
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext()); // 'this' là context của Activity hoặc Fragment
+                builder.setTitle("Thông báo")
+                        .setMessage("Bạn cần đăng nhập để tiếp tục!")
+                        .setPositiveButton("Đăng nhập", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Navigation.findNavController(v).navigate(R.id.loginFragment);
+                            }
+                        })
+                        .setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                if(DataPerson.getInstance().getIdPersonLogin().equals("null")){
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+                else Navigation.findNavController(v).navigate(R.id.addDrinkFragment);
+            }
+        });
+
+        binding.toolbar.btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.loginFragment);
             }
         });
 

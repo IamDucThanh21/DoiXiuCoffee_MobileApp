@@ -18,9 +18,6 @@ public class User extends Person{
         this.point = point;
     }
 
-    public String getIdUser(){
-        return getIdPerson();
-    }
 
     public int getPoint() {
         return point;

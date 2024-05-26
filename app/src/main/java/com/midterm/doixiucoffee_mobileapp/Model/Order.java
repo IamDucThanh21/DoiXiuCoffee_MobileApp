@@ -6,7 +6,7 @@ public class Order {
     private String idOrder;
     private int table;
     private ArrayList<Drink> listDrinks;
-    private int totalPrice;
+    private int totalPrice =0;
     private boolean status;
     private User user;
     private int discount;
@@ -24,7 +24,7 @@ public class Order {
     }
 
     public Order(){
-
+        this.listDrinks = new ArrayList<>();
     }
 
     public String getIdOrder() {
@@ -90,4 +90,33 @@ public class Order {
     public void setNote(String note) {
         this.note = note;
     }
+
+    public void removeDrink(String idDrink, int size){
+        int i =0;
+        String s = "M";
+        if(size == 1) s = "L";
+        for(Drink dr : listDrinks){
+            if(dr.getIdDrink().equals(idDrink)){
+                if(dr.getSizeInfo().getSize().equals(s)){
+                    listDrinks.remove(i);
+                    return;
+                }
+            }
+            i++;
+        }
+    }
+//        public static String generateRandomId() {
+//        Random random = new Random();
+//        int number = random.nextInt(100); // Tạo số ngẫu nhiên từ 0 đến 99
+//        String randomId = "us" + String.format("%02d", number); // Đảm bảo số có hai chữ số
+//        ArrayList<User> listUser = new ArrayList<>();
+//        listUser = DataPerson.getInstance().getAllUser();
+//
+//        for (User user : listUser){
+//            while (randomId == user.getIdUser()){
+//                randomId = "us" + String.format("%02d", random.nextInt(100));
+//            }
+//        }
+//        return randomId;
+//    }
 }
