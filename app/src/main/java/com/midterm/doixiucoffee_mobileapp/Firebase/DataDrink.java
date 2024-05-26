@@ -1,5 +1,7 @@
 package com.midterm.doixiucoffee_mobileapp.Firebase;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,7 +57,7 @@ public class DataDrink {
             listSize.add(new SizeInfo("M", size.get("M").intValue(), dr1.get("name").toString() ));
             listSize.add(new SizeInfo("L", size.get("L").intValue(), dr1.get("name").toString() ));
 
-            Drink drink = new Drink("", dr1.get("name").toString(),document.getId().toString(), listSize, dr1.get("story").toString() );
+            Drink drink = new Drink(dr1.get("idDrink").toString(), dr1.get("name").toString(),document.getId().toString(), listSize, dr1.get("story").toString() );
             listDrink.add(drink);
         }
         return listDrink;
@@ -63,6 +65,17 @@ public class DataDrink {
 
     public ArrayList<Category> getMenu(){
         return menu;
+    }
+
+    public Drink getDrinkById(String id){
+        for (Category ca : menu){
+            for (Drink dr : ca.getListDrink()){
+                if(dr.getIdDrink().equals(id)){
+                    return dr;
+                }
+            }
+        }
+        return null;
     }
 }
 

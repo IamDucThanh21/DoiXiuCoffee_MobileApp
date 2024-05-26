@@ -1,6 +1,7 @@
 package com.midterm.doixiucoffee_mobileapp.ViewModel;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,29 +9,33 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.rpc.context.AttributeContext;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataOrder;
 import com.midterm.doixiucoffee_mobileapp.Model.Drink;
 import com.midterm.doixiucoffee_mobileapp.Model.Order;
 import com.midterm.doixiucoffee_mobileapp.R;
+import com.midterm.doixiucoffee_mobileapp.View.ListOdersFragment;
+import com.midterm.doixiucoffee_mobileapp.databinding.FragmentListOdersBinding;
 
 import java.util.ArrayList;
 
 public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> {
     private ArrayList<Drink> listDrink;
     private int mode = 0;
-    private Order order;
+
     public DrinkAdapter(ArrayList<Drink> listDrink, int mode){
         this.listDrink = listDrink;
         this.mode = mode;
-        this.order = new Order();
-        order.setTotalPrice(0);
     }
 
     @NonNull
     @Override
     public DrinkAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_category, parent, false);
 
@@ -42,59 +47,94 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
         holder.drinkName.setText(listDrink.get(position).getDrinkName());
         holder.priceS.setText(listDrink.get(position).getSizeInfos().get(0).getPrice()+"K");
         holder.priceB.setText(listDrink.get(position).getSizeInfos().get(1).getPrice()+"K");
+
+        int p = position;
         if(mode == 1){
             holder.borderB.setVisibility(View.VISIBLE);
             holder.borderS.setVisibility(View.VISIBLE);
+
+            //Kiểm tra xem nó đã được chọn sẵn chưa, nếu rồi thì tô màu
+            for(Drink d: DataOrder.getInstance().getOrder().getListDrinks()){
+                if(d.getIdDrink().equals(listDrink.get(position).getIdDrink())){
+                    String size = d.getSizeInfo().getSize();
+                    int s = 0;
+                    if(size.equals("L")) s = 1;
+                    setModeDrinkChoice(holder, s, "On");
+                }
+            }
             holder.priceS.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Drink drink = listDrink.get(position);
-//                    drink.setSizeInfo(drink.getSizeInfos().get(0));
-                    if(holder.borderS.getVisibility()==View.VISIBLE){
-                        holder.borderS.setVisibility(View.GONE);
-                        holder.backS.setBackgroundColor(v.getResources().getColor(R.color.green));
-                        holder.priceS.setTextColor(v.getResources().getColor(R.color.white));
-//                        setOrder(drink);
+                    if (holder.borderS.getVisibility() == View.VISIBLE) {
+                        setModeDrinkChoice(holder, 0, "On");
+                        setOrder(p, 0);
+                    } else {
+                        setModeDrinkChoice(holder, 0, "Off");
+                        deleteDrinkOnOrder(p, 0);
                     }
-                    else{
-                        holder.borderS.setVisibility(View.VISIBLE);
-                        holder.backS.setBackgroundColor(v.getResources().getColor(R.color.white));
-                        holder.priceS.setTextColor(v.getResources().getColor(R.color.gray_text));
-//                        deleteDrinkOnOrder(drink);
-                    }
+                    Navigation.findNavController(v).navigate(R.id.addDrinkFragment);
                 }
             });
             holder.priceB.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Drink drink = listDrink.get(position);
-//                    drink.setSizeInfo(drink.getSizeInfos().get(1));
                     if(holder.borderB.getVisibility()==View.VISIBLE){
-                        holder.borderB.setVisibility(View.GONE);
-                        holder.backB.setBackgroundColor(v.getResources().getColor(R.color.green));
-                        holder.priceB.setTextColor(v.getResources().getColor(R.color.white));
-//                        setOrder(drink);
+                        setModeDrinkChoice(holder, 1, "On");
+                        setOrder(p, 1);
                     }
                     else{
-                        holder.borderB.setVisibility(View.VISIBLE);
-                        holder.backB.setBackgroundColor(v.getResources().getColor(R.color.white));
-                        holder.priceB.setTextColor(v.getResources().getColor(R.color.gray_text));
-//                        deleteDrinkOnOrder(drink);
+                        setModeDrinkChoice(holder, 1,"Off");
+                        deleteDrinkOnOrder(p, 1);
+                        Log.d("remove",DataOrder.getInstance().getOrder().getListDrinks().size()+"");
                     }
+                    Navigation.findNavController(v).navigate(R.id.addDrinkFragment);
                 }
             });
         }
     }
-    public void setOrder(Drink drink){
-        order.getListDrinks().add(drink);
-        int totalPriceOrder = order.getTotalPrice() + drink.getSizeInfo().getPrice();
-        order.setTotalPrice(totalPriceOrder);
+    public void setModeDrinkChoice(DrinkAdapter.ViewHolder holder, int size, String mode){
+        Resources re =  holder.borderB.getResources();
+        if(mode.equals("On")){
+            if(size == 0){
+                holder.borderS.setVisibility(View.GONE);
+                holder.backS.setBackgroundColor(re.getColor(R.color.green));
+                holder.priceS.setTextColor(re.getColor(R.color.white));
+            }
+            else{
+                holder.borderB.setVisibility(View.GONE);
+                holder.backB.setBackgroundColor(re.getColor(R.color.green));
+                holder.priceB.setTextColor(re.getColor(R.color.white));
+            }
+        }
+        else{
+            if(size == 0){
+                holder.borderS.setVisibility(View.VISIBLE);
+                holder.backS.setBackgroundColor(re.getColor(R.color.white));
+                holder.priceS.setTextColor(re.getColor(R.color.gray_text));
+            }
+            else {
+                holder.borderB.setVisibility(View.VISIBLE);
+                holder.backB.setBackgroundColor(re.getColor(R.color.white));
+                holder.priceB.setTextColor(re.getColor(R.color.gray_text));
+            }
+        }
     }
-    public void deleteDrinkOnOrder(Drink drink){
-        order.getListDrinks().remove(drink);
-        int totalPriceOrder = order.getTotalPrice() - drink.getSizeInfo().getPrice();
-        order.setTotalPrice(totalPriceOrder);
+
+    public void setOrder(int p, int size){
+        Drink drink = new Drink(listDrink.get(p).getIdDrink(), size);
+        DataOrder.getInstance().getOrder().getListDrinks().add(drink);
+        DataOrder.getInstance().updateTotalPrice();
+        Log.d("action","Add drink:"+ drink.getIdDrink()+"/"+drink.getSizeInfo().getSize());
+
     }
+    public void deleteDrinkOnOrder(int p, int size){
+        Drink drink = new Drink(listDrink.get(p).getIdDrink(), size);
+        DataOrder.getInstance().getOrder().removeDrink(drink.getIdDrink(), size);
+        DataOrder.getInstance().updateTotalPrice();
+        Log.d("action","Remove drink:"+ drink.getIdDrink()+"/"+drink.getSizeInfo().getSize());
+
+    }
+
     @Override
     public int getItemCount() {
         return listDrink.size();

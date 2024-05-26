@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,7 @@ import android.widget.FrameLayout;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataDrink;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
 import com.midterm.doixiucoffee_mobileapp.Model.Category;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.CategoryAdapter;
@@ -50,7 +52,13 @@ public class AddDrinkFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_add_drink, null, false);
 
+        if(!DataPerson.getInstance().getIdPersonLogin().equals("null")) {
+            binding.toolbar.imgAva.setVisibility(View.VISIBLE);
+            binding.toolbar.btnLogin.setVisibility(View.GONE);
+        }
+
         listCategory = new ArrayList<>(DataDrink.getInstance().getMenu());
+
         categoryAdapter = new CategoryAdapter(listCategory, 1);
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(this.getContext()));
         binding.rvCategory.setAdapter(categoryAdapter);
@@ -60,6 +68,13 @@ public class AddDrinkFragment extends Fragment {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .add(id.sub_fragment, listOdersFragment )
                 .commit();
+
+        binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(id.bookingFragment);
+            }
+        });
 
         View view = binding.getRoot();
         return view;

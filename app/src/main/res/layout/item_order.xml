@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@color/gray">
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/drinkName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hahhahah">
+        android:text="Espresso"
+        android:textSize="20dp"
+        android:layout_centerVertical="true">
     </TextView>
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="0dp">
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="15K"
+            android:textColor="@color/gray_text"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="10dp">
+        </TextView>
+        <ImageView
+            android:id="@+id/btn_remove"
+            android:layout_width="15dp"
+            android:layout_height="40dp"
+            android:src="@drawable/bin_red_icon"
+            android:layout_marginEnd="10dp">
+        </ImageView>
+        <ImageView
+            android:id="@+id/btn_take_note"
+            android:layout_width="18dp"
+            android:layout_height="40dp"
+            android:src="@drawable/take_note_icon">
+        </ImageView>
+    </LinearLayout>
+</RelativeLayout>

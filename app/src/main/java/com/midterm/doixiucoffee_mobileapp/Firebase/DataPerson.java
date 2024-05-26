@@ -73,6 +73,15 @@ public class DataPerson {
         return user;
     }
 
+    public User getUserById(String id){
+        for(User u : allUser){
+            if(u.getIdPerson().equals(id)){
+                return u;
+            }
+        }
+        return null;
+    }
+
     public String getIdPersonLogin() {
         return idPersonLogin;
     }
