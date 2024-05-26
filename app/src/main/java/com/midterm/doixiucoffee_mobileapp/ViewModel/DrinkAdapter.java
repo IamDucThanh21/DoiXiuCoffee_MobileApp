@@ -42,43 +42,44 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
         holder.drinkName.setText(listDrink.get(position).getDrinkName());
         holder.priceS.setText(listDrink.get(position).getSizeInfos().get(0).getPrice()+"K");
         holder.priceB.setText(listDrink.get(position).getSizeInfos().get(1).getPrice()+"K");
-        Drink drink = holder.getDrink(listDrink.get(position));
         if(mode == 1){
             holder.borderB.setVisibility(View.VISIBLE);
             holder.borderS.setVisibility(View.VISIBLE);
             holder.priceS.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    drink.setSizeInfo(drink.getSizeInfos().get(0));
+//                    Drink drink = listDrink.get(position);
+//                    drink.setSizeInfo(drink.getSizeInfos().get(0));
                     if(holder.borderS.getVisibility()==View.VISIBLE){
                         holder.borderS.setVisibility(View.GONE);
                         holder.backS.setBackgroundColor(v.getResources().getColor(R.color.green));
                         holder.priceS.setTextColor(v.getResources().getColor(R.color.white));
-                        setOrder(drink);
+//                        setOrder(drink);
                     }
                     else{
                         holder.borderS.setVisibility(View.VISIBLE);
                         holder.backS.setBackgroundColor(v.getResources().getColor(R.color.white));
                         holder.priceS.setTextColor(v.getResources().getColor(R.color.gray_text));
-                        deleteDrinkOnOrder(drink);
+//                        deleteDrinkOnOrder(drink);
                     }
                 }
             });
             holder.priceB.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    drink.setSizeInfo(drink.getSizeInfos().get(1));
+//                    Drink drink = listDrink.get(position);
+//                    drink.setSizeInfo(drink.getSizeInfos().get(1));
                     if(holder.borderB.getVisibility()==View.VISIBLE){
                         holder.borderB.setVisibility(View.GONE);
                         holder.backB.setBackgroundColor(v.getResources().getColor(R.color.green));
                         holder.priceB.setTextColor(v.getResources().getColor(R.color.white));
-                        setOrder(drink);
+//                        setOrder(drink);
                     }
                     else{
                         holder.borderB.setVisibility(View.VISIBLE);
                         holder.backB.setBackgroundColor(v.getResources().getColor(R.color.white));
                         holder.priceB.setTextColor(v.getResources().getColor(R.color.gray_text));
-                        deleteDrinkOnOrder(drink);
+//                        deleteDrinkOnOrder(drink);
                     }
                 }
             });
@@ -117,8 +118,6 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
             backS = (ShapeableImageView) view.findViewById(R.id.backS);
             backB = (ShapeableImageView) view.findViewById(R.id.backB);
         }
-        public Drink getDrink(Drink drink){
-            return drink;
-        }
+
     }
 }

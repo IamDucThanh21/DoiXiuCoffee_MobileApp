@@ -50,4 +50,11 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("de.hdodenhof:circleimageview:1.2.1")
     implementation ("com.google.android.material:material:1.2.0")
+
+    //import retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    // import json converter
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    // import picasso
+    implementation("com.squareup.picasso:picasso:2.8")
 }
