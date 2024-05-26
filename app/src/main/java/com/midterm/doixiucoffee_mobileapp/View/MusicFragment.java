@@ -7,10 +7,12 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataSong;
 import com.midterm.doixiucoffee_mobileapp.Model.Song;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.SongAdapter;
@@ -42,18 +44,19 @@ public class MusicFragment extends Fragment {
 
         binding.rvMusic.setLayoutManager(new LinearLayoutManager(this.getContext()));
         listSong = new ArrayList<>();
+        listSong = DataSong.getInstance().getListSong();
         songAdapter = new SongAdapter(listSong);
         binding.rvMusic.setAdapter(songAdapter);
 
-        listSong.add(new Song("Đại lộ mặt trời", "Chillies", 4));
-        listSong.add(new Song("Soạn", "The Cassette", 0));
+        Log.d("test", songAdapter.getItemCount()+"");
 
-        //Lấy thằng đầu danh sách làm bìa, từ thằng thứ 2 trở đi vào recyclview
-        Song firstSong = listSong.get(0);
-        listSong.remove(0);
-        binding.musicHb.musicName.setText(firstSong.getName());
-        binding.musicHb.musicSinger.setText(firstSong.getSinger());
-
+        if(listSong.size()!=0){
+            //Lấy thằng đầu danh sách làm bìa, từ thằng thứ 2 trở đi vào recyclview
+            Song firstSong = listSong.get(0);
+            listSong.remove(0);
+            binding.musicHb.musicName.setText(firstSong.getName());
+            binding.musicHb.musicSinger.setText(firstSong.getSinger());
+        }
         binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +67,16 @@ public class MusicFragment extends Fragment {
         binding.btnAddMusic.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.searchMusicFragment);
+                //Navigation.findNavController(v).navigate(R.id.searchMusicFragment);
+
+                SearchMusicFragment searchMusicFragment = SearchMusicFragment.newInstance();
+
+                binding.frameLayout.setVisibility(View.VISIBLE);
+                binding.btnAddMusic.addddd.setVisibility(View.GONE);
+
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .add(R.id.frameLayout, searchMusicFragment)
+                        .commit();
             }
         });
 

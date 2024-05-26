@@ -14,10 +14,13 @@
             android:id="@+id/toolbar"
             layout="@layout/sub_title">
         </include>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/frameLayout"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -25,28 +28,32 @@
 
                 <include
                     android:id="@+id/music_hb"
-                    layout="@layout/home_back">
-                </include>
+                    layout="@layout/home_back"></include>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
                     android:gravity="center_vertical"
                     android:text="Danh sách hàng đợi"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/black"
                     android:textSize="20dp"
-                    android:textColor="@color/black">
-                </TextView>
+                    android:textStyle="bold"></TextView>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_music"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </androidx.recyclerview.widget.RecyclerView>
+                    android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
 
             </LinearLayout>
         </ScrollView>
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"></FrameLayout>
 
         <include
             android:id="@+id/btn_add_music"
