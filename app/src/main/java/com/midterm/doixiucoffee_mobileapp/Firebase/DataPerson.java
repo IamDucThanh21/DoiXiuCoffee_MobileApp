@@ -1,9 +1,14 @@
 package com.midterm.doixiucoffee_mobileapp.Firebase;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -11,6 +16,8 @@ import com.midterm.doixiucoffee_mobileapp.Model.Admin;
 import com.midterm.doixiucoffee_mobileapp.Model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DataPerson {
 
@@ -51,6 +58,29 @@ public class DataPerson {
                                 else allUser.add(getDataUser(document));
                             }
                         }
+                    }
+                });
+    }
+
+    public void addNewUser(String name, String phone, int point, String role) {
+        Map<String, Object> dataUser = new HashMap<>();
+        dataUser.put("name", name);
+        dataUser.put("phone", phone);
+        dataUser.put("point", point);
+        dataUser.put("role", role);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("User").add(dataUser)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("Debug", "Add success");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("Debug", "Add fail", e);
                     }
                 });
     }

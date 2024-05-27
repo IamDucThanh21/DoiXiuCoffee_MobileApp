@@ -1,14 +1,13 @@
 package com.midterm.doixiucoffee_mobileapp.View;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
 import com.midterm.doixiucoffee_mobileapp.Model.User;
@@ -45,6 +44,10 @@ public class LoginFragment extends Fragment {
                     if(phone.equals(user.getPhoneNumber())){
                         DataPerson.getInstance().setIdPersonLogin(user.getIdPerson());
                         Navigation.findNavController(v).navigate(R.id.homeFragment);
+//                        User u = new User();
+//                        u = DataPerson.getInstance().getUserLogin();
+//
+//                        Log.d("test image", u.getImage());
                     }
                 }
                 binding.error.setVisibility(View.VISIBLE);

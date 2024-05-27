@@ -16,6 +16,7 @@ import com.midterm.doixiucoffee_mobileapp.Model.Song;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class DataSong {
     private ArrayList<Song> listSong;
@@ -44,9 +45,20 @@ public class DataSong {
                 });
     }
 
+    public boolean checkSong(Song song){
+        boolean var = false;
+        for (Song checkSong : listSong){
+            if (Objects.equals(song.getIdSong(), checkSong.getIdSong())){
+                var = true;
+                break;
+            }
+        }
+        return var;
+    }
+
     public Song getDataSong(QueryDocumentSnapshot document){
         Song song = new Song();
-        song.setIdSong((String) document.get("idSong"));
+        song.setIdSong((String) document.get("id"));
         song.setVotes(((Long) document.get("vote")).intValue());
         song.setName((String) document.get("songName"));
         song.setImage((String) document.get("image"));

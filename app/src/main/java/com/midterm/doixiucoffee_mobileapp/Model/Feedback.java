@@ -1,16 +1,16 @@
 package com.midterm.doixiucoffee_mobileapp.Model;
 
-import java.sql.Date;
+import com.google.firebase.Timestamp;
 
 public class Feedback {
     private String idFeedback;
     private User user;
-    private Date date;
+    private Timestamp date;
     private String content;
     private Boolean incognito;
     private Boolean isPublic;
 
-    public Feedback(String idFeedback, User user, Date date, String content, Boolean incognito, Boolean isPublic) {
+    public Feedback(String idFeedback, User user, Timestamp date, String content, Boolean incognito, Boolean isPublic) {
         this.idFeedback = idFeedback;
         this.user = user;
         this.date = date;
@@ -39,11 +39,11 @@ public class Feedback {
         this.user = user;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 

@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataDrink;
-import com.midterm.doixiucoffee_mobileapp.Firebase.DataOrder;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataFeedback;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataSong;
 import com.midterm.doixiucoffee_mobileapp.R;
@@ -35,6 +35,7 @@ public class HomeFragment extends Fragment {
         DataDrink.getInstance().getDataMenu();
         DataPerson.getInstance().getDataPerson();
         DataSong.getInstance().getAllSong();
+        DataFeedback.getInstance().getAllFeedback();
     }
 
     @Override
@@ -89,42 +90,4 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-
-//    public void addNewUser(String id, String name, String phone, int point, String role){
-//        Map<String, Object> dataUser = new HashMap<>();
-//        dataUser.put("name", name);
-//        dataUser.put("phone", phone);
-//        dataUser.put("point", point);
-//        dataUser.put("role", role);
-//
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        db.collection("User").document(id).set(dataUser)
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void unused) {
-//                        Log.d("Debug", "Add success");
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.d("Debug", "Add fail");
-//                    }
-//                });
-//    }
-//
-//    public static String generateRandomId() {
-//        Random random = new Random();
-//        int number = random.nextInt(100); // Tạo số ngẫu nhiên từ 0 đến 99
-//        String randomId = "us" + String.format("%02d", number); // Đảm bảo số có hai chữ số
-//        ArrayList<User> listUser = new ArrayList<>();
-//        listUser = DataPerson.getInstance().getAllUser();
-//
-//        for (User user : listUser){
-//            while (randomId == user.getIdUser()){
-//                randomId = "us" + String.format("%02d", random.nextInt(100));
-//            }
-//        }
-//        return randomId;
-//    }
 }

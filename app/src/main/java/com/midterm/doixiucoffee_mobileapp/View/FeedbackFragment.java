@@ -1,23 +1,25 @@
 package com.midterm.doixiucoffee_mobileapp.View;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataFeedback;
 import com.midterm.doixiucoffee_mobileapp.Model.Feedback;
-import com.midterm.doixiucoffee_mobileapp.Model.User;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.FeebackAdapter;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentFeedbackBinding;
 
-import java.sql.Date;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 public class FeedbackFragment extends Fragment {
@@ -31,6 +33,7 @@ public class FeedbackFragment extends Fragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,8 +49,9 @@ public class FeedbackFragment extends Fragment {
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(this.getContext()));
         binding.rvCategory.setAdapter(feebackAdapter);
 
-        listFeedback.add(new Feedback("fb01", new User("us01", "0", "Đức Thành", null, null, 8),new Date(2024,5,12), "Tôi cảm thấy Việt Thanh rất giỏi và đáng mến, tôi rất ngưỡng mộ anh ấy.", false, false));
-        listFeedback.add(new Feedback("fb02", new User("us02", "0", "Hoàng Huy", null, null, 8),new Date(2024,5,12), "Việt Thanh siêu cute, dễ thương, đẹp trai. Tôi rất ghen tỵ với Việt Thanh, và muốn được như anh ấy!", false, false));
+        listFeedback = DataFeedback.getInstance().getListFeedback();
+//        listFeedback.add(new Feedback("fb01", new User("us01", "0", "Đức Thành", null, null, 8),new Timestamp(2024,5), "Tôi cảm thấy Việt Thanh rất giỏi và đáng mến, tôi rất ngưỡng mộ anh ấy.", false, false));
+//        listFeedback.add(new Feedback("fb02", new User("us02", "0", "Hoàng Huy", null, null, 8),new Timestamp(2024,5), "Việt Thanh siêu cute, dễ thương, đẹp trai. Tôi rất ghen tỵ với Việt Thanh, và muốn được như anh ấy!", false, false));
 
         binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,8 +59,19 @@ public class FeedbackFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.homeFragment);
             }
         });
+
+        for(Feedback fb : listFeedback){
+            Log.d("test id", fb.getIdFeedback());
+            Log.d("Test content", fb.getContent());
+            Log.d("Test date", String.valueOf(fb.getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+            Log.d("Test user", fb.getUser().getPhoneNumber());
+            Log.d("Test isPublic", String.valueOf(fb.getPublic()));
+            Log.d("Test incognito", String.valueOf(fb.getIncognito()));
+        }
+
         View viewRoot = binding.getRoot();
         // Inflate the layout for this fragment
         return viewRoot;
     }
+
 }
