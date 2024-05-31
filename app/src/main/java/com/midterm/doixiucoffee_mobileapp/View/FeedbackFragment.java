@@ -2,7 +2,6 @@ package com.midterm.doixiucoffee_mobileapp.View;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.FeebackAdapter;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentFeedbackBinding;
 
-import java.time.ZoneId;
 import java.util.ArrayList;
 
 public class FeedbackFragment extends Fragment {
@@ -60,14 +58,17 @@ public class FeedbackFragment extends Fragment {
             }
         });
 
-        for(Feedback fb : listFeedback){
-            Log.d("test id", fb.getIdFeedback());
-            Log.d("Test content", fb.getContent());
-            Log.d("Test date", String.valueOf(fb.getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
-            Log.d("Test user", fb.getUser().getPhoneNumber());
-            Log.d("Test isPublic", String.valueOf(fb.getPublic()));
-            Log.d("Test incognito", String.valueOf(fb.getIncognito()));
-        }
+//        for(Feedback fb : listFeedback){
+//            Log.d("test id", fb.getIdFeedback());
+//            Log.d("Test content", fb.getContent());
+//            Log.d("Test date", String.valueOf(fb.getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+//            Log.d("Test user", fb.getUser().getPhoneNumber());
+//            Log.d("Test isPublic", String.valueOf(fb.getPublic()));
+//            Log.d("Test incognito", String.valueOf(fb.getIncognito()));
+//        }
+//        Long time = 16250L;
+//        Timestamp timestamp = new Timestamp(Instant.ofEpochSecond(time));
+//        DataFeedback.getInstance().addNewFeedback("us02", timestamp , "This is content", true, true);
 
         View viewRoot = binding.getRoot();
         // Inflate the layout for this fragment

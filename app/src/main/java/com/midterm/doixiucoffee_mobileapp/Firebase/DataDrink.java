@@ -1,7 +1,5 @@
 package com.midterm.doixiucoffee_mobileapp.Firebase;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -12,6 +10,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.midterm.doixiucoffee_mobileapp.Model.Category;
 import com.midterm.doixiucoffee_mobileapp.Model.Drink;
 import com.midterm.doixiucoffee_mobileapp.Model.SizeInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +48,7 @@ public class DataDrink {
         List<Object> i = (List<Object>) document.get("drink");
         ArrayList<Drink> listDrink = new ArrayList<>();
 
-        for(Object dr :i){
+        for(Object dr : i){
             Map<String, Object> dr1 = (Map<String, Object>) dr;
             Map<String, Long> size = (Map<String, Long>) dr1.get("size");
 
