@@ -88,4 +88,9 @@
         android:id="@+id/action_searchMusicFragment_to_musicFragment"
         app:destination="@id/musicFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/add_feedback"
+        android:name="com.midterm.doixiucoffee_mobileapp.View.AddFeedbackFragment"
+        android:label="fragment_add_feedback"
+        tools:layout="@layout/fragment_add_feedback" />
 </navigation>

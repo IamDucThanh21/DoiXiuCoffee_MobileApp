@@ -45,17 +45,7 @@ public class FeedbackFragment extends Fragment {
 
         listFeedback = new ArrayList<>();
         listFeedback = DataFeedback.getInstance().getListFeedback();
-//        if(listFeedback.size() != 0){
-//            for(Feedback fb : listFeedback){
-////                Log.d("test id", fb.getIdFeedback());
-////                Log.d("Test content", fb.getContent());
-//                Log.d("Test date", String.valueOf(fb.getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
-//                Log.d("Test time", String.valueOf(fb.getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalTime()));
-////                Log.d("Test user", fb.getUser().getPhoneNumber());
-////                Log.d("Test isPublic", String.valueOf(fb.getPublic()));
-////                Log.d("Test incognito", String.valueOf(fb.getIncognito()));
-//            }
-//        }
+
         feebackAdapter = new FeebackAdapter(listFeedback);
 
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -74,6 +64,25 @@ public class FeedbackFragment extends Fragment {
 //        Long time = 16250L;
 //        Timestamp timestamp = new Timestamp(Instant.ofEpochSecond(time));
 //        DataFeedback.getInstance().addNewFeedback("us02", timestamp , "This is content", true, true);
+
+        binding.addFeedbackBtn.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Navigation.findNavController(v).navigate(R.id.searchMusicFragment);
+
+                AddFeedbackFragment addFeedbackFragment = AddFeedbackFragment.newInstance();
+
+                binding.frameLayout.setVisibility(View.VISIBLE);
+                binding.addFeedbackBtn.addddd.setVisibility(View.GONE);
+                binding.include.music.setVisibility(View.GONE);
+
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .add(R.id.frameLayout, addFeedbackFragment)
+                        .commit();
+            }
+        });
+
+
         View viewRoot = binding.getRoot();
         // Inflate the layout for this fragment
         return viewRoot;

@@ -74,8 +74,15 @@
             android:layout_height="100dp"
             app:layout_constraintBottom_toBottomOf="parent">
         </include>
-
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone">
+        </FrameLayout>
         <include
+            android:id="@+id/add_feedback_btn"
             layout="@layout/add_button"
             android:layout_height="70dp"
             android:layout_width="70dp"
