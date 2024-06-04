@@ -88,6 +88,7 @@ public class DataPerson {
     public Admin getDataAdmin(QueryDocumentSnapshot document){
         Admin admin = new Admin();
         admin.setIdPerson(document.getId());
+        admin.setPassword((String) document.get("password"));
         admin.setPhoneNumber((String) document.get("phone"));
         admin.setName((String) document.get("name"));
         return admin;
@@ -118,5 +119,13 @@ public class DataPerson {
 
     public void setIdPersonLogin(String idPersonLogin) {
         this.idPersonLogin = idPersonLogin;
+    }
+    public boolean isAdminById(String id){
+        for(Admin admin: allAdmin){
+            if(id.equals(admin.getIdPerson())){
+                return true;
+            }
+        }
+        return false;
     }
 }

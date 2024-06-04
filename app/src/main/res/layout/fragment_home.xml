@@ -44,6 +44,7 @@
             </ImageView>
 
             <TextView
+                android:id="@+id/tv_booking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -75,13 +76,15 @@
             </ImageView>
 
             <TextView
+                android:id="@+id/tv_music"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/music"
                 android:textColor="@color/black"
                 android:textSize="30dp"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold">
+            </TextView>
         </RelativeLayout>
 
         <TextView
@@ -106,6 +109,7 @@
             </ImageView>
 
             <TextView
+                android:id="@+id/tv_feedback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
