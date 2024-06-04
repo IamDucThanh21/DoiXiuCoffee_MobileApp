@@ -1,6 +1,7 @@
 package com.midterm.doixiucoffee_mobileapp.View;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,6 @@ public class HomeFragment extends Fragment {
         DataDrink.getInstance().getDataMenu();
         DataPerson.getInstance().getDataPerson();
         DataSong.getInstance().getAllSong();
-        DataFeedback.getInstance().getAllFeedback();
     }
 
     @Override
@@ -51,7 +51,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         openBooking = view.findViewById(R.id.open_booking);
 
         openBooking.setOnClickListener(new View.OnClickListener() {

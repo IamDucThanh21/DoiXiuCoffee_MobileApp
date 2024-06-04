@@ -57,6 +57,7 @@ public class DataPerson {
                                     allAdmin.add(getDataAdmin(document));
                                 else allUser.add(getDataUser(document));
                             }
+                            DataFeedback.getInstance().getAllFeedback();
                         }
                     }
                 });

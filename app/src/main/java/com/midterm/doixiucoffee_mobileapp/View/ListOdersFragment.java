@@ -75,7 +75,7 @@ public class ListOdersFragment extends Fragment {
 
         binding.btnBookNow.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v){
 
             }
         });

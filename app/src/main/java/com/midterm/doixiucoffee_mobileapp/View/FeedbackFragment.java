@@ -51,9 +51,6 @@ public class FeedbackFragment extends Fragment {
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(this.getContext()));
         binding.rvCategory.setAdapter(feebackAdapter);
 
-//        listFeedback.add(new Feedback("fb01", new User("us01", "0", "Đức Thành", null, null, 8),new Timestamp(2024,5), "Tôi cảm thấy Việt Thanh rất giỏi và đáng mến, tôi rất ngưỡng mộ anh ấy.", false, false));
-//        listFeedback.add(new Feedback("fb02", new User("us02", "0", "Hoàng Huy", null, null, 8),new Timestamp(2024,5), "Việt Thanh siêu cute, dễ thương, đẹp trai. Tôi rất ghen tỵ với Việt Thanh, và muốn được như anh ấy!", false, false));
-
         binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
