@@ -43,7 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         Item currentData = items.get(position);
         // MediaPlayer mediaPlayer = MediaPlayer.create(context, Uri.parse("https://open.spotify.com/track/6M3x8hn7OYct4DXZZYKvEa"));//currentData.data.uri
         holder.title.setText(currentData.data.name);
-        holder.singer.setText("hehe");//currentData.data.artists.items.get(0).profile.name
+        holder.singer.setText(currentData.data.artists.items.get(0).profile.name);//currentData.data.artists.items.get(0).profile.name
         Picasso.get().load(currentData.data.albumOfTrack.coverArt.sources.get(0).url).into(holder.image);
 
         holder.btnAddMusic.setOnClickListener(new View.OnClickListener() {
@@ -52,13 +52,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
                 Song newSong = new Song();
                 newSong.setIdSong(currentData.data.id);
                 newSong.setName(currentData.data.name);
-                newSong.setSinger("ehhe");//currentData.data.artists.items.get(0).profile.name
+                newSong.setSinger(currentData.data.artists.items.get(0).profile.name);//currentData.data.artists.items.get(0).profile.name
                 newSong.setVotes(0);
                 newSong.setImage(currentData.data.albumOfTrack.coverArt.sources.get(0).url);
 
                 DataSong.getInstance().addNewSong(newSong);
                 Log.d("test", DataSong.getInstance().getListSong().size()+"");
-
                 Navigation.findNavController(v).navigate(R.id.musicFragment);
             }
         });

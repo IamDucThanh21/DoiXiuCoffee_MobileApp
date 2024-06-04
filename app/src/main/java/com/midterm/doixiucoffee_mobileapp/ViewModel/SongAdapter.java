@@ -19,7 +19,10 @@ import java.util.ArrayList;
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     private ArrayList<Song> listSong;
 
-    public SongAdapter(ArrayList<Song> listSong){this.listSong = listSong;}
+    public SongAdapter(ArrayList<Song> listSong){
+        listSong.remove(0);
+        this.listSong = listSong;
+    }
 
 
     @NonNull

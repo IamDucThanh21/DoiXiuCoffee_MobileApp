@@ -16,6 +16,7 @@ import com.midterm.doixiucoffee_mobileapp.Model.Song;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.SongAdapter;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentMusicBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -44,17 +45,18 @@ public class MusicFragment extends Fragment {
         binding.rvMusic.setLayoutManager(new LinearLayoutManager(this.getContext()));
         listSong = new ArrayList<>();
         listSong = DataSong.getInstance().getListSong();
-        songAdapter = new SongAdapter(listSong);
-        binding.rvMusic.setAdapter(songAdapter);
 
-        Log.d("test", songAdapter.getItemCount()+"");
+
 
         if(listSong.size()!=0){
             //Lấy thằng đầu danh sách làm bìa, từ thằng thứ 2 trở đi vào recyclview
             Song firstSong = listSong.get(0);
-            listSong.remove(0);
             binding.musicHb.musicName.setText(firstSong.getName());
             binding.musicHb.musicSinger.setText(firstSong.getSinger());
+            Picasso.get().load(firstSong.getImage()).into(binding.musicHb.musicImg);
+
+            songAdapter = new SongAdapter(listSong);
+            binding.rvMusic.setAdapter(songAdapter);
         }
         binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
