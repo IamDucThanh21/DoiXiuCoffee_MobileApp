@@ -1,5 +1,8 @@
 package com.midterm.doixiucoffee_mobileapp.Firebase;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -99,6 +102,7 @@ public class DataPerson {
         user.setName((String) document.get("name"));
         user.setPhoneNumber((String) document.get("phone"));
         user.setPoint(((Long) document.get("point")).intValue());
+        user.setImage((String) document.get("image"));
 
         return user;
     }
@@ -112,6 +116,26 @@ public class DataPerson {
         return null;
     }
 
+    public void uploadImageToFirestore(String base64String){
+        Map<String, Object> image = new HashMap<>();
+        image.put("image", base64String);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("User").document(getIdPersonLogin()).update(image)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("Debug", "Update image success");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("Debug", "Update image fail");
+                    }
+                });
+    }
+
     public String getIdPersonLogin() {
         return idPersonLogin;
     }
@@ -119,4 +143,12 @@ public class DataPerson {
     public void setIdPersonLogin(String idPersonLogin) {
         this.idPersonLogin = idPersonLogin;
     }
+
+    public Bitmap base64toBitmap(String base64String){
+        // Giải mã chuỗi Base64 thành mảng byte
+        byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+        // Chuyển đổi mảng byte thành đối tượng Bitmap
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
 }
+

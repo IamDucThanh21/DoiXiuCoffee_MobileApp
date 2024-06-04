@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -12,6 +13,7 @@ import com.midterm.doixiucoffee_mobileapp.Model.Drink;
 import com.midterm.doixiucoffee_mobileapp.Model.SizeInfo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,6 +62,23 @@ public class DataDrink {
             listDrink.add(drink);
         }
         return listDrink;
+    }
+
+    public void addNewDrink(String idDrink, String drinkName, String typeDrink, ArrayList<SizeInfo> listSizeInfo, String story){
+        Map<String, Object> drink = new HashMap<>();
+        drink.put("idDrink", idDrink);
+        drink.put("name", drinkName);
+        drink.put("story", story);
+
+        Map<String, Integer> sizeInfo = new HashMap<>();
+        for (SizeInfo data : listSizeInfo){
+            sizeInfo.put(data.getSize(), data.getPrice());
+            sizeInfo.put(data.getSize(), data.getPrice());
+        }
+        drink.put("size", sizeInfo);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Category").document(typeDrink).update("drink", FieldValue.arrayUnion(drink));
     }
 
     public ArrayList<Category> getMenu(){

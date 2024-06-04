@@ -4,6 +4,7 @@ public class Person {
     private String idPerson;
     private String phoneNumber;
     private String name;
+    private String image;
 
     public Person(String idPerson, String phoneNumber, String name) {
         this.idPerson = idPerson;
@@ -37,5 +38,13 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
