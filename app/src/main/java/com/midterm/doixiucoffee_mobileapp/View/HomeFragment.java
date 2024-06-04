@@ -25,6 +25,10 @@ public class HomeFragment extends Fragment {
     private RelativeLayout openFeedback;
     private ImageView imgAva;
     private TextView btnLogin;
+    private TextView textview;
+    private TextView tvBooking;
+    private TextView tvMusic;
+    private TextView tvFeedback;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,11 @@ public class HomeFragment extends Fragment {
         openBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.bookingFragment);
+                if(DataPerson.getInstance().isAdminById(DataPerson.getInstance().getIdPersonLogin())){
+                    Navigation.findNavController(v).navigate(R.id.adminBookingFragment);
+                }
+                else
+                    Navigation.findNavController(v).navigate(R.id.bookingFragment);
             }
         });
 
@@ -81,6 +89,16 @@ public class HomeFragment extends Fragment {
         if(!DataPerson.getInstance().getIdPersonLogin().equals("null")){
             imgAva.setVisibility(View.VISIBLE);
             btnLogin.setVisibility(View.GONE);
+            if(DataPerson.getInstance().isAdminById(DataPerson.getInstance().getIdPersonLogin())){
+                textview = view.findViewById(R.id.textView);
+                textview.setText("Admin");
+                tvBooking = view.findViewById(R.id.tv_booking);
+                tvMusic = view.findViewById(R.id.tv_music);
+                tvFeedback = view.findViewById(R.id.tv_feedback);
+                tvBooking.setText("Quản lí đặt món");
+                tvMusic.setText("Quản lí nhạc");
+                tvFeedback.setText("Quản lí feedback");
+            }
         }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -89,5 +107,6 @@ public class HomeFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.loginFragment);
             }
         });
+
     }
 }

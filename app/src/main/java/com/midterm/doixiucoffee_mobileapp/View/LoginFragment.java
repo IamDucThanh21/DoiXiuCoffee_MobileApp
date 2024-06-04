@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
+import com.midterm.doixiucoffee_mobileapp.Model.Admin;
 import com.midterm.doixiucoffee_mobileapp.Model.User;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentLoginBinding;
@@ -50,7 +51,36 @@ public class LoginFragment extends Fragment {
 //                        Log.d("test image", u.getImage());
                     }
                 }
+                for(Admin admin: DataPerson.getInstance().getAllAdmin()){
+                    if(phone.equals(admin.getPhoneNumber())){
+                        binding.layoutPwd.setVisibility(View.VISIBLE);
+                        binding.layoutBtnLogin.setVisibility(View.GONE);
+                        binding.layoutBtnLoginAdmin.setVisibility(View.VISIBLE);
+                        return;
+                    }
+                }
                 binding.error.setVisibility(View.VISIBLE);
+            }
+        });
+
+        binding.loginAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phone = binding.etPhone.getText().toString().trim();
+                String pwd = binding.etPwd.getText().toString().trim();
+                for(Admin admin: DataPerson.getInstance().getAllAdmin()){
+                    if(phone.equals(admin.getPhoneNumber())){
+                        if(pwd.equals(admin.getPassword())){
+                            DataPerson.getInstance().setIdPersonLogin(admin.getIdPerson());
+                            Navigation.findNavController(v).navigate(R.id.homeFragment);
+                        }
+                        else{
+                            binding.error.setVisibility(View.VISIBLE);
+                            binding.error.setText("Mật khẩu không chính xác!");
+                            binding.etPwd.setText("");
+                        }
+                    }
+                }
             }
         });
 
