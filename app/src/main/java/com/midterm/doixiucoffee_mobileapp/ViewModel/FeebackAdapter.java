@@ -1,16 +1,19 @@
 package com.midterm.doixiucoffee_mobileapp.ViewModel;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.midterm.doixiucoffee_mobileapp.Model.Feedback;
 import com.midterm.doixiucoffee_mobileapp.R;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 public class FeebackAdapter extends RecyclerView.Adapter<FeebackAdapter.ViewHolder> {
@@ -26,10 +29,13 @@ public class FeebackAdapter extends RecyclerView.Adapter<FeebackAdapter.ViewHold
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull FeebackAdapter.ViewHolder holder, int position) {
         holder.useName.setText(listFeedback.get(position).getUser().getName());
-        holder.time.setText(listFeedback.get(position).getDate().toString());
+        holder.time.setText(String.valueOf(listFeedback.get(position).getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalTime())
+                            + " "
+                            + String.valueOf(listFeedback.get(position).getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
         holder.content.setText(listFeedback.get(position).getContent());
     }
 

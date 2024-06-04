@@ -43,7 +43,19 @@ public class FeedbackFragment extends Fragment {
         binding.includeHb.homeBackImg.setImageResource(R.drawable.feedback_back);
         binding.includeHb.homeBackTitle.setText(R.string.feedback);
 
+        listFeedback = new ArrayList<>();
         listFeedback = DataFeedback.getInstance().getListFeedback();
+//        if(listFeedback.size() != 0){
+//            for(Feedback fb : listFeedback){
+////                Log.d("test id", fb.getIdFeedback());
+////                Log.d("Test content", fb.getContent());
+//                Log.d("Test date", String.valueOf(fb.getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+//                Log.d("Test time", String.valueOf(fb.getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalTime()));
+////                Log.d("Test user", fb.getUser().getPhoneNumber());
+////                Log.d("Test isPublic", String.valueOf(fb.getPublic()));
+////                Log.d("Test incognito", String.valueOf(fb.getIncognito()));
+//            }
+//        }
         feebackAdapter = new FeebackAdapter(listFeedback);
 
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -58,17 +70,6 @@ public class FeedbackFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.homeFragment);
             }
         });
-//        if(listFeedback.size() != 0){
-//            for(Feedback fb : listFeedback){
-//                Log.d("test id", fb.getIdFeedback());
-//                Log.d("Test content", fb.getContent());
-//                Log.d("Test date", String.valueOf(fb.getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
-//                Log.d("Test user", fb.getUser().getPhoneNumber());
-//                Log.d("Test isPublic", String.valueOf(fb.getPublic()));
-//                Log.d("Test incognito", String.valueOf(fb.getIncognito()));
-//            }
-//        }
-//        else Log.d("Lỗi" , "Không có dữ liệu feedback");
 
 //        Long time = 16250L;
 //        Timestamp timestamp = new Timestamp(Instant.ofEpochSecond(time));
