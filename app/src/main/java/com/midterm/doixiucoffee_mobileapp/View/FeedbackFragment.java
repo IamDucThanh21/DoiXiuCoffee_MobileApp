@@ -61,6 +61,25 @@ public class FeedbackFragment extends Fragment {
 //        Long time = 16250L;
 //        Timestamp timestamp = new Timestamp(Instant.ofEpochSecond(time));
 //        DataFeedback.getInstance().addNewFeedback("us02", timestamp , "This is content", true, true);
+
+        binding.addFeedbackBtn.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Navigation.findNavController(v).navigate(R.id.searchMusicFragment);
+
+                AddFeedbackFragment addFeedbackFragment = AddFeedbackFragment.newInstance();
+
+                binding.frameLayout.setVisibility(View.VISIBLE);
+                binding.addFeedbackBtn.addddd.setVisibility(View.GONE);
+                binding.include.music.setVisibility(View.GONE);
+
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .add(R.id.frameLayout, addFeedbackFragment)
+                        .commit();
+            }
+        });
+
+
         View viewRoot = binding.getRoot();
         // Inflate the layout for this fragment
         return viewRoot;

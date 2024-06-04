@@ -92,6 +92,11 @@
         app:destination="@id/musicFragment" />
     </fragment>
     <fragment
+        android:id="@+id/add_feedback"
+        android:name="com.midterm.doixiucoffee_mobileapp.View.AddFeedbackFragment"
+        android:label="fragment_add_feedback"
+        tools:layout="@layout/fragment_add_feedback" />
+    <fragment
         android:id="@+id/adminBookingFragment"
         android:name="com.midterm.doixiucoffee_mobileapp.View.AdminBookingFragment"
         android:label="fragment_admin_booking"
