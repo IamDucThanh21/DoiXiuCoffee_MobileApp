@@ -70,4 +70,5 @@ public class Feedback {
     public void setPublic(Boolean aPublic) {
         isPublic = aPublic;
     }
+
 }
