@@ -45,24 +45,11 @@ public class FeedbackFragment extends Fragment {
 
         listFeedback = new ArrayList<>();
         listFeedback = DataFeedback.getInstance().getListFeedback();
-//        if(listFeedback.size() != 0){
-//            for(Feedback fb : listFeedback){
-////                Log.d("test id", fb.getIdFeedback());
-////                Log.d("Test content", fb.getContent());
-//                Log.d("Test date", String.valueOf(fb.getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
-//                Log.d("Test time", String.valueOf(fb.getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalTime()));
-////                Log.d("Test user", fb.getUser().getPhoneNumber());
-////                Log.d("Test isPublic", String.valueOf(fb.getPublic()));
-////                Log.d("Test incognito", String.valueOf(fb.getIncognito()));
-//            }
-//        }
+
         feebackAdapter = new FeebackAdapter(listFeedback);
 
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(this.getContext()));
         binding.rvCategory.setAdapter(feebackAdapter);
-
-//        listFeedback.add(new Feedback("fb01", new User("us01", "0", "Đức Thành", null, null, 8),new Timestamp(2024,5), "Tôi cảm thấy Việt Thanh rất giỏi và đáng mến, tôi rất ngưỡng mộ anh ấy.", false, false));
-//        listFeedback.add(new Feedback("fb02", new User("us02", "0", "Hoàng Huy", null, null, 8),new Timestamp(2024,5), "Việt Thanh siêu cute, dễ thương, đẹp trai. Tôi rất ghen tỵ với Việt Thanh, và muốn được như anh ấy!", false, false));
 
         binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

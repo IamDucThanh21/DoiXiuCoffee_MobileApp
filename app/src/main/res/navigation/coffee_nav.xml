@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_adminBookingFragment"
+            app:destination="@id/adminBookingFragment" />
     </fragment>
     <fragment
         android:id="@+id/bookingFragment"
@@ -87,5 +90,14 @@
     <action
         android:id="@+id/action_searchMusicFragment_to_musicFragment"
         app:destination="@id/musicFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminBookingFragment"
+        android:name="com.midterm.doixiucoffee_mobileapp.View.AdminBookingFragment"
+        android:label="fragment_admin_booking"
+        tools:layout="@layout/fragment_admin_booking" >
+        <action
+            android:id="@+id/action_adminBookingFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

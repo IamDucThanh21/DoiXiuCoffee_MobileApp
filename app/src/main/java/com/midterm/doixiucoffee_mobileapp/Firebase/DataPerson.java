@@ -60,6 +60,7 @@ public class DataPerson {
                                     allAdmin.add(getDataAdmin(document));
                                 else allUser.add(getDataUser(document));
                             }
+                            DataFeedback.getInstance().getAllFeedback();
                         }
                     }
                 });
@@ -91,6 +92,7 @@ public class DataPerson {
     public Admin getDataAdmin(QueryDocumentSnapshot document){
         Admin admin = new Admin();
         admin.setIdPerson(document.getId());
+        admin.setPassword((String) document.get("password"));
         admin.setPhoneNumber((String) document.get("phone"));
         admin.setName((String) document.get("name"));
         return admin;
@@ -149,6 +151,14 @@ public class DataPerson {
         byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
         // Chuyển đổi mảng byte thành đối tượng Bitmap
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+    public boolean isAdminById(String id){
+        for(Admin admin: allAdmin){
+            if(id.equals(admin.getIdPerson())){
+                return true;
+            }
+        }
+        return false;
     }
 }
 

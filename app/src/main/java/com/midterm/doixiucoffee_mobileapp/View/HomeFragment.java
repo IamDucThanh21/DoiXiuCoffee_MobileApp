@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,10 @@ public class HomeFragment extends Fragment {
     private ImageView imgAva;
     private TextView btnLogin;
     private final int GALLERY_REQ_CODE = 1000;
+    private TextView textview;
+    private TextView tvBooking;
+    private TextView tvMusic;
+    private TextView tvFeedback;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +51,6 @@ public class HomeFragment extends Fragment {
         DataDrink.getInstance().getDataMenu();
         DataPerson.getInstance().getDataPerson();
         DataSong.getInstance().getAllSong();
-        DataFeedback.getInstance().getAllFeedback();
     }
 
     @Override
@@ -58,13 +62,16 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         openBooking = view.findViewById(R.id.open_booking);
 
         openBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.bookingFragment);
+                if(DataPerson.getInstance().isAdminById(DataPerson.getInstance().getIdPersonLogin())){
+                    Navigation.findNavController(v).navigate(R.id.adminBookingFragment);
+                }
+                else
+                    Navigation.findNavController(v).navigate(R.id.bookingFragment);
             }
         });
 
@@ -102,6 +109,16 @@ public class HomeFragment extends Fragment {
         if(!DataPerson.getInstance().getIdPersonLogin().equals("null")){
             imgAva.setVisibility(View.VISIBLE);
             btnLogin.setVisibility(View.GONE);
+            if(DataPerson.getInstance().isAdminById(DataPerson.getInstance().getIdPersonLogin())){
+                textview = view.findViewById(R.id.textView);
+                textview.setText("Admin");
+                tvBooking = view.findViewById(R.id.tv_booking);
+                tvMusic = view.findViewById(R.id.tv_music);
+                tvFeedback = view.findViewById(R.id.tv_feedback);
+                tvBooking.setText("Quản lí đặt món");
+                tvMusic.setText("Quản lí nhạc");
+                tvFeedback.setText("Quản lí feedback");
+            }
         }
 
         
