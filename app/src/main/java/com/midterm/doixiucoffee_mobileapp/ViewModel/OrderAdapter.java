@@ -22,9 +22,13 @@ import java.util.ArrayList;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
-    private ArrayList<Drink> listOrderDrink = DataOrder.getInstance().getOrder().getListDrinks();
+    private ArrayList<Drink> listOrderDrink;
+    private int mode =0;
 
-    public OrderAdapter() {}
+    public OrderAdapter(ArrayList<Drink> listOrderDrink,int mode) {
+        this.listOrderDrink = listOrderDrink;
+        this.mode = mode;
+    }
 
     @NonNull
     @Override
@@ -39,7 +43,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.drinkName.setText(listOrderDrink.get(position).getDrinkName());
         holder.price.setText(listOrderDrink.get(position).getSizeInfo().getPrice()+"K");
         int i = position;
-
+        if(mode==1){
+            holder.btnRemove.setVisibility(View.GONE);
+            holder.btnTakeNote.setVisibility(View.GONE);
+        }
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
