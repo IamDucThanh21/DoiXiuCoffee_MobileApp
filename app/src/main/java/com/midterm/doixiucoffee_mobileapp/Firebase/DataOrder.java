@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class DataOrder {
-    public ArrayList<Order> allOrder;
+    private ArrayList<Order> allOrder;
     private static DataOrder dataOrder;
     private static Order order;
 

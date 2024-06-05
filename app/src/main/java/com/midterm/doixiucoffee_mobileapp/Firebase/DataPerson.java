@@ -160,5 +160,15 @@ public class DataPerson {
         }
         return false;
     }
+
+    public boolean checkPhone(String phone){
+        for (User user : allUser){
+            if (user.getPhoneNumber().equals(phone)) return false;
+        }
+        for (Admin admin : allAdmin){
+            if (admin.getPhoneNumber().equals(phone)) return false;
+        }
+        return true;
+    }
 }
 

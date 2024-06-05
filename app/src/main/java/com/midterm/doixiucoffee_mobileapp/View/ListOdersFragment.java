@@ -11,9 +11,12 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataOrder;
+import com.midterm.doixiucoffee_mobileapp.Model.Drink;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.OrderAdapter;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentListOdersBinding;
+
+import java.util.ArrayList;
 
 public class ListOdersFragment extends Fragment {
 

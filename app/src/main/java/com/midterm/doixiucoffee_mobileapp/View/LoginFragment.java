@@ -84,6 +84,13 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        binding.signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.signupFragment);
+            }
+        });
+
         View view = binding.getRoot();
         return view;
     }
