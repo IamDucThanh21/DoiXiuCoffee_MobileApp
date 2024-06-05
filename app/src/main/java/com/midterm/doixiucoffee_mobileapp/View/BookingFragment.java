@@ -64,32 +64,6 @@ public class BookingFragment extends Fragment {
         });
 
 
-        binding.btnAdd.btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //Nếu như chưa đăng nhập thì hiện thông báo yêu cầu đăng nhập
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext()); // 'this' là context của Activity hoặc Fragment
-                builder.setTitle("Thông báo")
-                        .setMessage("Bạn cần đăng nhập để tiếp tục!")
-                        .setPositiveButton("Đăng nhập", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Navigation.findNavController(v).navigate(R.id.loginFragment);
-                            }
-                        })
-                        .setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                if(DataPerson.getInstance().getIdPersonLogin().equals("null")){
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                }
-                else Navigation.findNavController(v).navigate(R.id.addDrinkFragment);
-            }
-        });
 
         binding.toolbar.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

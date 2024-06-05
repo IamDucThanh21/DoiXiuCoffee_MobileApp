@@ -34,6 +34,9 @@ public class DataFeedback {
     public ArrayList<Feedback> getListFeedback() {
         return listFeedback;
     }
+    public void addFeedBack(Feedback newFeedback){
+        this.listFeedback.add(newFeedback);
+    }
 
     public void getAllFeedback(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
