@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".View.LoginFragment">
+        tools:context=".View.SignupFragment">
 
         <include
             layout="@layout/log_title"
@@ -70,7 +70,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/layout_pwd"
+                    android:id="@+id/layout_name"
                     android:layout_width="300dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
@@ -84,7 +84,7 @@
                         app:shapeAppearanceOverlay="@style/rounded_corner"></com.google.android.material.imageview.ShapeableImageView>
 
                     <EditText
-                        android:id="@+id/et_pwd"
+                        android:id="@+id/et_name"
                         style="@android:style/Widget.EditText"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                     android:visibility="gone"></TextView>
 
                 <RelativeLayout
-                    android:id="@+id/layout_btn_login"
+                    android:id="@+id/layout_btn_signup"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center">
@@ -130,42 +130,13 @@
                         app:shapeAppearance="@style/rounded_corner"></com.google.android.material.imageview.ShapeableImageView>
 
                     <TextView
-                        android:id="@+id/login"
+                        android:id="@+id/signup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignStart="@+id/shapeableImageView2"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginEnd="20dp"
                         android:text="ĐĂNG KÍ"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"></TextView>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/layout_btn_login_admin"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:visibility="gone">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="100dp"
-                        android:layout_height="40dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="0dp"
-                        android:background="@color/black"
-                        app:shapeAppearance="@style/rounded_corner"></com.google.android.material.imageview.ShapeableImageView>
-
-                    <TextView
-                        android:id="@+id/login_admin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="10dp"
-                        android:text="ĐĂNG NHẬP"
                         android:textColor="@color/white"
                         android:textStyle="bold"></TextView>
                 </RelativeLayout>
