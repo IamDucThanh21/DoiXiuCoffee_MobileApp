@@ -1,5 +1,7 @@
 package com.midterm.doixiucoffee_mobileapp.View;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,11 +16,14 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataFeedback;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
 import com.midterm.doixiucoffee_mobileapp.Model.Feedback;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.FeebackAdapter;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentFeedbackBinding;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.ZoneId;
 import java.util.ArrayList;
 
@@ -67,15 +72,34 @@ public class FeedbackFragment extends Fragment {
             public void onClick(View v) {
                 //Navigation.findNavController(v).navigate(R.id.searchMusicFragment);
 
-                AddFeedbackFragment addFeedbackFragment = AddFeedbackFragment.newInstance();
+                if(DataPerson.getInstance().getIdPersonLogin().equals("null")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext()); // 'this' là context của Activity hoặc Fragment
+                    builder.setTitle("Thông báo")
+                            .setMessage("Bạn cần đăng nhập để tiếp tục!")
+                            .setPositiveButton("Đăng nhập", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Navigation.findNavController(v).navigate(R.id.loginFragment);
+                                }
+                            })
+                            .setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+                else{
+                    AddFeedbackFragment addFeedbackFragment = AddFeedbackFragment.newInstance();
 
-                binding.frameLayout.setVisibility(View.VISIBLE);
-                binding.addFeedbackBtn.addddd.setVisibility(View.GONE);
-                binding.include.music.setVisibility(View.GONE);
+                    binding.frameLayout.setVisibility(View.VISIBLE);
+                    binding.addFeedbackBtn.addddd.setVisibility(View.GONE);
+                    binding.include.music.setVisibility(View.GONE);
 
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .add(R.id.frameLayout, addFeedbackFragment)
-                        .commit();
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .add(R.id.frameLayout, addFeedbackFragment)
+                            .commit();
+                }
             }
         });
 

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
     <data></data>
     <RelativeLayout
+        tools:context=".View.AddFeedbackFragment"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         >
@@ -55,27 +57,32 @@
                     android:background="@color/gray"
                     app:shapeAppearanceOverlay="@style/rounded_corner">
                 </com.google.android.material.imageview.ShapeableImageView>
+
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white_sys"
+                    android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_margin="2dp"
-                    app:shapeAppearanceOverlay="@style/rounded_corner">
-                </com.google.android.material.imageview.ShapeableImageView>
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/white_sys"
+                    app:shapeAppearanceOverlay="@style/rounded_corner"></com.google.android.material.imageview.ShapeableImageView>
                 <EditText
-                    android:id="@+id/tv_write_feedback"
+                    android:id="@+id/et_write_feedback"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="Nhập feedback của bạn ở đây..."
                     android:textSize="20dp"
                     android:padding="10dp"
                     android:textStyle="italic"
+                    style="@android:style/Widget.EditText"
                     android:textColor="@color/gray_text"
-                    android:inputType="text"
+                    android:background="@null"
+                    android:inputType="textMultiLine"
                     >
                 </EditText>
                 <TextView
@@ -103,8 +110,10 @@
                     android:layout_height="wrap_content"
                     android:gravity="center">
                     <CheckBox
+                        android:id="@+id/cb_public"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checked="true"
                         android:layout_gravity="center_vertical"
                         >
                     </CheckBox>
@@ -121,6 +130,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center">
                     <CheckBox
+                        android:id="@+id/cb_igconite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -136,11 +146,13 @@
                 </LinearLayout>
 
                 <RelativeLayout
+                    android:id="@+id/btn_add_feedback"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     >
                     <com.google.android.material.imageview.ShapeableImageView
+
                         android:layout_width="60dp"
                         android:layout_height="40dp"
                         android:background="@color/green"
@@ -151,7 +163,7 @@
                         app:shapeAppearanceOverlay="@style/rounded_corner"></com.google.android.material.imageview.ShapeableImageView>
 
                     <ImageView
-                        android:id="@+id/imageView2"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
