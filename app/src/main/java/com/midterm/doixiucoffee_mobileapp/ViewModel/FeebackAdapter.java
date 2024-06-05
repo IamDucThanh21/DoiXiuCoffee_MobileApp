@@ -32,11 +32,16 @@ public class FeebackAdapter extends RecyclerView.Adapter<FeebackAdapter.ViewHold
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull FeebackAdapter.ViewHolder holder, int position) {
-        holder.useName.setText(listFeedback.get(position).getUser().getName());
-        holder.time.setText(String.valueOf(listFeedback.get(position).getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalTime())
-                            + " "
-                            + String.valueOf(listFeedback.get(position).getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
-        holder.content.setText(listFeedback.get(position).getContent());
+        if(listFeedback.get(position).getPublic()){
+            if(!listFeedback.get(position).getIncognito())
+                holder.useName.setText(listFeedback.get(position).getUser().getName());
+            else
+                holder.useName.setText("Ẩn danh");
+            holder.time.setText(String.valueOf(listFeedback.get(position).getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalTime())
+                    + " "
+                    + String.valueOf(listFeedback.get(position).getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+            holder.content.setText(listFeedback.get(position).getContent());
+        }
     }
 
     @Override

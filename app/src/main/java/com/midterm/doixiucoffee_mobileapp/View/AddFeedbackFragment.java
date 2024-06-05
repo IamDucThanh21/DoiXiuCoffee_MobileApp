@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,8 +61,25 @@ public class AddFeedbackFragment extends Fragment {
                                                         , binding.etWriteFeedback.getText().toString()
                                                         , binding.cbIgconite.isChecked()
                                                         , binding.cbPublic.isChecked());
-                DataFeedback.getInstance().getListFeedback().add(newFeedback);
+                DataFeedback.getInstance().addFeedBack(newFeedback);
+                Log.d("contentttt", newFeedback.getContent());
                 Navigation.findNavController(v).navigate(R.id.feedbackFragment);
+            }
+        });
+
+        binding.etWriteFeedback.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                binding.rvNoteSoChu.setText(binding.etWriteFeedback.length() + "/100");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });

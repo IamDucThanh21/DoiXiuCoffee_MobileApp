@@ -2,6 +2,7 @@ package com.midterm.doixiucoffee_mobileapp.View;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,7 +53,6 @@ public class FeedbackFragment extends Fragment {
         listFeedback = DataFeedback.getInstance().getListFeedback();
 
         feebackAdapter = new FeebackAdapter(listFeedback);
-
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(this.getContext()));
         binding.rvCategory.setAdapter(feebackAdapter);
 
@@ -62,10 +62,6 @@ public class FeedbackFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.homeFragment);
             }
         });
-
-//        Long time = 16250L;
-//        Timestamp timestamp = new Timestamp(Instant.ofEpochSecond(time));
-//        DataFeedback.getInstance().addNewFeedback("us02", timestamp , "This is content", true, true);
 
         binding.addFeedbackBtn.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +99,30 @@ public class FeedbackFragment extends Fragment {
             }
         });
 
-
+        binding.btnPublic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.btnPrivate.setTextColor(Color.parseColor("#6c6c6c"));
+                binding.btnPublic.setTextColor(Color.parseColor("#1A2130"));
+                feebackAdapter = new FeebackAdapter(listFeedback);
+                binding.rvCategory.setAdapter(feebackAdapter);
+            }
+        });
+        binding.btnPrivate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.btnPublic.setTextColor(Color.parseColor("#6c6c6c"));
+                binding. btnPrivate.setTextColor(Color.parseColor("#1A2130"));
+                ArrayList<Feedback> myFeedback = new ArrayList<>();
+                for(Feedback fb : listFeedback){
+                    if(fb.getUser().getIdPerson().equals(DataPerson.getInstance().getIdPersonLogin())){
+                        myFeedback.add(fb);
+                    }
+                }
+                feebackAdapter = new FeebackAdapter(myFeedback);
+                binding.rvCategory.setAdapter(feebackAdapter);
+            }
+        });
         View viewRoot = binding.getRoot();
         // Inflate the layout for this fragment
         return viewRoot;
