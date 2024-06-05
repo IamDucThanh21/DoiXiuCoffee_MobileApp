@@ -27,6 +27,8 @@ public class ListOdersFragment extends Fragment {
 
     private FragmentListOdersBinding binding;
     private OrderAdapter orderAdapter;
+
+    private ArrayList<Drink> listDrink;
     private int size;
     public ListOdersFragment() {
         // Required empty public constructor
@@ -59,7 +61,9 @@ public class ListOdersFragment extends Fragment {
         }
         binding.numDrink.setText(size+"");
 
-        orderAdapter = new OrderAdapter();
+        listDrink = DataOrder.getInstance().getOrder().getListDrinks();
+
+        orderAdapter = new OrderAdapter(listDrink, 0);
         binding.rvOrder.setAdapter(orderAdapter);
 
         Log.d("test", "Size oder:" + orderAdapter.getItemCount());
