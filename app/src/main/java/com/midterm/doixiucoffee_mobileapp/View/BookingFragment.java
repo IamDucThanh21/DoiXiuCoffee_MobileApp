@@ -98,11 +98,9 @@ public class BookingFragment extends Fragment {
             }
         });
 
-//        ArrayList<SizeInfo> listSizeInfo = new ArrayList<>();
-//        listSizeInfo.add(new SizeInfo("M", 15, ""));
-//        listSizeInfo.add(new SizeInfo("L", 20, ""));
-//
-//        DataDrink.getInstance().addNewDrink("drTest", "Test name", "ca04", listSizeInfo, "test story");
+//        for (Order order : DataOrder.getInstance().allOrder){
+//            Log.d("Order", order.getIdOrder());
+//        }
 
         View view = binding.getRoot();
         return view;

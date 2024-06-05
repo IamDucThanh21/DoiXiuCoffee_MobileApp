@@ -105,18 +105,4 @@ public class Order {
             i++;
         }
     }
-//        public static String generateRandomId() {
-//        Random random = new Random();
-//        int number = random.nextInt(100); // Tạo số ngẫu nhiên từ 0 đến 99
-//        String randomId = "us" + String.format("%02d", number); // Đảm bảo số có hai chữ số
-//        ArrayList<User> listUser = new ArrayList<>();
-//        listUser = DataPerson.getInstance().getAllUser();
-//
-//        for (User user : listUser){
-//            while (randomId == user.getIdUser()){
-//                randomId = "us" + String.format("%02d", random.nextInt(100));
-//            }
-//        }
-//        return randomId;
-//    }
 }
