@@ -1,27 +1,19 @@
 package com.midterm.doixiucoffee_mobileapp.View;
 
 import android.os.Bundle;
-
-import androidx.databinding.ObservableArrayList;
-import androidx.databinding.ObservableList;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.midterm.doixiucoffee_mobileapp.Firebase.DataDrink;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataOrder;
-import com.midterm.doixiucoffee_mobileapp.Model.Drink;
-import com.midterm.doixiucoffee_mobileapp.Model.Order;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.OrderAdapter;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentListOdersBinding;
-
-import java.util.ArrayList;
 
 public class ListOdersFragment extends Fragment {
 
@@ -76,7 +68,7 @@ public class ListOdersFragment extends Fragment {
         binding.btnBookNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-
+                DataOrder.getInstance().addNewOrder(DataOrder.getInstance().getOrder());
             }
         });
 

@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataDrink;
-import com.midterm.doixiucoffee_mobileapp.Firebase.DataFeedback;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataSong;
 import com.midterm.doixiucoffee_mobileapp.R;
@@ -47,7 +45,6 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
-
         DataDrink.getInstance().getDataMenu();
         DataPerson.getInstance().getDataPerson();
         DataSong.getInstance().getAllSong();
@@ -121,14 +118,11 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        
-//            String id = DataPerson.getInstance().getIdPersonLogin();
-//            String img = DataPerson.getInstance().getUserById(id).getImage();
-//            imgAva.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
-
-
-
-
+        String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
+        if (!idPersonLogin.equals("null")){
+            String img = DataPerson.getInstance().getUserById(idPersonLogin).getImage();
+            imgAva.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
+        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
