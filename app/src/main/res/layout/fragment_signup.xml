@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".View.SignupFragment">
+
+        <include
+            layout="@layout/log_title"
+            android:id="@+id/toolbar">
+        </include>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/music"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="39dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="Đăng kí"
+                    android:textSize="30dp"></TextView>
+
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center"
+                    android:background="@color/black"></LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/gray"
+                        app:shapeAppearanceOverlay="@style/rounded_corner"></com.google.android.material.imageview.ShapeableImageView>
+
+                    <EditText
+                        android:id="@+id/et_phone"
+                        style="@android:style/Widget.EditText"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginEnd="50dp"
+                        android:background="@null"
+                        android:hint="Số điện thoại..."
+                        android:textSize="20dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_name"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/gray"
+                        app:shapeAppearanceOverlay="@style/rounded_corner"></com.google.android.material.imageview.ShapeableImageView>
+
+                    <EditText
+                        android:id="@+id/et_name"
+                        style="@android:style/Widget.EditText"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginEnd="50dp"
+                        android:background="@null"
+                        android:hint="Tên của bạn..."
+                        android:textSize="20dp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/error"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Tài khoản không tồn tại!"
+                    android:textColor="@color/red"
+                    android:textStyle="bold|italic"
+                    android:visibility="gone"></TextView>
+
+                <RelativeLayout
+                    android:id="@+id/layout_btn_signup"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Đăng nhập"
+                        android:textColor="#6c6c6c"
+                        android:textSize="18dp"
+                        android:textStyle="bold|italic" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/shapeableImageView2"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="0dp"
+                        android:background="@color/black"
+                        app:shapeAppearance="@style/rounded_corner"></com.google.android.material.imageview.ShapeableImageView>
+
+                    <TextView
+                        android:id="@+id/signup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="20dp"
+                        android:text="ĐĂNG KÍ"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"></TextView>
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <include
+            android:id="@+id/music"
+            layout="@layout/music_pain"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+        </include>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

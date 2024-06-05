@@ -5,7 +5,10 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -13,11 +16,13 @@ import com.midterm.doixiucoffee_mobileapp.Model.Drink;
 import com.midterm.doixiucoffee_mobileapp.Model.Order;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class DataOrder {
-    private ArrayList<Order> allOrder;
+    public ArrayList<Order> allOrder;
     private static DataOrder dataOrder;
     private static Order order;
 
@@ -75,6 +80,46 @@ public class DataOrder {
 //    public void addOrder(Order order){
 //        this.AllOrder.add(order);
 //    }
+
+    public void addNewOrder(Order order){
+        Map<String, Object> dataOrder = new HashMap<>();
+        dataOrder.put("discount", order.getDiscount());
+        dataOrder.put("idUser", DataPerson.getInstance().getIdPersonLogin());
+
+        ArrayList<Map<String, String>> listDrinks = new ArrayList<>();
+        for (Drink drink : order.getListDrinks()){
+            Map<String, String> dataDrink = new HashMap<>();
+            dataDrink.put("idDrink", drink.getIdDrink());
+
+            if (Objects.equals(drink.getSizeInfo().getSize(), "M"))
+                dataDrink.put("size", "0");
+            else
+                dataDrink.put("size", "1");
+
+
+            listDrinks.add(dataDrink);
+        }
+
+        dataOrder.put("listDrink", listDrinks);
+        dataOrder.put("status", order.isStatus());
+        dataOrder.put("table", order.getTable());
+        dataOrder.put("totalPrice", order.getTotalPrice());
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Order").add(dataOrder)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("Debug", "Add order success");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("Debug", "Add order fail");
+                    }
+                });
+    }
 
     public Order getOrder(){ return order;}
     public void setOrder(Order order){
