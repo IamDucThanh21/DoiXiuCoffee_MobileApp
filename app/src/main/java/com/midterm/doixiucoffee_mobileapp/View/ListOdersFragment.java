@@ -71,11 +71,18 @@ public class ListOdersFragment extends Fragment {
         });
 
         binding.totalCost.setText(DataOrder.getInstance().getOrder().getTotalPrice()+".000");
+        if(DataOrder.getInstance().getOrder().isStatus()){
+            binding.btnBookNow.setClickable(false);
+            binding.btnBookNow.setBackgroundColor(getResources().getColor(R.color.gray));
+            binding.btnBookNow.setText("Đợi quầy!");
+        }
 
         binding.btnBookNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                DataOrder.getInstance().addNewOrder(DataOrder.getInstance().getOrder());
+                //DataOrder.getInstance().addNewOrder(DataOrder.getInstance().getOrder());
+                DataOrder.getInstance().getOrder().setStatus(true);
+                Navigation.findNavController(v).navigate(R.id.bookingFragment);
             }
         });
 

@@ -7,7 +7,7 @@ public class Order {
     private int table;
     private ArrayList<Drink> listDrinks;
     private int totalPrice =0;
-    private boolean status;
+    private boolean status = false;
     private User user;
     private int discount;
     private String note;

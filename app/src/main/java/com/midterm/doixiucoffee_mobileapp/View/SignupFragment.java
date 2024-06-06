@@ -28,7 +28,7 @@ public class SignupFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_signup, null, false);
 
-        
+
 
         View view = binding.getRoot();
         return view;
