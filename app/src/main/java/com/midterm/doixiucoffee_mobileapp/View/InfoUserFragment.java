@@ -72,8 +72,15 @@ public class InfoUserFragment extends Fragment {
         binding.logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DataPerson.getInstance().setIdPersonLogin("");
+                DataPerson.getInstance().setIdPersonLogin("null");
                 Navigation.findNavController(v).navigate(R.id.homeFragment);
+            }
+        });
+
+        binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
 

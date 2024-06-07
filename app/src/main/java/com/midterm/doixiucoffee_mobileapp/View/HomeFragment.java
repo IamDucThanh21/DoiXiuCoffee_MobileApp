@@ -114,5 +114,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        imgAva.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.infoUserFragment);
+            }
+        });
     }
 }
