@@ -58,6 +58,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
                 DataSong.getInstance().addNewSong(newSong);
                 Log.d("test", DataSong.getInstance().getListSong().size()+"");
+                DataSong.getInstance().setMusicChooseCreate(newSong.getIdSong());
                 Navigation.findNavController(v).navigate(R.id.musicFragment);
             }
         });
