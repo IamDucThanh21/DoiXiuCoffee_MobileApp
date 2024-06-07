@@ -47,8 +47,18 @@ public class InfoUserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_info_user, null, false);
-        // Inflate the layout for this fragment
 
+        //Setup ava và tên
+        User userLogin = new User();
+        userLogin = DataPerson.getInstance().getUserById(DataPerson.getInstance().getIdPersonLogin());
+
+        String img = userLogin.getImage();
+        if (!img.equals("")) {
+            binding.ava.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
+        }
+        binding.tvName.setText(userLogin.getName());
+
+        //Nhấn vào ava thì đổi ảnh
         binding.ava.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,23 +68,7 @@ public class InfoUserFragment extends Fragment {
             }
         });
 
-        String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
-
-        if(!idPersonLogin.equals("null")) {
-            binding.ava.setVisibility(View.VISIBLE);
-
-            String img = DataPerson.getInstance().getPersonById(idPersonLogin).getImage();
-            if (!img.equals("")) {
-                binding.ava.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
-            }
-        }
-
-        return inflater.inflate(R.layout.fragment_info_user, container, false);
-        User userLogin = new User();
-        userLogin = DataPerson.getInstance().getUserById(DataPerson.getInstance().getIdPersonLogin());
-
-        binding.tvName.setText(userLogin.getName());
-
+        //Nhấn logout thì quay lại trang home
         binding.logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
