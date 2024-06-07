@@ -48,7 +48,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/person_chooses"
         android:layout_width="50dp"
         android:layout_height="30dp"
         android:layout_centerVertical="true"
@@ -77,30 +77,36 @@
             ></ImageView>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/garbage"
         android:layout_width="50dp"
         android:layout_height="30dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="5dp"
-        android:layout_toEndOf="@+id/linearLayout3"
-        android:gravity="center"
-        android:visibility="gone">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/garbage"></ImageView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="5dp"
-        android:layout_toEndOf="@+id/linearLayout3"
+        android:layout_toEndOf="@+id/person_chooses"
         android:gravity="center"
         android:visibility="visible">
 
         <ImageView
+            android:id="@+id/imv_garbage"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+
+            android:src="@drawable/garbage"></ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/heart_votes"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/person_chooses"
+        android:gravity="center"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/imv_heart"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="5dp"
