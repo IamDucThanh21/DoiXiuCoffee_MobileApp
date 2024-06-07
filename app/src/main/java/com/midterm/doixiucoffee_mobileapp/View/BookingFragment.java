@@ -111,10 +111,6 @@ public class BookingFragment extends Fragment {
             }
         });
 
-//        for (Order order : DataOrder.getInstance().allOrder){
-//            Log.d("Order", order.getIdOrder());
-//        }
-
         View view = binding.getRoot();
         return view;
     }

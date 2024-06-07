@@ -70,6 +70,14 @@ public class AddDrinkFragment extends Fragment {
             }
         });
 
+        //Xem thoong tin cá nhân khi nhấn vào ava
+        binding.toolbar.imgAva.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.infoUserFragment);
+            }
+        });
+
         View view = binding.getRoot();
         return view;
     }
