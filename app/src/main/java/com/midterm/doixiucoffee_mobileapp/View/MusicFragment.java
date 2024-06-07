@@ -1,5 +1,7 @@
 package com.midterm.doixiucoffee_mobileapp.View;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,16 +84,34 @@ public class MusicFragment extends Fragment {
         binding.btnAddMusic.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Navigation.findNavController(v).navigate(R.id.searchMusicFragment);
+                if(idPersonLogin.equals("null")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext()); // 'this' là context của Activity hoặc Fragment
+                    builder.setTitle("Thông báo")
+                            .setMessage("Bạn cần đăng nhập để tiếp tục!")
+                            .setPositiveButton("Đăng nhập", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Navigation.findNavController(v).navigate(R.id.loginFragment);
+                                }
+                            })
+                            .setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+                else{
+                    SearchMusicFragment searchMusicFragment = SearchMusicFragment.newInstance();
 
-                SearchMusicFragment searchMusicFragment = SearchMusicFragment.newInstance();
+                    binding.frameLayout.setVisibility(View.VISIBLE);
+                    binding.btnAddMusic.addddd.setVisibility(View.GONE);
 
-                binding.frameLayout.setVisibility(View.VISIBLE);
-                binding.btnAddMusic.addddd.setVisibility(View.GONE);
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .add(R.id.frameLayout, searchMusicFragment)
+                            .commit();
+                }
 
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .add(R.id.frameLayout, searchMusicFragment)
-                        .commit();
             }
         });
 
