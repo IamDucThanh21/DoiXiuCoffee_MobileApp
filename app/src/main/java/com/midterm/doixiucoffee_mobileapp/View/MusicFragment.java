@@ -57,6 +57,8 @@ public class MusicFragment extends Fragment {
 
         DataSong.getInstance().sortSong();
 
+        if(DataSong.getInstance().getMusicChooseCreate() == null) DataSong.getInstance().createMusicChoose();
+
         if(listSong.size()!=0){
             //Lấy thằng đầu danh sách làm bìa, từ thằng thứ 2 trở đi vào recyclview
             Song firstSong = listSong.get(0);

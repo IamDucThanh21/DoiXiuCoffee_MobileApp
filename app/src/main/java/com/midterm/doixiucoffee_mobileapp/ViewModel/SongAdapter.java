@@ -60,6 +60,11 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         holder.songSinger.setText(listSong.get(position).getSinger());
         holder.songVotes.setText(listSong.get(position).getVotes()+"");
         Picasso.get().load(listSong.get(position).getImage()).into(holder.avaSong);
+
+        if(DataSong.getInstance().getMusicChoose(listSong.get(position).getIdSong())){
+            holder.imvHeart.setEnabled(false);
+            holder.imvHeart.setImageResource(R.drawable.favorited);
+        }
         if(DataPerson.getInstance().isAdminById(DataPerson.getInstance().getIdPersonLogin())){
             holder.layoutPersonHearts.setVisibility(View.GONE);
             holder.layoutPersonChooses.setVisibility(View.GONE);
@@ -101,11 +106,13 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                 else{
                     holder.imvHeart.setImageResource(R.drawable.favorited);
 //                    DataSong.getInstance().getListSong().get(position).setVotes(DataSong.getInstance().getListSong().get(position).getVotes() + 1);
+                    DataSong.getInstance().setMusicChoose(listSong.get(position).getIdSong());
                     DataSong.getInstance().getListSong().get(position).addVote();
                     DataSong.getInstance().updateVote(listSong.get(position).getIdSong());
                     Navigation.findNavController(v).navigate(R.id.musicFragment);
                 }
             }
+
         });
     }
 

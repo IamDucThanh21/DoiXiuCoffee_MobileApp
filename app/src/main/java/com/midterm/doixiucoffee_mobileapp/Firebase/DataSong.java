@@ -15,17 +15,21 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.midterm.doixiucoffee_mobileapp.Model.Song;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.Objects;
 
 public class DataSong {
     private ArrayList<Song> listSong;
     private static DataSong dataSong;
+    private Dictionary musicChoose;
 
     public static DataSong getInstance(){
         if(dataSong == null){
             dataSong = new DataSong();
+
         }
         return dataSong;
     }
@@ -44,7 +48,6 @@ public class DataSong {
                         }
                     }
                 });
-//        sortSong();
     }
     public void sortSong(){
         Song song = new Song();
@@ -62,6 +65,24 @@ public class DataSong {
         }
     }
 
+    public void createMusicChoose(){
+        musicChoose = new Hashtable();
+        for(Song song : listSong){
+            musicChoose.put(song.getIdSong(), false);
+        }
+    }
+
+    public Dictionary getMusicChooseCreate() {
+        return musicChoose;
+    }
+
+    public void setMusicChoose(String idSong){
+        this.musicChoose.remove(idSong);
+        this.musicChoose.put(idSong, true);
+    }
+    public boolean getMusicChoose(String idSong){
+        return (boolean) musicChoose.get(idSong);
+    }
     public boolean checkSong(Song song){
         boolean var = false;
         for (Song checkSong : listSong){
