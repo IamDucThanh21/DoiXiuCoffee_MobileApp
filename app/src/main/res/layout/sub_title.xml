@@ -48,7 +48,7 @@
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:shapeAppearanceOverlay="@style/circle"
-            app:srcCompat="@drawable/ava"
+            app:srcCompat="@drawable/avt_mac_dinh"
             android:visibility="gone"/>
 
         <TextView
