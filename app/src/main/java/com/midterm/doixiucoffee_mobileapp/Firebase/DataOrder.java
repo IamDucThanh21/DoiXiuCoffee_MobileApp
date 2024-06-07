@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class DataOrder {
     private ArrayList<Order> allOrder;
@@ -94,7 +93,7 @@ public class DataOrder {
             dataDrink.put("idDrink", drink.getIdDrink());
             dataDrink.put("note", drink.getNote());
 
-            if (Objects.equals(drink.getSizeInfo().getSize(), "M"))
+            if (drink.getSizeInfo().getSize().equals("M"))
                 dataDrink.put("size", "0");
             else
                 dataDrink.put("size", "1");
