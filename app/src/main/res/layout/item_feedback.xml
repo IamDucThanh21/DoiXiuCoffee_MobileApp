@@ -41,10 +41,11 @@
             android:orientation="horizontal">
 
             <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ava"
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ava"
+                android:src="@drawable/avt_mac_dinh"
                 app:shapeAppearanceOverlay="@style/circle"></com.google.android.material.imageview.ShapeableImageView>
 
             <LinearLayout

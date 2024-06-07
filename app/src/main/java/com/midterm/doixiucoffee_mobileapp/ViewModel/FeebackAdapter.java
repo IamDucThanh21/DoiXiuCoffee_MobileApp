@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.imageview.ShapeableImageView;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
 import com.midterm.doixiucoffee_mobileapp.Model.Feedback;
 import com.midterm.doixiucoffee_mobileapp.R;
 
@@ -41,6 +43,10 @@ public class FeebackAdapter extends RecyclerView.Adapter<FeebackAdapter.ViewHold
                     + " "
                     + String.valueOf(listFeedback.get(position).getDate().toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
             holder.content.setText(listFeedback.get(position).getContent());
+
+            if (!listFeedback.get(position).getIncognito())
+                holder.ava.setImageBitmap(DataPerson.getInstance().base64toBitmap(listFeedback.get(position).getUser().getImage()));
+
         }
     }
 
@@ -53,11 +59,13 @@ public class FeebackAdapter extends RecyclerView.Adapter<FeebackAdapter.ViewHold
         private TextView useName;
         private TextView time;
         private TextView content;
+        private ShapeableImageView ava;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             useName = (TextView) itemView.findViewById(R.id.user_name);
             time = (TextView) itemView.findViewById(R.id.time);
             content = (TextView) itemView.findViewById(R.id.content);
+            ava = (ShapeableImageView) itemView.findViewById(R.id.ava);
         }
     }
 }

@@ -1,9 +1,15 @@
 package com.midterm.doixiucoffee_mobileapp.Firebase;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -79,6 +85,42 @@ public class DataDrink {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Category").document(typeDrink).update("drink", FieldValue.arrayUnion(drink));
+    }
+
+    public void deleteDrink(String documentPath, String idDrink){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DocumentReference docRef = db.collection("Category").document(documentPath);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    List<Map<String, Object>> drinkList = (List<Map<String, Object>>) documentSnapshot.get("drink");
+                    List<Map<String, Object>> updatedDrinkList = new ArrayList<>();
+                    for (Map<String, Object> drink : drinkList) {
+                        if (!drink.get("idDrink").equals(idDrink)) {
+                            updatedDrinkList.add(drink);
+                        }
+                    }
+                    docRef.update("drink", updatedDrinkList)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("Debug", "DocumentSnapshot successfully updated!");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w("Debug", "Error updating document", e);
+                                }
+                            });
+                } else {
+                    Log.d("Debug", "No such document");
+                }
+            }
+        });
+
     }
 
     public ArrayList<Category> getMenu(){

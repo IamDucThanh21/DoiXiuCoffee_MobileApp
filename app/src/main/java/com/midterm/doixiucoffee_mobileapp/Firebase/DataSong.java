@@ -8,6 +8,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -107,6 +108,26 @@ public class DataSong {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.d("Delete music", "Fail");
+                    }
+                });
+    }
+
+    public void updateVote(String idSong){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Map<String, Object> update = new HashMap<>();
+        update.put("vote", FieldValue.increment(1));
+
+        db.collection("Song").document(idSong).update(update)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d("Update vote", "Success");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("Update vote", "Fail");
                     }
                 });
     }
