@@ -38,7 +38,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@+id/tv_booking"
                 android:src="@drawable/coffee_cup_icon">
 
             </ImageView>
@@ -70,7 +71,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@+id/tv_music"
                 android:src="@drawable/music_icon">
 
             </ImageView>
@@ -104,6 +106,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@+id/tv_feedback"
                 android:src="@drawable/feedback_icon">
 
             </ImageView>

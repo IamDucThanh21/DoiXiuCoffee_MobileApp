@@ -56,40 +56,25 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
             holder.borderB.setVisibility(View.VISIBLE);
             holder.borderS.setVisibility(View.VISIBLE);
 
-            //Kiểm tra xem nó đã được chọn sẵn chưa, nếu rồi thì tô màu
-            for(Drink d: DataOrder.getInstance().getOrder().getListDrinks()){
-                if(d.getIdDrink().equals(listDrink.get(position).getIdDrink())){
-                    String size = d.getSizeInfo().getSize();
-                    int s = 0;
-                    if(size.equals("L")) s = 1;
-                    setModeDrinkChoice(holder, s, "On");
-                }
-            }
             holder.priceS.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (holder.borderS.getVisibility() == View.VISIBLE) {
-                        setModeDrinkChoice(holder, 0, "On");
-                        setOrder(p, 0);
-                    } else {
-                        setModeDrinkChoice(holder, 0, "Off");
-                        deleteDrinkOnOrder(p, 0);
-                    }
+                    Resources re =  holder.borderB.getResources();
+                    holder.borderS.setVisibility(View.GONE);
+                    holder.backS.setBackgroundColor(re.getColor(R.color.green));
+                    holder.priceS.setTextColor(re.getColor(R.color.white));
+                    setOrder(p, 0);
                     Navigation.findNavController(v).navigate(R.id.addDrinkFragment);
                 }
             });
             holder.priceB.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(holder.borderB.getVisibility()==View.VISIBLE){
-                        setModeDrinkChoice(holder, 1, "On");
-                        setOrder(p, 1);
-                    }
-                    else{
-                        setModeDrinkChoice(holder, 1,"Off");
-                        deleteDrinkOnOrder(p, 1);
-                        Log.d("remove",DataOrder.getInstance().getOrder().getListDrinks().size()+"");
-                    }
+                    Resources re =  holder.borderB.getResources();
+                    holder.borderB.setVisibility(View.GONE);
+                    holder.backB.setBackgroundColor(re.getColor(R.color.green));
+                    holder.priceB.setTextColor(re.getColor(R.color.white));
+                    setOrder(p, 1);
                     Navigation.findNavController(v).navigate(R.id.addDrinkFragment);
                 }
             });
@@ -111,33 +96,6 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
                 else holder.tvInfo.setVisibility(View.GONE);
             }
         });
-    }
-    public void setModeDrinkChoice(DrinkAdapter.ViewHolder holder, int size, String mode){
-        Resources re =  holder.borderB.getResources();
-        if(mode.equals("On")){
-            if(size == 0){
-                holder.borderS.setVisibility(View.GONE);
-                holder.backS.setBackgroundColor(re.getColor(R.color.green));
-                holder.priceS.setTextColor(re.getColor(R.color.white));
-            }
-            else{
-                holder.borderB.setVisibility(View.GONE);
-                holder.backB.setBackgroundColor(re.getColor(R.color.green));
-                holder.priceB.setTextColor(re.getColor(R.color.white));
-            }
-        }
-        else{
-            if(size == 0){
-                holder.borderS.setVisibility(View.VISIBLE);
-                holder.backS.setBackgroundColor(re.getColor(R.color.white));
-                holder.priceS.setTextColor(re.getColor(R.color.gray_text));
-            }
-            else {
-                holder.borderB.setVisibility(View.VISIBLE);
-                holder.backB.setBackgroundColor(re.getColor(R.color.white));
-                holder.priceB.setTextColor(re.getColor(R.color.gray_text));
-            }
-        }
     }
 
     public void setOrder(int p, int size){

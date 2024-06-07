@@ -25,7 +25,7 @@ import java.util.Objects;
 public class DataSong {
     private ArrayList<Song> listSong;
     private static DataSong dataSong;
-    private Dictionary musicChoose;
+    private Dictionary<String, Boolean> musicChoose;
     private Song playingSong;
 
     public static DataSong getInstance(){
@@ -85,13 +85,15 @@ public class DataSong {
     public Dictionary getMusicChooseCreate() {
         return musicChoose;
     }
-
+    public void setMusicChooseCreate(String idSong){
+        this.musicChoose.put(idSong, false);
+    }
     public void setMusicChoose(String idSong){
         this.musicChoose.remove(idSong);
         this.musicChoose.put(idSong, true);
     }
     public boolean getMusicChoose(String idSong){
-        return (boolean) musicChoose.get(idSong);
+        return musicChoose.get(idSong);
     }
     public boolean checkSong(Song song){
         boolean var = false;
