@@ -80,7 +80,7 @@ public class ListOdersFragment extends Fragment {
         binding.btnBookNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                //DataOrder.getInstance().addNewOrder(DataOrder.getInstance().getOrder());
+                DataOrder.getInstance().addNewOrder(DataOrder.getInstance().getOrder());
                 DataOrder.getInstance().getOrder().setStatus(true);
                 Navigation.findNavController(v).navigate(R.id.bookingFragment);
             }
