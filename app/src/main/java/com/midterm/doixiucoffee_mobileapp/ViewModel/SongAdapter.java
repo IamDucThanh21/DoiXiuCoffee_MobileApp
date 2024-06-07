@@ -1,5 +1,6 @@
 package com.midterm.doixiucoffee_mobileapp.ViewModel;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataSong;
 import com.midterm.doixiucoffee_mobileapp.Model.Song;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.squareup.picasso.Picasso;
@@ -36,6 +38,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull SongAdapter.ViewHolder holder, int position) {
         holder.songName.setText(listSong.get(position).getName());
@@ -47,6 +50,13 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             holder.layoutPersonChooses.setVisibility(View.GONE);
             holder.layoutGarbage.setVisibility(View.VISIBLE);
         }
+        holder.imvGarbage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.imvGarbage.setImageResource(R.drawable.garbage_after);
+                DataSong.getInstance().deleteMusicById(listSong.get(position).getIdSong());
+            }
+        });
     }
 
     @Override
@@ -65,7 +75,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 //        public TextView numPersonVotes;
 //        public ImageView personVotes;
 //        public ImageView imvHeart;
-//        public ImageView imvGarbage;
+        public ImageView imvGarbage;
         public ViewHolder(View itemView) {
             super(itemView);
             songName = (TextView) itemView.findViewById(R.id.song_name);
@@ -77,6 +87,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             layoutPersonChooses = (LinearLayout) itemView.findViewById(R.id.person_chooses);
             layoutPersonHearts = (LinearLayout) itemView.findViewById(R.id.heart_votes);
             layoutGarbage = (LinearLayout) itemView.findViewById(R.id.garbage);
+            imvGarbage = (ImageView) itemView.findViewById(R.id.imv_garbage);
         }
     }
 }

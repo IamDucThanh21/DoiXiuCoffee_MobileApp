@@ -78,19 +78,19 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/garbage"
-        android:layout_width="50dp"
+        android:layout_width="100dp"
         android:layout_height="30dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="5dp"
-        android:layout_toEndOf="@+id/person_chooses"
+        android:layout_toEndOf="@+id/linearLayout2"
         android:gravity="center"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/imv_garbage"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="60dp"
 
             android:src="@drawable/garbage"></ImageView>
     </LinearLayout>
