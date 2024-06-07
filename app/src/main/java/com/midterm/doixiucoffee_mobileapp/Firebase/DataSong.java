@@ -150,9 +150,10 @@ public class DataSong {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()){
                             DocumentSnapshot document = task.getResult();
+                            playingSong = new Song();
                             playingSong.setIdSong((String) document.get("id"));
                             playingSong.setImage((String) document.get("image"));
-                            playingSong.setVotes((Integer) document.get("vote"));
+                            playingSong.setVotes(((Long) document.get("vote")).intValue());
                             playingSong.setSinger((String) document.get("singer"));
                             playingSong.setName((String) document.get("songName"));
                         }
