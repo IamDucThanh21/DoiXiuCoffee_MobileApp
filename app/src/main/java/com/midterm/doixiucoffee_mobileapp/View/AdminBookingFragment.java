@@ -40,10 +40,13 @@ public class AdminBookingFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_admin_booking, null, false);
 
+        String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
         //Setup ban đầu
         binding.includeHb.homeBackTitle.setText("Danh sách gọi món");
         binding.toolbar.imgAva.setVisibility(View.VISIBLE);
         binding.toolbar.btnLogin.setVisibility(View.GONE);
+        String img = DataPerson.getInstance().getPersonById(idPersonLogin).getImage();
+        binding.toolbar.imgAva.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
 
         //Setup danh sách order, chỉ chọn những order đang đợi
         listOrder = new ArrayList<>(DataOrder.getInstance().getAllOrder());
@@ -57,10 +60,14 @@ public class AdminBookingFragment extends Fragment {
         binding.rvOrder.setAdapter(adminOrderAdapter);
         binding.rvOrder.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
         if(!DataPerson.getInstance().isAdminById(idPersonLogin)){
             listOrder = new ArrayList<>(DataOrder.getInstance().getAllOrder());
-            adminOrderAdapter = new AdminOrderAdapter(listOrder);
+            ArrayList<Order> list = new ArrayList<>();
+            for(Order o : listOrder){
+                if(o.getUser().getIdPerson().equals(idPersonLogin))
+                    list.add(o);
+            }
+            adminOrderAdapter = new AdminOrderAdapter(list);
             binding.rvOrder.setAdapter(adminOrderAdapter);
             binding.rvOrder.setLayoutManager(new LinearLayoutManager(getContext()));
             binding.relativeLayout.setVisibility(View.GONE);
