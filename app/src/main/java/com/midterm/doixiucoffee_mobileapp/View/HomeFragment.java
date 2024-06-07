@@ -92,14 +92,14 @@ public class HomeFragment extends Fragment {
 
         imgAva = view.findViewById(R.id.imgAva);
 
-        imgAva.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent iGallery = new Intent(Intent.ACTION_PICK);
-                iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(iGallery, GALLERY_REQ_CODE);
-            }
-        });
+//        imgAva.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent iGallery = new Intent(Intent.ACTION_PICK);
+//                iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(iGallery, GALLERY_REQ_CODE);
+//            }
+//        });
 
         btnLogin = view.findViewById(R.id.btnLogin);
 

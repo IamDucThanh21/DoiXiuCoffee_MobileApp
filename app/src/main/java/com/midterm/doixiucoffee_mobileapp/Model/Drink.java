@@ -37,6 +37,7 @@ public class Drink {
         this.typeDrink = drink.getTypeDrink();
         this.story = drink.getStory();
         this.sizeInfo = drink.getSizeInfos().get(size);
+        this.note = "";
     }
 
     public Drink(String idDrink_, int size, String note){

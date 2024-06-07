@@ -54,7 +54,7 @@ public class BookingFragment extends Fragment {
 
             Order o = new Order();
             o = DataOrder.getInstance().findOrderByIdUser(idPersonLogin);
-            if(o != null){
+            if(o != null && (o.getStatus().equals("booking")||o.getStatus().equals("waiting"))){
                 DataOrder.getInstance().setOrder(o);
             }
         }

@@ -120,4 +120,9 @@
             android:id="@+id/action_signupFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/infoUserFragment"
+        android:name="com.midterm.doixiucoffee_mobileapp.View.InfoUserFragment"
+        android:label="fragment_info_user"
+        tools:layout="@layout/fragment_info_user" />
 </navigation>
