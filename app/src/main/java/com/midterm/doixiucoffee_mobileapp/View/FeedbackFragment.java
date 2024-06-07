@@ -42,8 +42,11 @@ public class FeedbackFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_feedback, null, false);
 
+
+
         //Setup ava, back, title
         String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
+
         if (!idPersonLogin.equals("null")){
             binding.toolbar.imgAva.setVisibility(View.VISIBLE);
             String img = DataPerson.getInstance().getPersonById(idPersonLogin).getImage();
@@ -133,6 +136,19 @@ public class FeedbackFragment extends Fragment {
                 binding.rvCategory.setAdapter(feebackAdapter);
             }
         });
+
+        if (!idPersonLogin.equals("null")){
+            if(DataPerson.getInstance().isAdminById(idPersonLogin)){
+                binding.lineCenter.setVisibility(View.GONE);
+                binding.btnPrivate.setVisibility(View.GONE);
+                binding.btnPublic.setClickable(false);
+            }
+            ArrayList<Feedback> myFeedback = new ArrayList<>();
+
+            myFeedback = DataFeedback.getInstance().getListFeedback();
+            feebackAdapter = new FeebackAdapter(myFeedback);
+            binding.rvCategory.setAdapter(feebackAdapter);
+        }
 
         //Xem thoong tin cá nhân khi nhấn vào ava
         binding.toolbar.imgAva.setOnClickListener(new View.OnClickListener() {

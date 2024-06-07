@@ -1,5 +1,6 @@
 package com.midterm.doixiucoffee_mobileapp.ViewModel;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,19 +55,31 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Vi
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DataOrder.getInstance().getAllOrder().get(i).setStatus("cancel");
-                DataOrder.getInstance().setStatusFirebase(DataOrder.getInstance().getAllOrder().get(i).getIdOrder(), "cancel");
+                DataOrder.getInstance().getOrderByIdOrder(listOrder.get(i).getIdOrder()).setStatus("cancel");
+                DataOrder.getInstance().setStatusFirebase(listOrder.get(i).getIdOrder(), "cancel");
                 Navigation.findNavController(v).navigate(R.id.adminBookingFragment);
             }
         });
         holder.btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DataOrder.getInstance().getAllOrder().get(i).setStatus("done");
-                DataOrder.getInstance().setStatusFirebase(DataOrder.getInstance().getAllOrder().get(i).getIdOrder(), "done");
+                DataOrder.getInstance().getOrderByIdOrder(listOrder.get(i).getIdOrder()).setStatus("done");
+                DataOrder.getInstance().setStatusFirebase(listOrder.get(i).getIdOrder(), "done");
                 Navigation.findNavController(v).navigate(R.id.adminBookingFragment);
             }
         });
+
+        if(listOrder.get(i).getStatus().equals("cancel")){
+            holder.btnDone.setVisibility(View.GONE);
+            holder.btnEdit.setVisibility(View.GONE);
+            holder.btnRemove.setClickable(false);
+        }
+
+        if(listOrder.get(i).getStatus().equals("done")){
+            holder.btnRemove.setVisibility(View.GONE);
+            holder.btnEdit.setVisibility(View.GONE);
+            holder.btnDone.setClickable(false);
+        }
 
     }
 

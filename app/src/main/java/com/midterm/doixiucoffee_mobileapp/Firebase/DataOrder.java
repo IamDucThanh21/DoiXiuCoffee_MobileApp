@@ -147,6 +147,14 @@ public class DataOrder {
         return null;
     }
 
+    public Order getOrderByIdOrder(String idOrder){
+        for(Order o : allOrder){
+            if(o.getIdOrder().equals(idOrder))
+                return o;
+        }
+        return null;
+    }
+
     public void setStatusFirebase(String idOrder, String newStatus){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Order").document(idOrder).update("status", newStatus)

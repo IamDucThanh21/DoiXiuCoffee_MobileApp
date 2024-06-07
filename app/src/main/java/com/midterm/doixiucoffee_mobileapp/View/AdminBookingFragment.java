@@ -24,6 +24,7 @@ public class AdminBookingFragment extends Fragment {
     private AdminOrderAdapter adminOrderAdapter;
 
     private FragmentAdminBookingBinding binding;
+    private int mode = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,66 @@ public class AdminBookingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.infoUserFragment);
+            }
+        });
+
+        binding.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mode==0){
+                    if(binding.btnMoreCancel.getVisibility() == View.GONE){
+                        binding.btnMoreCancel.setVisibility(View.VISIBLE);
+                        binding.btnMoreDone.setVisibility(View.VISIBLE);
+
+                    }
+                    else {
+                        binding.btnMoreCancel.setVisibility(View.GONE);
+                        binding.btnMoreDone.setVisibility(View.GONE);
+                    }
+                }
+                else{
+                    Navigation.findNavController(v).navigate(R.id.adminBookingFragment);
+                }
+            }
+        });
+
+        binding.btnMoreCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<Order> l = new ArrayList<>();
+                for(Order o: listOrder){
+                    if(o.getStatus().equals("cancel")){
+                        l.add(o);
+                    }
+                }
+                adminOrderAdapter = new AdminOrderAdapter(l);
+                binding.rvOrder.setAdapter(adminOrderAdapter);
+
+                binding.btnMoreCancel.setVisibility(View.GONE);
+                binding.btnMoreDone.setVisibility(View.GONE);
+                binding.ivMenu.setImageResource(R.drawable.backk_icon);
+                binding.includeHb.homeBackTitle.setText("Các đơn đã hủy");
+                mode = 1;
+            }
+        });
+
+        binding.btnMoreDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<Order> l = new ArrayList<>();
+                for(Order o: listOrder){
+                    if(o.getStatus().equals("done")){
+                        l.add(o);
+                    }
+                }
+                adminOrderAdapter = new AdminOrderAdapter(l);
+                binding.rvOrder.setAdapter(adminOrderAdapter);
+
+                binding.btnMoreCancel.setVisibility(View.GONE);
+                binding.btnMoreDone.setVisibility(View.GONE);
+                binding.ivMenu.setImageResource(R.drawable.backk_icon);
+                binding.includeHb.homeBackTitle.setText("Các đơn hoàn thành");
+                mode = 1;
             }
         });
 

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.rpc.context.AttributeContext;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataDrink;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataOrder;
 import com.midterm.doixiucoffee_mobileapp.Model.Drink;
 import com.midterm.doixiucoffee_mobileapp.Model.Order;
@@ -98,6 +100,17 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
                 holder.priceB.setClickable(false);
             }
         }
+
+        holder.moreInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.tvInfo.getVisibility() == View.GONE){
+                    holder.tvInfo.setVisibility(View.VISIBLE);
+                    holder.tvInfo.setText(listDrink.get(p).getStory());
+                }
+                else holder.tvInfo.setVisibility(View.GONE);
+            }
+        });
     }
     public void setModeDrinkChoice(DrinkAdapter.ViewHolder holder, int size, String mode){
         Resources re =  holder.borderB.getResources();
@@ -155,6 +168,8 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
         public ShapeableImageView borderB;
         public ShapeableImageView backS;
         public ShapeableImageView backB;
+        public ImageView moreInfo;
+        public TextView tvInfo;
         public ViewHolder(View view){
             super(view);
             drinkName = (TextView) view.findViewById(R.id.drinkName);
@@ -164,6 +179,8 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
             borderB = (ShapeableImageView) view.findViewById(R.id.borderB);
             backS = (ShapeableImageView) view.findViewById(R.id.backS);
             backB = (ShapeableImageView) view.findViewById(R.id.backB);
+            moreInfo = (ImageView) view.findViewById(R.id.more_info);
+            tvInfo = (TextView) view.findViewById(R.id.tv_infor);
         }
 
     }

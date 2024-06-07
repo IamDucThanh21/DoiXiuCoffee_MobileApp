@@ -2,89 +2,118 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <TextView
-        android:id="@+id/drinkName"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Trà sữa việt quất"
-        android:textSize="25dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
-    </TextView>
-    <RelativeLayout
-        android:layout_width="60dp"
-        android:layout_height="35dp"
-        android:layout_gravity="center">
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/borderS"
-            android:layout_width="60dp"
-            android:layout_height="35dp"
-            app:shapeAppearanceOverlay="@style/rounded_corner"
-            android:background="@color/black"
-            android:visibility="gone">
-        </com.google.android.material.imageview.ShapeableImageView>
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/backS"
-            android:layout_width="58dp"
-            android:layout_height="33dp"
-            app:shapeAppearanceOverlay="@style/rounded_corner"
-            android:background="@color/white_sys"
-            android:layout_centerInParent="true">
-        </com.google.android.material.imageview.ShapeableImageView>
-        <TextView
-            android:id="@+id/priceS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="10K"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:textColor="#6c6c6c">
-        </TextView>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="60dp"
-        android:layout_height="35dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp">
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/borderB"
-            android:layout_width="60dp"
-            android:layout_height="35dp"
-            app:shapeAppearanceOverlay="@style/rounded_corner"
-            android:background="@color/black"
-            android:visibility="gone">
-        </com.google.android.material.imageview.ShapeableImageView>
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/backB"
-            android:layout_width="58dp"
-            android:layout_height="33dp"
-            app:shapeAppearanceOverlay="@style/rounded_corner"
-            android:layout_centerInParent="true"
-            android:background="@color/white_sys">
-        </com.google.android.material.imageview.ShapeableImageView>
-        <TextView
-            android:id="@+id/priceB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="10K"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:textColor="#6c6c6c">
-        </TextView>
-    </RelativeLayout>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <ImageView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/drinkName"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:text="Trà sữa việt quất"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/S"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            app:layout_constraintEnd_toStartOf="@+id/relativeLayout3"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/borderS"
+                android:layout_width="60dp"
+                android:layout_height="35dp"
+                android:background="@color/black"
+                android:visibility="gone"
+                app:shapeAppearanceOverlay="@style/rounded_corner"></com.google.android.material.imageview.ShapeableImageView>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/backS"
+                android:layout_width="58dp"
+                android:layout_height="33dp"
+                android:layout_centerInParent="true"
+                android:background="@color/white_sys"
+                app:shapeAppearanceOverlay="@style/rounded_corner" />
+
+            <TextView
+                android:id="@+id/priceS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="10K"
+                android:textColor="#6c6c6c"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout3"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/more_info"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/borderB"
+                android:layout_width="60dp"
+                android:layout_height="35dp"
+                android:background="@color/black"
+                android:visibility="gone"
+                app:shapeAppearanceOverlay="@style/rounded_corner"></com.google.android.material.imageview.ShapeableImageView>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/backB"
+                android:layout_width="58dp"
+                android:layout_height="33dp"
+                android:layout_centerInParent="true"
+                android:background="@color/white_sys"
+                app:shapeAppearanceOverlay="@style/rounded_corner"></com.google.android.material.imageview.ShapeableImageView>
+
+            <TextView
+                android:id="@+id/priceB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="10K"
+                android:textColor="#6c6c6c"
+                android:textSize="20dp"
+                android:textStyle="bold"></TextView>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/more_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/arrow_down_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_infor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/down_icon"
-        android:layout_gravity="center"
-        android:scaleY="1.2"
-        android:scaleX="1.2"
-        android:layout_marginStart="10dp">
-    </ImageView>
+        android:text="     Cà phê phin đen là một phần không thể thiếu của văn hóa Việt Nam, được pha chế tỉ mỉ qua từng giọt cà phê nhỏ xuống ly, mang đến hương vị đậm đà, thơm ngon. Đây không chỉ là thức uống mà còn là phong cách sống, thể hiện sự chậm rãi, thư giãn và kết nối của người Việt."
+        android:paddingStart="35dp"
+        android:paddingEnd="35dp"
+        android:textStyle="italic"
+        android:textSize="15dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone">
+    </TextView>
 </LinearLayout>
