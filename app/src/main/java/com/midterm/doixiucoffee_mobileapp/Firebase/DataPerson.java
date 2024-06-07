@@ -61,6 +61,7 @@ public class DataPerson {
                                 else allUser.add(getDataUser(document));
                             }
                             DataFeedback.getInstance().getAllFeedback();
+                            DataOrder.getInstance().getDataOrder();
                         }
                     }
                 });

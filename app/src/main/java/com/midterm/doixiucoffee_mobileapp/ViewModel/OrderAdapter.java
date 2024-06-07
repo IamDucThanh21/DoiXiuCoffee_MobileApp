@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -59,6 +60,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 Navigation.findNavController(v).navigate(R.id.addDrinkFragment);
             }
         });
+
+        if(DataOrder.getInstance().getOrder().getStatus().equals("waiting")){
+            holder.btnRemove.setClickable(false);
+        }
     }
 
     @Override

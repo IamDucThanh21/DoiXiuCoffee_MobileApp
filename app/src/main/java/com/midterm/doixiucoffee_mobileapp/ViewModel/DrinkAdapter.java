@@ -50,6 +50,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
 
         int p = position;
         if(mode == 1){
+            //Thêm viền cho chế độ order
             holder.borderB.setVisibility(View.VISIBLE);
             holder.borderS.setVisibility(View.VISIBLE);
 
@@ -90,6 +91,12 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
                     Navigation.findNavController(v).navigate(R.id.addDrinkFragment);
                 }
             });
+
+            //Nếu như đơn hiện tại đã đặt thì không thể thêm món mới
+            if(DataOrder.getInstance().getOrder().getStatus().equals("waiting")){
+                holder.priceS.setClickable(false);
+                holder.priceB.setClickable(false);
+            }
         }
     }
     public void setModeDrinkChoice(DrinkAdapter.ViewHolder holder, int size, String mode){

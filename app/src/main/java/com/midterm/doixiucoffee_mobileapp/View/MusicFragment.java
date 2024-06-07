@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataSong;
 import com.midterm.doixiucoffee_mobileapp.Model.Song;
 import com.midterm.doixiucoffee_mobileapp.R;
@@ -37,6 +38,14 @@ public class MusicFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_music, null, false);
+
+        String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
+        if (!idPersonLogin.equals("null")){
+            binding.toolbar.imgAva.setVisibility(View.VISIBLE);
+            String img = DataPerson.getInstance().getUserById(idPersonLogin).getImage();
+            binding.toolbar.imgAva.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
+            binding.toolbar.btnLogin.setVisibility(View.GONE);
+        }
 
         binding.musicHb.homeBackImg.setImageResource(R.drawable.music_back);
         binding.musicHb.homeBackTitle.setVisibility(View.GONE);

@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class Order {
     private String idOrder;
-    private int table;
+    private int table = -1;
     private ArrayList<Drink> listDrinks;
     private int totalPrice =0;
-    private boolean status = false;
+    private String status = "booking";
     private User user;
     private int discount;
     private String note;
 
-    public Order(String idOrder, int table, ArrayList<Drink> listDrinks, int totalPrice, boolean status, User user, int discount, String note) {
+    public Order(String idOrder, int table, ArrayList<Drink> listDrinks, int totalPrice, String status, User user, int discount, String note) {
         this.idOrder = idOrder;
         this.table = table;
         this.listDrinks = listDrinks;
@@ -59,11 +59,11 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

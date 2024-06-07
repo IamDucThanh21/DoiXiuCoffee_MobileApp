@@ -3,12 +3,15 @@ package com.midterm.doixiucoffee_mobileapp.ViewModel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataOrder;
 import com.midterm.doixiucoffee_mobileapp.Model.Drink;
 import com.midterm.doixiucoffee_mobileapp.Model.Order;
 import com.midterm.doixiucoffee_mobileapp.R;
@@ -34,13 +37,36 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull AdminOrderAdapter.ViewHolder holder, int position) {
-        holder.table.setText("Bàn "+ listOrder.get(position).getTable());
-        holder.totalCost.setText(listOrder.get(position).getTotalPrice()+".000");
 
-        listDrink = listOrder.get(position).getListDrinks();
+        int i = position;
+        //Setup ban đầu
+        holder.table.setText("Bàn "+ listOrder.get(i).getTable()+" - ");
+        holder.totalCost.setText(listOrder.get(i).getTotalPrice()+".000");
+        holder.userName.setText(listOrder.get(i).getUser().getName());
+
+        //Setup danh sách drink
+        listDrink = listOrder.get(i).getListDrinks();
         orderAdapter = new OrderAdapter(listDrink, 1); //mode 1 là mode xem order của admin
         holder.rvDrink.setLayoutManager(new LinearLayoutManager(holder.rvDrink.getContext()));
         holder.rvDrink.setAdapter(orderAdapter);
+
+        //Set sự kiện cho các nút
+        holder.btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataOrder.getInstance().getAllOrder().get(i).setStatus("cancel");
+                DataOrder.getInstance().setStatusFirebase(DataOrder.getInstance().getAllOrder().get(i).getIdOrder(), "cancel");
+                Navigation.findNavController(v).navigate(R.id.adminBookingFragment);
+            }
+        });
+        holder.btnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataOrder.getInstance().getAllOrder().get(i).setStatus("done");
+                DataOrder.getInstance().setStatusFirebase(DataOrder.getInstance().getAllOrder().get(i).getIdOrder(), "done");
+                Navigation.findNavController(v).navigate(R.id.adminBookingFragment);
+            }
+        });
 
     }
 
@@ -53,12 +79,20 @@ public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.Vi
         private TextView table;
         private TextView totalCost;
         private RecyclerView rvDrink;
+        private TextView userName;
+        private RelativeLayout btnRemove;
+        private RelativeLayout btnEdit;
+        private RelativeLayout btnDone;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             table = (TextView) itemView.findViewById(R.id.table);
             totalCost = (TextView) itemView.findViewById(R.id.total_cost);
             rvDrink = (RecyclerView) itemView.findViewById(R.id.rv_drink);
+            userName = (TextView) itemView.findViewById(R.id.user_name);
+            btnRemove = (RelativeLayout) itemView.findViewById(R.id.btn_remove);
+            btnEdit = (RelativeLayout) itemView.findViewById(R.id.btn_edit);
+            btnDone = (RelativeLayout)  itemView.findViewById(R.id.btn_done);
 
         }
     }

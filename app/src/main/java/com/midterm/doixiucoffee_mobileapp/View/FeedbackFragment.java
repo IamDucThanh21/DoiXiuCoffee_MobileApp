@@ -46,9 +46,18 @@ public class FeedbackFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_feedback, null, false);
 
+        //Setup ava, back, title
+        String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
+        if (!idPersonLogin.equals("null")){
+            binding.toolbar.imgAva.setVisibility(View.VISIBLE);
+            String img = DataPerson.getInstance().getUserById(idPersonLogin).getImage();
+            binding.toolbar.imgAva.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
+            binding.toolbar.btnLogin.setVisibility(View.GONE);
+        }
         binding.includeHb.homeBackImg.setImageResource(R.drawable.feedback_back);
         binding.includeHb.homeBackTitle.setText(R.string.feedback);
 
+        //Lấy danh sách feedback
         listFeedback = new ArrayList<>();
         listFeedback = DataFeedback.getInstance().getListFeedback();
 
@@ -63,12 +72,13 @@ public class FeedbackFragment extends Fragment {
             }
         });
 
+        //Setup sự kiện cho nút thêm feedback, cần phải đăng nhập để viết feedback
         binding.addFeedbackBtn.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Navigation.findNavController(v).navigate(R.id.searchMusicFragment);
 
-                if(DataPerson.getInstance().getIdPersonLogin().equals("null")){
+                if(idPersonLogin.equals("null")){
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext()); // 'this' là context của Activity hoặc Fragment
                     builder.setTitle("Thông báo")
                             .setMessage("Bạn cần đăng nhập để tiếp tục!")
@@ -85,6 +95,7 @@ public class FeedbackFragment extends Fragment {
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 }
+                //Nếu đã đăng nhập thêm fragment viết feedback vào fragment chính
                 else{
                     AddFeedbackFragment addFeedbackFragment = AddFeedbackFragment.newInstance();
 
@@ -99,6 +110,7 @@ public class FeedbackFragment extends Fragment {
             }
         });
 
+        //Sự kiện nút xem feedback của mọi người -> tất cả
         binding.btnPublic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +120,8 @@ public class FeedbackFragment extends Fragment {
                 binding.rvCategory.setAdapter(feebackAdapter);
             }
         });
+
+        //Sự kiện nút xem feedback của mình
         binding.btnPrivate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +129,7 @@ public class FeedbackFragment extends Fragment {
                 binding. btnPrivate.setTextColor(Color.parseColor("#1A2130"));
                 ArrayList<Feedback> myFeedback = new ArrayList<>();
                 for(Feedback fb : listFeedback){
-                    if(fb.getUser().getIdPerson().equals(DataPerson.getInstance().getIdPersonLogin())){
+                    if(fb.getUser().getIdPerson().equals(idPersonLogin)){
                         myFeedback.add(fb);
                     }
                 }
@@ -124,7 +138,6 @@ public class FeedbackFragment extends Fragment {
             }
         });
         View viewRoot = binding.getRoot();
-        // Inflate the layout for this fragment
         return viewRoot;
     }
 

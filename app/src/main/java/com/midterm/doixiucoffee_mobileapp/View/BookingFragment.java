@@ -17,6 +17,7 @@ import com.midterm.doixiucoffee_mobileapp.Firebase.DataDrink;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataOrder;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
 import com.midterm.doixiucoffee_mobileapp.Model.Category;
+import com.midterm.doixiucoffee_mobileapp.Model.Order;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.CategoryAdapter;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentBookingBinding;
@@ -40,15 +41,22 @@ public class BookingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        DataOrder.getInstance().getDataOrder();
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_booking, null, false);
 
+        //Setup ava và order hiện tại nếu có
         String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
+
         if(!idPersonLogin.equals("null")) {
             binding.toolbar.imgAva.setVisibility(View.VISIBLE);
             binding.toolbar.btnLogin.setVisibility(View.GONE);
             String img = DataPerson.getInstance().getUserById(idPersonLogin).getImage();
             binding.toolbar.imgAva.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
+
+            Order o = new Order();
+            o = DataOrder.getInstance().findOrderByIdUser(idPersonLogin);
+            if(o != null){
+                DataOrder.getInstance().setOrder(o);
+            }
         }
 
 
@@ -66,7 +74,6 @@ public class BookingFragment extends Fragment {
             public void onClick(View v) {
 
                 //Nếu như chưa đăng nhập thì hiện thông báo yêu cầu đăng nhập
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext()); // 'this' là context của Activity hoặc Fragment
                 builder.setTitle("Thông báo")
                         .setMessage("Bạn cần đăng nhập để tiếp tục!")

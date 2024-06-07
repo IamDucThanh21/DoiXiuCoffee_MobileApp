@@ -51,24 +51,28 @@ public class AddDrinkFragment extends Fragment {
 
 
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_add_drink, null, false);
+        
+        //setup avatar
+        String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
+        String img = DataPerson.getInstance().getUserById(idPersonLogin).getImage();
+        binding.toolbar.imgAva.setVisibility(View.VISIBLE);
+        binding.toolbar.imgAva.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
+        binding.toolbar.btnLogin.setVisibility(View.GONE);
 
-        if(!DataPerson.getInstance().getIdPersonLogin().equals("null")) {
-            binding.toolbar.imgAva.setVisibility(View.VISIBLE);
-            binding.toolbar.btnLogin.setVisibility(View.GONE);
-        }
-
+        //setup menu
         listCategory = new ArrayList<>(DataDrink.getInstance().getMenu());
-
         categoryAdapter = new CategoryAdapter(listCategory, 1);
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(this.getContext()));
         binding.rvCategory.setAdapter(categoryAdapter);
 
+        //Thêm fragment chọn món ở dưới
         ListOdersFragment listOdersFragment = ListOdersFragment.newInstance();
 
         getActivity().getSupportFragmentManager().beginTransaction()
                 .add(id.sub_fragment, listOdersFragment )
                 .commit();
 
+        //Setup nút back
         binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

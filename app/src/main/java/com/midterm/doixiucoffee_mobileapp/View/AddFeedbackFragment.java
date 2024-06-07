@@ -45,6 +45,7 @@ public class AddFeedbackFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_add_feedback, null, false);
+
         binding.btnAddFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -103,10 +103,15 @@ public class HomeFragment extends Fragment {
 
         btnLogin = view.findViewById(R.id.btnLogin);
 
-        if(!DataPerson.getInstance().getIdPersonLogin().equals("null")){
+        String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
+
+        if(!idPersonLogin.equals("null")){
             imgAva.setVisibility(View.VISIBLE);
             btnLogin.setVisibility(View.GONE);
-            if(DataPerson.getInstance().isAdminById(DataPerson.getInstance().getIdPersonLogin())){
+            //String img = DataPerson.getInstance().getUserById(idPersonLogin).getImage();
+            //imgAva.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
+
+            if(DataPerson.getInstance().isAdminById(idPersonLogin)){
                 textview = view.findViewById(R.id.textView);
                 textview.setText("Admin");
                 tvBooking = view.findViewById(R.id.tv_booking);
@@ -118,11 +123,6 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
-        if (!idPersonLogin.equals("null")){
-            String img = DataPerson.getInstance().getUserById(idPersonLogin).getImage();
-            imgAva.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
-        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

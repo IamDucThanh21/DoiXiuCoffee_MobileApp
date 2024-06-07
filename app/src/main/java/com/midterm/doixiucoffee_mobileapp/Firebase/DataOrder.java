@@ -61,7 +61,7 @@ public class DataOrder {
         Order order1 = new Order();
         order1.setIdOrder(document.getId());
         order1.setDiscount(((Long)document.get("discount")).intValue());
-        order1.setStatus((Boolean) document.get("status"));
+        order1.setStatus(document.get("status").toString());
         order1.setUser(DataPerson.getInstance().getUserById(document.get("idUser").toString()));
         ArrayList<Drink> drinks = new ArrayList<>();
         List<Object> i = (List<Object>) document.get("listDrink");
@@ -74,6 +74,7 @@ public class DataOrder {
         }
         order1.setListDrinks(drinks);
         order1.setTotalPrice(((Long) document.get("totalPrice")).intValue());
+        order1.setTable(((Long) document.get("table")).intValue());
         return order1;
     }
 
@@ -101,7 +102,7 @@ public class DataOrder {
         }
 
         dataOrder.put("listDrink", listDrinks);
-        dataOrder.put("status", order.isStatus());
+        dataOrder.put("status", order.getStatus());
         dataOrder.put("table", order.getTable());
         dataOrder.put("totalPrice", order.getTotalPrice());
 
@@ -133,5 +134,19 @@ public class DataOrder {
                 sum+= dr.getSizeInfo().getPrice();
             }
         order.setTotalPrice(sum);
+    }
+    public ArrayList<Order> getAllOrder(){return allOrder;}
+
+    public Order findOrderByIdUser(String idUser){
+        for(Order o: allOrder){
+            if(o.getUser().getIdPerson().equals(idUser)){
+                return o;
+            }
+        }
+        return null;
+    }
+
+    public void setStatusFirebase(String idOrder, String newStatus){
+
     }
 }

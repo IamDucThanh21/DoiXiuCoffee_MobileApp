@@ -38,16 +38,24 @@ public class AdminBookingFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_admin_booking, null, false);
 
+        //Setup ban đầu
         binding.includeHb.homeBackTitle.setText("Danh sách gọi món");
         binding.toolbar.imgAva.setVisibility(View.VISIBLE);
         binding.toolbar.btnLogin.setVisibility(View.GONE);
 
-        listOrder = new ArrayList<>();
-        listOrder.add(DataOrder.getInstance().getOrder());
-        adminOrderAdapter = new AdminOrderAdapter(listOrder);
+        //Setup danh sách order, chỉ chọn những order đang đợi
+        listOrder = new ArrayList<>(DataOrder.getInstance().getAllOrder());
+        ArrayList<Order> listWaitingOrder = new ArrayList<>();
+        for(Order o: listOrder){
+            if(o.getStatus().equals("waiting")){
+                listWaitingOrder.add(o);
+            }
+        }
+        adminOrderAdapter = new AdminOrderAdapter(listWaitingOrder);
         binding.rvOrder.setAdapter(adminOrderAdapter);
         binding.rvOrder.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        //Gán sự kiện cho nút back
         binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

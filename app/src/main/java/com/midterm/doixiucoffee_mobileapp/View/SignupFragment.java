@@ -44,7 +44,7 @@ public class SignupFragment extends Fragment {
                     binding.error.setVisibility(View.VISIBLE);
                 }
                 else {
-                    DataPerson.getInstance().addNewUser(name, phone);
+                    DataPerson.getInstance().addNewUser(name, phone, 0, "user");
                     Navigation.findNavController(v).navigate(R.id.loginFragment);
                 }
             }
