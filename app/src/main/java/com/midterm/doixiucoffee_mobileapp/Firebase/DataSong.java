@@ -94,5 +94,22 @@ public class DataSong {
                 });
     }
 
+    public void deleteMusicById(String idMusic){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Song").document(idMusic).delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d("Delete music", "Success");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("Delete music", "Fail");
+                    }
+                });
+    }
+
     public ArrayList<Song> getListSong(){ return listSong;}
 }

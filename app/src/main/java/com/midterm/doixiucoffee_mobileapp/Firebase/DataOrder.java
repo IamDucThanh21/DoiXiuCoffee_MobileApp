@@ -69,8 +69,9 @@ public class DataOrder {
             Map<String, String> dr1 = (Map<String, String>) dr;
             int size = Integer.parseInt(dr1.get("size"));
             String idDrink = dr1.get("idDrink");
+            String note = dr1.get("note");
 
-            drinks.add(new Drink(idDrink, size));
+            drinks.add(new Drink(idDrink, size, note));
         }
         order1.setListDrinks(drinks);
         order1.setTotalPrice(((Long) document.get("totalPrice")).intValue());
@@ -91,6 +92,7 @@ public class DataOrder {
         for (Drink drink : order.getListDrinks()){
             Map<String, String> dataDrink = new HashMap<>();
             dataDrink.put("idDrink", drink.getIdDrink());
+            dataDrink.put("note", drink.getNote());
 
             if (Objects.equals(drink.getSizeInfo().getSize(), "M"))
                 dataDrink.put("size", "0");

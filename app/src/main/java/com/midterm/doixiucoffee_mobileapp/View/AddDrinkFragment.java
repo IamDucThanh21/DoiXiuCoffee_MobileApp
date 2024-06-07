@@ -1,33 +1,23 @@
 package com.midterm.doixiucoffee_mobileapp.View;
 
-import static com.midterm.doixiucoffee_mobileapp.R.*;
+import static com.midterm.doixiucoffee_mobileapp.R.id;
 
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
-import com.google.android.material.imageview.ShapeableImageView;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataDrink;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
 import com.midterm.doixiucoffee_mobileapp.Model.Category;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.CategoryAdapter;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentAddDrinkBinding;
-import com.midterm.doixiucoffee_mobileapp.databinding.ItemCategoryBinding;
 
 import java.util.ArrayList;
 
@@ -54,7 +44,7 @@ public class AddDrinkFragment extends Fragment {
         
         //setup avatar
         String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
-        String img = DataPerson.getInstance().getUserById(idPersonLogin).getImage();
+        String img = DataPerson.getInstance().getPersonById(idPersonLogin).getImage();
         binding.toolbar.imgAva.setVisibility(View.VISIBLE);
         binding.toolbar.imgAva.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
         binding.toolbar.btnLogin.setVisibility(View.GONE);

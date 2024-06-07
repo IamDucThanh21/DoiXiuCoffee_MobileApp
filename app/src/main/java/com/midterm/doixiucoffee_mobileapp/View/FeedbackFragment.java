@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +22,6 @@ import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.FeebackAdapter;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentFeedbackBinding;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.ZoneId;
 import java.util.ArrayList;
 
 public class FeedbackFragment extends Fragment {
@@ -50,7 +46,7 @@ public class FeedbackFragment extends Fragment {
         String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
         if (!idPersonLogin.equals("null")){
             binding.toolbar.imgAva.setVisibility(View.VISIBLE);
-            String img = DataPerson.getInstance().getUserById(idPersonLogin).getImage();
+            String img = DataPerson.getInstance().getPersonById(idPersonLogin).getImage();
             binding.toolbar.imgAva.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
             binding.toolbar.btnLogin.setVisibility(View.GONE);
         }
