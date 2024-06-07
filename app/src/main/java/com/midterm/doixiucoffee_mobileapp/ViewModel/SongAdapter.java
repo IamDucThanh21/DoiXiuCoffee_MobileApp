@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.imageview.ShapeableImageView;
@@ -53,8 +54,15 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         holder.imvGarbage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // set khi nhấn vào cái thùng rác thì nó in đậm
                 holder.imvGarbage.setImageResource(R.drawable.garbage_after);
+                // xóa nhạc trong database
                 DataSong.getInstance().deleteMusicById(listSong.get(position).getIdSong());
+                // xóa nhạc trong this listsong
+                DataSong.getInstance().getListSong().remove(listSong.get(position));
+                // xóa nhạc trong song chương trình
+//                listSong.remove(listSong.get(position));
+                Navigation.findNavController(v).navigate(R.id.musicFragment);
             }
         });
     }
