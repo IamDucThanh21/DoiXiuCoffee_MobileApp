@@ -37,6 +37,7 @@ public class HomeFragment extends Fragment {
         DataDrink.getInstance().getDataMenu();
         DataPerson.getInstance().getDataPerson();
         DataSong.getInstance().getAllSong();
+        DataSong.getInstance().getPlayingSongFromFirebase();
     }
 
     @Override

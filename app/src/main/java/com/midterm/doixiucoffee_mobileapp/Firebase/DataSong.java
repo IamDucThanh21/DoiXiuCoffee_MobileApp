@@ -8,6 +8,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -25,6 +26,7 @@ public class DataSong {
     private ArrayList<Song> listSong;
     private static DataSong dataSong;
     private Dictionary musicChoose;
+    private Song playingSong;
 
     public static DataSong getInstance(){
         if(dataSong == null){
@@ -32,6 +34,14 @@ public class DataSong {
 
         }
         return dataSong;
+    }
+
+    public void setPlayingSong(Song playingSong) {
+        this.playingSong = playingSong;
+    }
+
+    public Song getPlayingSong() {
+        return playingSong;
     }
 
     public void getAllSong(){
@@ -165,6 +175,49 @@ public class DataSong {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.d("Update vote", "Fail");
+                    }
+                });
+    }
+
+    public void getPlayingSongFromFirebase(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("SongPlaying").document("song").get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()){
+                            DocumentSnapshot document = task.getResult();
+                            playingSong = new Song();
+                            playingSong.setIdSong((String) document.get("id"));
+                            playingSong.setImage((String) document.get("image"));
+                            playingSong.setVotes(((Long) document.get("vote")).intValue());
+                            playingSong.setSinger((String) document.get("singer"));
+                            playingSong.setName((String) document.get("songName"));
+                        }
+                    }
+                });
+    }
+
+    public void setPlayingSongToFirebase(Song song){
+        Map<String, Object> dataPlayingSong = new HashMap<>();
+        dataPlayingSong.put("id", song.getIdSong());
+        dataPlayingSong.put("image", song.getImage());
+        dataPlayingSong.put("vote", song.getVotes());
+        dataPlayingSong.put("singer", song.getSinger());
+        dataPlayingSong.put("songName", song.getName());
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("SongPlaying").document("song").update(dataPlayingSong)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d("Update Playing Song", "Success");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("Update Playing Song", "Fail");
                     }
                 });
     }
