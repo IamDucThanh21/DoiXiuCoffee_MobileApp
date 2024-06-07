@@ -16,6 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.midterm.doixiucoffee_mobileapp.Model.Admin;
+import com.midterm.doixiucoffee_mobileapp.Model.Person;
 import com.midterm.doixiucoffee_mobileapp.Model.User;
 
 import java.util.ArrayList;
@@ -73,6 +74,7 @@ public class DataPerson {
         dataUser.put("phone", phone);
         dataUser.put("point", point);
         dataUser.put("role", role);
+        dataUser.put("image", "");
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("User").add(dataUser)
@@ -96,6 +98,7 @@ public class DataPerson {
         admin.setPassword((String) document.get("password"));
         admin.setPhoneNumber((String) document.get("phone"));
         admin.setName((String) document.get("name"));
+        admin.setImage((String) document.get("image"));
         return admin;
     }
 
@@ -115,6 +118,18 @@ public class DataPerson {
             if(u.getIdPerson().equals(id)){
                 return u;
             }
+        }
+        return null;
+    }
+
+    public Person getPersonById(String id){
+        for(Person person : allUser){
+            if (person.getIdPerson().equals(id))
+                return person;
+        }
+        for (Person person : allAdmin){
+            if (person.getIdPerson().equals(id))
+                return person;
         }
         return null;
     }

@@ -108,8 +108,11 @@ public class HomeFragment extends Fragment {
         if(!idPersonLogin.equals("null")){
             imgAva.setVisibility(View.VISIBLE);
             btnLogin.setVisibility(View.GONE);
-            //String img = DataPerson.getInstance().getUserById(idPersonLogin).getImage();
-            //imgAva.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
+
+            String img = DataPerson.getInstance().getPersonById(idPersonLogin).getImage();
+            if (!img.equals("")){
+                imgAva.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
+            }
 
             if(DataPerson.getInstance().isAdminById(idPersonLogin)){
                 textview = view.findViewById(R.id.textView);
