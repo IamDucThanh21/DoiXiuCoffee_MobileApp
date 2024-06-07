@@ -44,6 +44,22 @@ public class DataSong {
                         }
                     }
                 });
+//        sortSong();
+    }
+    public void sortSong(){
+        Song song = new Song();
+        Song song1 = new Song();
+        for (int i = 0; i < ( listSong.size() - 1 ); i++) {
+            for (int j = 0; j < listSong.size() - i - 1; j++) {
+                if (listSong.get(j).getVotes() < listSong.get(j+1).getVotes())
+                {
+                    song = listSong.get(j);
+                    song1 = listSong.get(j+1);
+                    listSong.set(j, song1);
+                    listSong.set(j+1, song);
+                }
+            }
+        }
     }
 
     public boolean checkSong(Song song){

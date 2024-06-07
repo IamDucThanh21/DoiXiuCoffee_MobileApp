@@ -27,11 +27,23 @@ import java.util.ArrayList;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     private ArrayList<Song> listSong;
-    private boolean checkOnScrenn = false;
     public SongAdapter(ArrayList<Song> listSong){
-        this.listSong = listSong;
+        ArrayList<Song> list = new ArrayList<>(listSong);
+        Song song = new Song();
+        Song song1 = new Song();
+        for (int i = 0; i < ( list.size() - 1 ); i++) {
+            for (int j = 0; j < list.size() - i - 1; j++) {
+                if (list.get(j).getVotes() < list.get(j+1).getVotes())
+                {
+                    song = list.get(j);
+                    song1 = list.get(j+1);
+                    list.set(j, song1);
+                    list.set(j+1, song);
+                }
+            }
+        }
+        this.listSong = list;
     }
-
 
     @NonNull
     @Override
@@ -44,10 +56,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull SongAdapter.ViewHolder holder, int position) {
-        if(position == 0) {
-            holder.each_item_music.setVisibility(View.GONE);
-            return;
-        }
         holder.songName.setText(listSong.get(position).getName());
         holder.songSinger.setText(listSong.get(position).getSinger());
         holder.songVotes.setText(listSong.get(position).getVotes()+"");
@@ -66,7 +74,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                 DataSong.getInstance().deleteMusicById(listSong.get(position).getIdSong());
                 // xóa nhạc trong this listsong
                 DataSong.getInstance().getListSong().remove(listSong.get(position));
-                // xóa nhạc trong song chương trình
+                // reload lai trang
                 Navigation.findNavController(v).navigate(R.id.musicFragment);
             }
         });
@@ -94,6 +102,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                     holder.imvHeart.setImageResource(R.drawable.favorited);
 //                    DataSong.getInstance().getListSong().get(position).setVotes(DataSong.getInstance().getListSong().get(position).getVotes() + 1);
                     DataSong.getInstance().getListSong().get(position).addVote();
+                    DataSong.getInstance().updateVote(listSong.get(position).getIdSong());
                     Navigation.findNavController(v).navigate(R.id.musicFragment);
                 }
             }
