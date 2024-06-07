@@ -45,10 +45,6 @@ public class LoginFragment extends Fragment {
                     if(phone.equals(user.getPhoneNumber())){
                         DataPerson.getInstance().setIdPersonLogin(user.getIdPerson());
                         Navigation.findNavController(v).navigate(R.id.homeFragment);
-//                        User u = new User();
-//                        u = DataPerson.getInstance().getUserLogin();
-//
-//                        Log.d("test image", u.getImage());
                     }
                 }
                 for(Admin admin: DataPerson.getInstance().getAllAdmin()){
