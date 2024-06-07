@@ -30,8 +30,9 @@
                     android:id="@+id/include_hb"
                     layout="@layout/home_back"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp">
-                </include>
+                    android:layout_height="200dp"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="0dp"></include>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_category"

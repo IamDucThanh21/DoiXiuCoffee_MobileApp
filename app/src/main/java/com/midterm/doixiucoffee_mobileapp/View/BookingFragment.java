@@ -16,11 +16,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataDrink;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataOrder;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataSong;
 import com.midterm.doixiucoffee_mobileapp.Model.Category;
 import com.midterm.doixiucoffee_mobileapp.Model.Order;
+import com.midterm.doixiucoffee_mobileapp.Model.Song;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.CategoryAdapter;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentBookingBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -42,6 +45,11 @@ public class BookingFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_booking, null, false);
+
+        Song firstSong = DataSong.getInstance().getPlayingSong();
+        binding.include.tvNameMusic.setText(firstSong.getName());
+        binding.include.tvNameArtist.setText(firstSong.getSinger());
+        Picasso.get().load(firstSong.getImage()).into(binding.include.imgMusic);
 
         //Setup ava và order hiện tại nếu có
         String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();

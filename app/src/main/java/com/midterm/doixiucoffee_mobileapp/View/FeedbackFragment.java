@@ -17,10 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataFeedback;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataSong;
 import com.midterm.doixiucoffee_mobileapp.Model.Feedback;
+import com.midterm.doixiucoffee_mobileapp.Model.Song;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.FeebackAdapter;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentFeedbackBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -42,7 +45,10 @@ public class FeedbackFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_feedback, null, false);
 
-
+        Song firstSong = DataSong.getInstance().getPlayingSong();
+        binding.include.tvNameMusic.setText(firstSong.getName());
+        binding.include.tvNameArtist.setText(firstSong.getSinger());
+        Picasso.get().load(firstSong.getImage()).into(binding.include.imgMusic);
 
         //Setup ava, back, title
         String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();

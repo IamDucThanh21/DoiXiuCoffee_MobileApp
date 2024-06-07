@@ -59,9 +59,11 @@ public class MusicFragment extends Fragment {
 
         if(DataSong.getInstance().getMusicChooseCreate() == null) DataSong.getInstance().createMusicChoose();
 
+//        DataSong.getInstance().setPlayingSongToFirebase(DataSong.getInstance().getListSong().get(0));
+//        DataSong.getInstance().deleteMusicById(DataSong.getInstance().getListSong().get(0).getIdSong());
         if(listSong.size()!=0){
             //Lấy thằng đầu danh sách làm bìa, từ thằng thứ 2 trở đi vào recyclview
-            Song firstSong = listSong.get(0);
+            Song firstSong = DataSong.getInstance().getPlayingSong();
             binding.musicHb.musicName.setText(firstSong.getName());
             binding.musicHb.musicSinger.setText(firstSong.getSinger());
             Picasso.get().load(firstSong.getImage()).into(binding.musicHb.musicImg);

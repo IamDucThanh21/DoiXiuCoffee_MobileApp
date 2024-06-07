@@ -14,10 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataDrink;
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataSong;
 import com.midterm.doixiucoffee_mobileapp.Model.Category;
+import com.midterm.doixiucoffee_mobileapp.Model.Song;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.CategoryAdapter;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentAddDrinkBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -41,7 +44,7 @@ public class AddDrinkFragment extends Fragment {
 
 
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_add_drink, null, false);
-        
+
         //setup avatar
         String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
         String img = DataPerson.getInstance().getPersonById(idPersonLogin).getImage();
