@@ -13,6 +13,7 @@ public class Drink {
     private ArrayList<SizeInfo> sizeInfos;
     private SizeInfo sizeInfo;
     private String story;
+    private String note;
 
     public Drink(String idDrink, String drinkName, String typeDrink, ArrayList<SizeInfo> sizeInfos, String story) {
         this.idDrink = idDrink;
@@ -90,5 +91,13 @@ public class Drink {
 
     public void setSizeInfo(SizeInfo sizeInfo) {
         this.sizeInfo = sizeInfo;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

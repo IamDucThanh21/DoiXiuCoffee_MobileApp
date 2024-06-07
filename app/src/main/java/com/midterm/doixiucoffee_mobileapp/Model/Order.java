@@ -10,9 +10,8 @@ public class Order {
     private String status = "booking";
     private User user;
     private int discount;
-    private String note;
 
-    public Order(String idOrder, int table, ArrayList<Drink> listDrinks, int totalPrice, String status, User user, int discount, String note) {
+    public Order(String idOrder, int table, ArrayList<Drink> listDrinks, int totalPrice, String status, User user, int discount) {
         this.idOrder = idOrder;
         this.table = table;
         this.listDrinks = listDrinks;
@@ -20,7 +19,6 @@ public class Order {
         this.status = status;
         this.user = user;
         this.discount = discount;
-        this.note = note;
     }
 
     public Order(){
@@ -81,14 +79,6 @@ public class Order {
 
     public void setDiscount(int discount) {
         this.discount = discount;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
     }
 
     public void removeDrink(String idDrink, int size){
