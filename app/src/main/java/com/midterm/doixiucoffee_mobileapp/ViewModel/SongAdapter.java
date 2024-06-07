@@ -24,9 +24,13 @@ import java.util.ArrayList;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     private ArrayList<Song> listSong;
-
+    private boolean checkOnScrenn = false;
     public SongAdapter(ArrayList<Song> listSong){
         listSong.remove(0);
+//        if(!checkOnScrenn){
+//            listSong.remove(0);
+//            checkOnScrenn = true;
+//        }
         this.listSong = listSong;
     }
 
@@ -61,7 +65,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                 // xóa nhạc trong this listsong
                 DataSong.getInstance().getListSong().remove(listSong.get(position));
                 // xóa nhạc trong song chương trình
-//                listSong.remove(listSong.get(position));
                 Navigation.findNavController(v).navigate(R.id.musicFragment);
             }
         });
