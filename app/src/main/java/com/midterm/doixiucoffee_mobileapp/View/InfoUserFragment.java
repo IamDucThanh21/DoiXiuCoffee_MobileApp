@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataSong;
 import com.midterm.doixiucoffee_mobileapp.Model.Person;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentInfoUserBinding;
@@ -67,6 +68,7 @@ public class InfoUserFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 DataPerson.getInstance().setIdPersonLogin("null");
+                DataSong.getInstance().createMusicChoose();
                 Navigation.findNavController(v).navigate(R.id.homeFragment);
             }
         });
