@@ -1,2 +1,2 @@
 # DoiXiuCoffee_MobileApp
- Bai tap lon lap trinh mobile
+ Bài tập lớn lập trình mobile

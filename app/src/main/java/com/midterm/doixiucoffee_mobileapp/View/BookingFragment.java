@@ -43,10 +43,15 @@ public class BookingFragment extends Fragment {
         DataOrder.getInstance().getDataOrder();
         binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_booking, null, false);
 
-        if(!DataPerson.getInstance().getIdPersonLogin().equals("null")) {
+        String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
+        if(!idPersonLogin.equals("null")) {
             binding.toolbar.imgAva.setVisibility(View.VISIBLE);
             binding.toolbar.btnLogin.setVisibility(View.GONE);
+            String img = DataPerson.getInstance().getUserById(idPersonLogin).getImage();
+            binding.toolbar.imgAva.setImageBitmap(DataPerson.getInstance().base64toBitmap(img));
         }
+
+
 
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(this.getContext()));
         listCategory = new ArrayList<>(DataDrink.getInstance().getMenu());
@@ -106,5 +111,7 @@ public class BookingFragment extends Fragment {
         View view = binding.getRoot();
         return view;
     }
+
+
 
 }
