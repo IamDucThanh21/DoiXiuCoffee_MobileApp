@@ -60,4 +60,5 @@ public class Song {
     public void setImage(String image) {
         this.image = image;
     }
+    public void addVote(){this.votes++;}
 }

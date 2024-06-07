@@ -112,6 +112,6 @@
             android:layout_height="20dp"
             android:layout_marginLeft="5dp"
 
-            android:src="@drawable/heart_icon"></ImageView>
+            android:src="@drawable/favorite"></ImageView>
     </LinearLayout>
 </RelativeLayout>

@@ -1,6 +1,8 @@
 package com.midterm.doixiucoffee_mobileapp.ViewModel;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,6 +70,34 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                 Navigation.findNavController(v).navigate(R.id.musicFragment);
             }
         });
+        holder.imvHeart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(DataPerson.getInstance().getIdPersonLogin().equals("null")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext()); // 'this' là context của Activity hoặc Fragment
+                    builder.setTitle("Thông báo")
+                            .setMessage("Bạn cần đăng nhập để tiếp tục!")
+                            .setPositiveButton("Đăng nhập", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Navigation.findNavController(v).navigate(R.id.loginFragment);
+                                }
+                            })
+                            .setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+                else{
+                    holder.imvHeart.setImageResource(R.drawable.favorited);
+//                    DataSong.getInstance().getListSong().get(position).setVotes(DataSong.getInstance().getListSong().get(position).getVotes() + 1);
+                    DataSong.getInstance().getListSong().get(position).addVote();
+                    Navigation.findNavController(v).navigate(R.id.musicFragment);
+                }
+            }
+        });
     }
 
     @Override
@@ -84,9 +114,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         public LinearLayout layoutPersonHearts;
         public LinearLayout layoutGarbage;
         public RelativeLayout each_item_music;
-//        public TextView numPersonVotes;
+        public TextView numPersonVotes;
 //        public ImageView personVotes;
-//        public ImageView imvHeart;
+        public ImageView imvHeart;
         public ImageView imvGarbage;
         public ViewHolder(View itemView) {
             super(itemView);
@@ -94,13 +124,15 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             songSinger = (TextView) itemView.findViewById(R.id.song_singer);
             songVotes = (TextView) itemView.findViewById(R.id.song_votes);
             avaSong = (ShapeableImageView) itemView.findViewById(R.id.song_image);
-//            numPersonVotes = (TextView) itemView.findViewById(R.id.song_votes);
+
 //            personVotes = (ImageView) itemView.findViewById(R.id.)
             layoutPersonChooses = (LinearLayout) itemView.findViewById(R.id.person_chooses);
             layoutPersonHearts = (LinearLayout) itemView.findViewById(R.id.heart_votes);
             layoutGarbage = (LinearLayout) itemView.findViewById(R.id.garbage);
             imvGarbage = (ImageView) itemView.findViewById(R.id.imv_garbage);
             each_item_music = (RelativeLayout) itemView.findViewById(R.id.main_layout);
+            numPersonVotes = (TextView) itemView.findViewById(R.id.song_votes);
+            imvHeart = (ImageView) itemView.findViewById(R.id.imv_heart);
         }
     }
 }
