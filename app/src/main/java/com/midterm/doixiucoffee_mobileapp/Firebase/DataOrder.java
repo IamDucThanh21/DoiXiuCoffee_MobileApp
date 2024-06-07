@@ -147,6 +147,19 @@ public class DataOrder {
     }
 
     public void setStatusFirebase(String idOrder, String newStatus){
-
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Order").document(idOrder).update("status", newStatus)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("Set status", "Success");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("Set status", "Fail");
+                    }
+                });
     }
 }
