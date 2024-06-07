@@ -6,7 +6,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
 public interface SpotifyAPIMusic {
-    @Headers({"X-RapidAPI-Key: 8fa1abe269mshabf1b79b5e22ae0p112547jsn39f56d60df13",
+    @Headers({"X-RapidAPI-Key: 3f60ddcd9fmsh4873837b22bdcfap18c1d6jsnf9acccf1bfed",
             "X-RapidAPI-Host: spotify23.p.rapidapi.com"})
     @GET("search")
     Call<MyData> getData(@Query("q") String query);

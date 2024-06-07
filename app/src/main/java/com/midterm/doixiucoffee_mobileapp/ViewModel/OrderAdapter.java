@@ -1,11 +1,15 @@
 package com.midterm.doixiucoffee_mobileapp.ViewModel;
 
 import android.provider.ContactsContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -43,11 +47,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull OrderAdapter.ViewHolder holder, int position) {
         holder.drinkName.setText(listOrderDrink.get(position).getDrinkName());
         holder.price.setText(listOrderDrink.get(position).getSizeInfo().getPrice()+"K");
+
+        //Chế độ mode = 1 là của admin
         int i = position;
         if(mode==1){
             holder.btnRemove.setVisibility(View.GONE);
             holder.btnTakeNote.setVisibility(View.GONE);
         }
+
+        //sự kiện cho nút xóa, xóa xong thì reset lại
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,9 +69,39 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             }
         });
 
-        if(DataOrder.getInstance().getOrder().getStatus().equals("waiting")){
+        //Sự kiện take note
+        holder.btnTakeNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.note.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //Lưu lại note
+        holder.etNote.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(DataOrder.getInstance().getOrder().getListDrinks().size()!=0){
+                    DataOrder.getInstance().getOrder().getListDrinks().get(i).setNote(s.toString());
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        //Nếu không phải ở trạng thái booking thì ko đươc sửa
+        if(!DataOrder.getInstance().getOrder().getStatus().equals("booking")){
             holder.btnRemove.setClickable(false);
         }
+
+        //Kiểm tra xem, nếu có note thì hiện
+        if(!listOrderDrink.get(i).getNote().trim().equals("")){
+            holder.note.setVisibility(View.VISIBLE);
+            holder.etNote.setText(listOrderDrink.get(i).getNote());
+        }
+        else holder.note.setVisibility(View.GONE);
     }
 
     @Override
@@ -77,7 +115,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         private TextView price;
         private ImageView btnRemove;
         private ImageView btnTakeNote;
-
+        private LinearLayout note;
+        private EditText etNote;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -85,6 +124,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             price = (TextView)  itemView.findViewById(R.id.price);
             btnRemove = (ImageView) itemView.findViewById(R.id.btn_remove);
             btnTakeNote = (ImageView) itemView.findViewById(R.id.btn_take_note);
+            note = (LinearLayout) itemView.findViewById(R.id.note);
+            etNote = (EditText) itemView.findViewById(R.id.et_note);
         }
     }
 }
