@@ -18,6 +18,7 @@ import com.midterm.doixiucoffee_mobileapp.ViewModel.SongAdapter;
 import com.midterm.doixiucoffee_mobileapp.databinding.FragmentMusicBinding;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MusicFragment extends Fragment {
@@ -62,6 +63,7 @@ public class MusicFragment extends Fragment {
             binding.musicHb.musicName.setText(firstSong.getName());
             binding.musicHb.musicSinger.setText(firstSong.getSinger());
             Picasso.get().load(firstSong.getImage()).into(binding.musicHb.musicImg);
+
 
             songAdapter = new SongAdapter(listSong);
             binding.rvMusic.setAdapter(songAdapter);

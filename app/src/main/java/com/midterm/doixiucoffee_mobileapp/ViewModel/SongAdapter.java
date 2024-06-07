@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,11 +27,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     private ArrayList<Song> listSong;
     private boolean checkOnScrenn = false;
     public SongAdapter(ArrayList<Song> listSong){
-        listSong.remove(0);
-//        if(!checkOnScrenn){
-//            listSong.remove(0);
-//            checkOnScrenn = true;
-//        }
         this.listSong = listSong;
     }
 
@@ -46,6 +42,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull SongAdapter.ViewHolder holder, int position) {
+        if(position == 0) {
+            holder.each_item_music.setVisibility(View.GONE);
+            return;
+        }
         holder.songName.setText(listSong.get(position).getName());
         holder.songSinger.setText(listSong.get(position).getSinger());
         holder.songVotes.setText(listSong.get(position).getVotes()+"");
@@ -83,6 +83,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         public LinearLayout layoutPersonChooses;
         public LinearLayout layoutPersonHearts;
         public LinearLayout layoutGarbage;
+        public RelativeLayout each_item_music;
 //        public TextView numPersonVotes;
 //        public ImageView personVotes;
 //        public ImageView imvHeart;
@@ -99,6 +100,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             layoutPersonHearts = (LinearLayout) itemView.findViewById(R.id.heart_votes);
             layoutGarbage = (LinearLayout) itemView.findViewById(R.id.garbage);
             imvGarbage = (ImageView) itemView.findViewById(R.id.imv_garbage);
+            each_item_music = (RelativeLayout) itemView.findViewById(R.id.main_layout);
         }
     }
 }
