@@ -84,6 +84,12 @@ public class AddFeedbackFragment extends Fragment {
 
             }
         });
+        binding.btnDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.feedbackFragment);
+            }
+        });
         // Inflate the layout for this fragment
         View view = binding.getRoot();
         return view;
