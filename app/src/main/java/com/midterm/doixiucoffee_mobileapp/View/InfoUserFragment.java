@@ -80,6 +80,17 @@ public class InfoUserFragment extends Fragment {
             }
         });
 
+        if(DataPerson.getInstance().isAdminById(userLogin.getIdPerson())){
+            binding.history.setVisibility(View.GONE);
+        }
+
+        binding.history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.adminBookingFragment);
+            }
+        });
+
         View view = binding.getRoot();
         return view;
     }

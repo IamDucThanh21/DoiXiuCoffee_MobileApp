@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.midterm.doixiucoffee_mobileapp.Firebase.DataOrder;
+import com.midterm.doixiucoffee_mobileapp.Firebase.DataPerson;
 import com.midterm.doixiucoffee_mobileapp.Model.Order;
 import com.midterm.doixiucoffee_mobileapp.R;
 import com.midterm.doixiucoffee_mobileapp.ViewModel.AdminOrderAdapter;
@@ -55,6 +56,16 @@ public class AdminBookingFragment extends Fragment {
         adminOrderAdapter = new AdminOrderAdapter(listWaitingOrder);
         binding.rvOrder.setAdapter(adminOrderAdapter);
         binding.rvOrder.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        String idPersonLogin = DataPerson.getInstance().getIdPersonLogin();
+        if(!DataPerson.getInstance().isAdminById(idPersonLogin)){
+            listOrder = new ArrayList<>(DataOrder.getInstance().getAllOrder());
+            adminOrderAdapter = new AdminOrderAdapter(listOrder);
+            binding.rvOrder.setAdapter(adminOrderAdapter);
+            binding.rvOrder.setLayoutManager(new LinearLayoutManager(getContext()));
+            binding.relativeLayout.setVisibility(View.GONE);
+            binding.includeHb.homeBackTitle.setText("Lịch sử đơn đặt");
+        }
 
         //Gán sự kiện cho nút back
         binding.toolbar.btnBack.setOnClickListener(new View.OnClickListener() {
